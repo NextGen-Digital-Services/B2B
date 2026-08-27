@@ -5,13 +5,8 @@ import Button from '../shared/Button';
 
 export default function SampleRequestForm({ product, selectedColor }) {
   const [formData, setFormData] = useState({
-    companyName: '',
-    email: '',
-    courierAccount: '',
-    shippingAddress: '',
-    notes: ''
+    companyName: '', email: '', courierAccount: '', shippingAddress: '', notes: '',
   });
-
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -25,29 +20,18 @@ export default function SampleRequestForm({ product, selectedColor }) {
     e.preventDefault();
     setErrorMsg('');
     setLoading(true);
-
     try {
-      const messageText = `SAMPLE REQUEST: Product: ${product.name} | Selected Leather Swatch: ${selectedColor} | Carrier Account: ${formData.courierAccount || 'No Carrier Account'} | Notes: ${formData.notes || 'None'} | Delivery Address: ${formData.shippingAddress}`;
-      
+      const messageText = `SAMPLE: ${product.name} | Color: ${selectedColor} | Courier: ${formData.courierAccount || 'N/A'} | Address: ${formData.shippingAddress}`;
       if (supabase) {
-        const { error } = await supabase.from('contact_inquiries').insert([
-          {
-            name: 'Sample Desk Request',
-            email: formData.email,
-            phone: 'N/A',
-            company: formData.companyName,
-            message: messageText
-          }
-        ]);
+        const { error } = await supabase.from('contact_inquiries').insert([{
+          name: 'Sample Request', email: formData.email, phone: 'N/A',
+          company: formData.companyName, message: messageText,
+        }]);
         if (error) throw error;
-      } else {
-        console.log('Supabase offline. Submitting sample request locally:', formData, selectedColor);
       }
-
       setSuccess(true);
-    } catch (err) {
-      console.error('Error submitting sample request:', err);
-      setErrorMsg('Failed to submit sample request. Please try again.');
+    } catch {
+      setErrorMsg('Failed to submit. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -55,136 +39,71 @@ export default function SampleRequestForm({ product, selectedColor }) {
 
   if (success) {
     return (
-      <div className="bg-card border border-gold p-6 text-center space-y-3 rounded-[2px] font-sans">
-        <h4 className="text-sm font-serif text-primary uppercase">Sample Request Logged</h4>
-        <p className="text-[11px] text-muted leading-relaxed">
-          Your sample request for **{product.name}** in color **{selectedColor}** has been processed. Sourcing division will send a verification email within 24 hours.
+      <div className="border border-border bg-card p-6 text-center space-y-3">
+        <h4 className="text-sm font-serif text-ink">Sample Request Logged</h4>
+        <p className="text-[10px] text-muted leading-relaxed font-mono">
+          {product.name} in {selectedColor}. Verification email within 24 hours.
         </p>
       </div>
     );
   }
 
+  const inputClass = "w-full bg-ivory border border-border py-2 px-3 text-xs font-sans text-ink focus:outline-none focus:border-leather transition-colors duration-300 placeholder-muted";
+
   return (
-    <form onSubmit={handleSubmit} className="font-sans border border-border bg-card p-6 rounded-[2px] space-y-4">
-      
-      <div className="border-b border-border pb-3">
-        <h4 className="text-xs uppercase tracking-widest font-bold text-primary">
-          Request Physical Sample
-        </h4>
-        <p className="text-[10px] text-muted mt-1 leading-relaxed">
-          B2B buyers can request pre-production samples. Samples are billed at first-tier pricing and shipped collect using your courier account.
+    <form onSubmit={handleSubmit} className="border border-border bg-card p-6 space-y-4">
+      <div className="border-b border-border-light pb-3">
+        <h4 className="text-[10px] uppercase tracking-[0.2em] font-medium text-muted">Request Physical Sample</h4>
+        <p className="text-[9px] text-muted mt-1 font-mono">
+          Billed at first-tier pricing. Shipped collect via your courier account.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="bg-primary/5 border border-primary text-primary py-2 px-3 text-[10px] font-semibold">
-          {errorMsg}
-        </div>
+        <div className="border border-burgundy/30 bg-burgundy/5 py-2 px-3 text-[10px] text-burgundy font-medium">{errorMsg}</div>
       )}
 
-      {/* Company Name */}
-      <div className="space-y-1">
-        <label htmlFor="sample-company" className="text-[9px] font-bold uppercase tracking-wider text-muted flex items-center">
-          <Building className="w-3.5 h-3.5 mr-1 text-cognac" />
-          Company Name *
-        </label>
-        <input
-          type="text"
-          id="sample-company"
-          name="companyName"
-          required
-          value={formData.companyName}
-          onChange={handleChange}
-          placeholder="e.g. Avenue Goods Corp"
-          className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2 px-3 text-xs text-charcoal focus:outline-none focus:border-cognac"
-        />
+      <div className="space-y-3">
+        <div className="space-y-1">
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Building className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Company *
+          </label>
+          <input type="text" name="companyName" required value={formData.companyName} onChange={handleChange}
+            placeholder="e.g. Avenue Goods Corp" className={inputClass} />
+        </div>
+        <div className="space-y-1">
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Mail className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Email *
+          </label>
+          <input type="email" name="email" required value={formData.email} onChange={handleChange}
+            placeholder="e.g. logistics@avenuegoods.com" className={inputClass} />
+        </div>
+        <div className="space-y-1">
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Truck className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Courier Account
+          </label>
+          <input type="text" name="courierAccount" value={formData.courierAccount} onChange={handleChange}
+            placeholder="e.g. DHL #968382012" className={inputClass} />
+        </div>
+        <div className="space-y-1">
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <MapPin className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Shipping Address *
+          </label>
+          <textarea name="shippingAddress" required rows="3" value={formData.shippingAddress} onChange={handleChange}
+            placeholder="Full address" className={`${inputClass} resize-y`} />
+        </div>
+        <div className="space-y-1">
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Clipboard className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Notes
+          </label>
+          <textarea name="notes" rows="2" value={formData.notes} onChange={handleChange}
+            placeholder="Additional swatches or details" className={`${inputClass} resize-y`} />
+        </div>
       </div>
 
-      {/* Email */}
-      <div className="space-y-1">
-        <label htmlFor="sample-email" className="text-[9px] font-bold uppercase tracking-wider text-muted flex items-center">
-          <Mail className="w-3.5 h-3.5 mr-1 text-cognac" />
-          Business Email *
-        </label>
-        <input
-          type="email"
-          id="sample-email"
-          name="email"
-          required
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="e.g. logistics@avenuegoods.com"
-          className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2 px-3 text-xs text-charcoal focus:outline-none focus:border-cognac"
-        />
-      </div>
-
-      {/* Courier Account */}
-      <div className="space-y-1">
-        <label htmlFor="sample-courier" className="text-[9px] font-bold uppercase tracking-wider text-muted flex items-center">
-          <Truck className="w-3.5 h-3.5 mr-1 text-cognac" />
-          Courier account (DHL / FedEx / UPS)
-        </label>
-        <input
-          type="text"
-          id="sample-courier"
-          name="courierAccount"
-          value={formData.courierAccount}
-          onChange={handleChange}
-          placeholder="e.g. DHL #968382012 (Collect)"
-          className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2 px-3 text-xs text-charcoal focus:outline-none focus:border-cognac"
-        />
-        <p className="text-[8px] text-muted">
-          * Leaving blank means we will calculate and quote courier freight costs separately.
-        </p>
-      </div>
-
-      {/* Shipping address */}
-      <div className="space-y-1">
-        <label htmlFor="sample-address" className="text-[9px] font-bold uppercase tracking-wider text-muted flex items-center">
-          <MapPin className="w-3.5 h-3.5 mr-1 text-cognac" />
-          Complete shipping address *
-        </label>
-        <textarea
-          id="sample-address"
-          name="shippingAddress"
-          required
-          rows="3"
-          value={formData.shippingAddress}
-          onChange={handleChange}
-          placeholder="e.g. Suite 405, 120 Broadway, New York, NY 10271, USA"
-          className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2 px-3 text-xs text-charcoal focus:outline-none focus:border-cognac resize-y"
-        />
-      </div>
-
-      {/* Notes */}
-      <div className="space-y-1">
-        <label htmlFor="sample-notes" className="text-[9px] font-bold uppercase tracking-wider text-muted flex items-center">
-          <Clipboard className="w-3.5 h-3.5 mr-1 text-cognac" />
-          Additional swatches / details
-        </label>
-        <textarea
-          id="sample-notes"
-          name="notes"
-          rows="2"
-          value={formData.notes}
-          onChange={handleChange}
-          placeholder="Include sample leather swatches for other colors (Oxblood, Saddle, etc.)"
-          className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2 px-3 text-xs text-charcoal focus:outline-none focus:border-cognac resize-y"
-        />
-      </div>
-
-      <div className="pt-2">
-        <Button
-          type="submit"
-          variant="outline-dark"
-          className="w-full py-3 text-xs"
-          disabled={loading}
-        >
-          {loading ? 'Submitting sample request...' : `Request Sample (${selectedColor})`}
-        </Button>
-      </div>
-
+      <Button type="submit" variant="outline" className="w-full py-2.5" disabled={loading}>
+        {loading ? 'Submitting...' : `Request Sample (${selectedColor})`}
+      </Button>
     </form>
   );
 }
-export { SampleRequestForm };

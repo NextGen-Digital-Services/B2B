@@ -6,14 +6,8 @@ import Button from '../shared/Button';
 
 export default function RFQForm({ cartItems, onClearCart }) {
   const [formData, setFormData] = useState({
-    companyName: '',
-    contactPerson: '',
-    email: '',
-    phone: '',
-    country: '',
-    message: ''
+    companyName: '', contactPerson: '', email: '', phone: '', country: '', message: '',
   });
-
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -29,52 +23,29 @@ export default function RFQForm({ cartItems, onClearCart }) {
     setLoading(true);
 
     if (cartItems.length === 0) {
-      setErrorMsg('Your RFQ cart is empty. Please add products first.');
+      setErrorMsg('Your inquiry cart is empty. Please add products first.');
       setLoading(false);
       return;
     }
 
     try {
-      // 1. Submit to Supabase if config is active
       if (supabase) {
-        const { error } = await supabase.from('rfq_requests').insert([
-          {
-            company_name: formData.companyName,
-            contact_person: formData.contactPerson,
-            email: formData.email,
-            phone: formData.phone,
-            country: formData.country,
-            items: cartItems.map((item) => ({
-              product_id: item.product_id,
-              product_name: item.product_name,
-              color: item.selected_color,
-              quantity: item.quantity
-            })),
-            message: formData.message,
-            status: 'pending'
-          }
-        ]);
-
+        const { error } = await supabase.from('rfq_requests').insert([{
+          company_name: formData.companyName, contact_person: formData.contactPerson,
+          email: formData.email, phone: formData.phone, country: formData.country,
+          items: cartItems.map((item) => ({
+            product_id: item.product_id, product_name: item.product_name,
+            color: item.selected_color, quantity: item.quantity,
+          })),
+          message: formData.message, status: 'pending',
+        }]);
         if (error) throw error;
-      } else {
-        // Mock offline fallback
-        console.log('Supabase offline. Submitting RFQ data locally:', formData, cartItems);
       }
-
       setSuccess(true);
-      
-      // 2. Open WhatsApp pre-filled template link
       const waUrl = buildWhatsAppRFQUrl(formData.companyName, formData.country, cartItems);
-      
-      setTimeout(() => {
-        // Open WhatsApp in a separate tab
-        window.open(waUrl, '_blank');
-        onClearCart();
-      }, 1000);
-
-    } catch (err) {
-      console.error('Error submitting RFQ:', err);
-      setErrorMsg('Failed to submit quote request. Please check your network and try again.');
+      setTimeout(() => { window.open(waUrl, '_blank'); onClearCart(); }, 1000);
+    } catch {
+      setErrorMsg('Failed to submit. Please check your network and try again.');
     } finally {
       setLoading(false);
     }
@@ -82,158 +53,80 @@ export default function RFQForm({ cartItems, onClearCart }) {
 
   if (success) {
     return (
-      <div className="bg-card border border-gold p-8 text-center space-y-4 rounded-[2px] font-sans">
-        <h3 className="text-xl font-serif text-primary">RFQ Submission Successful</h3>
+      <div className="border border-border bg-card p-8 text-center space-y-4">
+        <h3 className="text-xl font-serif text-ink">Inquiry Submitted</h3>
         <p className="text-xs text-muted leading-relaxed">
-          Your wholesale quotation request has been recorded. Redirecting you to WhatsApp to connect directly with our export manager...
+          Redirecting to WhatsApp to connect with our export manager...
         </p>
-        <div className="animate-pulse inline-block h-2 w-16 bg-gold" />
+        <div className="animate-pulse inline-block h-0.5 w-16 bg-leather" />
       </div>
     );
   }
 
+  const inputClass = "w-full bg-ivory border border-border py-2.5 px-4 text-xs font-sans text-ink focus:outline-none focus:border-leather transition-colors duration-300 placeholder-muted";
+
   return (
-    <form onSubmit={handleSubmit} className="font-sans border border-border bg-card p-6 md:p-8 rounded-[2px] space-y-6">
-      
-      <div className="border-b border-border pb-4">
-        <h3 className="text-base font-serif text-primary uppercase tracking-wide">
-          Submit Quote Requirements
-        </h3>
-        <p className="text-xs text-muted mt-1 leading-relaxed">
-          Provide your business credentials. Our sales desk will verify your company status and send an official FOB price quote email.
+    <form onSubmit={handleSubmit} className="border border-border bg-card p-6 md:p-8 space-y-5">
+      <div className="border-b border-border-light pb-4">
+        <h3 className="text-base font-serif text-ink">Submit Quote Requirements</h3>
+        <p className="text-[10px] text-muted mt-1 font-mono uppercase tracking-wider">
+          Provide your business credentials for an official FOB price quote.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="bg-primary/5 border border-primary text-primary py-3 px-4 text-xs font-medium">
-          {errorMsg}
-        </div>
+        <div className="border border-burgundy/30 bg-burgundy/5 py-3 px-4 text-xs text-burgundy font-medium">{errorMsg}</div>
       )}
 
-      {/* Grid Inputs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        
-        {/* Company Name */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <label htmlFor="companyName" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Building className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Company Registered Name *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Building className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Company *
           </label>
-          <input
-            type="text"
-            id="companyName"
-            name="companyName"
-            required
-            value={formData.companyName}
-            onChange={handleChange}
-            placeholder="e.g. Vance Retail Ltd"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="text" name="companyName" required value={formData.companyName} onChange={handleChange}
+            placeholder="e.g. Vance Retail Ltd" className={inputClass} />
         </div>
-
-        {/* Contact Person */}
         <div className="space-y-1.5">
-          <label htmlFor="contactPerson" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <User className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Contact Sourcing Officer *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <User className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Contact Person *
           </label>
-          <input
-            type="text"
-            id="contactPerson"
-            name="contactPerson"
-            required
-            value={formData.contactPerson}
-            onChange={handleChange}
-            placeholder="e.g. Marcus Vance"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="text" name="contactPerson" required value={formData.contactPerson} onChange={handleChange}
+            placeholder="e.g. Marcus Vance" className={inputClass} />
         </div>
-
-        {/* Business Email */}
         <div className="space-y-1.5">
-          <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Mail className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Business Email *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Mail className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Email *
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="e.g. buyer@vancegoods.co.uk"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="email" name="email" required value={formData.email} onChange={handleChange}
+            placeholder="e.g. buyer@vancegoods.co.uk" className={inputClass} />
         </div>
-
-        {/* Phone */}
         <div className="space-y-1.5">
-          <label htmlFor="phone" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Phone className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            WhatsApp / Mobile Number *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Phone className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Phone *
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            required
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="e.g. +44 20 7946 0192"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="tel" name="phone" required value={formData.phone} onChange={handleChange}
+            placeholder="e.g. +44 20 7946 0192" className={inputClass} />
         </div>
-
-        {/* Country */}
         <div className="space-y-1.5 md:col-span-2">
-          <label htmlFor="country" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Globe className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Destination Port / Country *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Globe className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Destination Country *
           </label>
-          <input
-            type="text"
-            id="country"
-            name="country"
-            required
-            value={formData.country}
-            onChange={handleChange}
-            placeholder="e.g. London Gateway Port, United Kingdom"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="text" name="country" required value={formData.country} onChange={handleChange}
+            placeholder="e.g. London Gateway Port, UK" className={inputClass} />
         </div>
-
-        {/* Additional specifications / custom requests */}
         <div className="space-y-1.5 md:col-span-2">
-          <label htmlFor="message" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <FileText className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Customization Instructions & Details
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <FileText className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Customization Details
           </label>
-          <textarea
-            id="message"
-            name="message"
-            rows="4"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="e.g. Need customized metal rivets with our logo stamp. Custom cotton lining in matching burgundy color for 100 units."
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac resize-y"
-          />
+          <textarea name="message" rows="4" value={formData.message} onChange={handleChange}
+            placeholder="e.g. Custom metal rivets with logo stamp, matching burgundy lining for 100 units."
+            className={`${inputClass} resize-y`} />
         </div>
-
       </div>
 
-      <div className="pt-4 border-t border-border/40">
-        <Button
-          type="submit"
-          variant="primary"
-          className="w-full py-4 text-xs font-semibold uppercase tracking-wider"
-          disabled={loading}
-        >
-          {loading ? 'Processing Quotation...' : 'Request B2B FOB Quote (WhatsApp)'}
-        </Button>
-      </div>
-
+      <Button type="submit" variant="primary" className="w-full py-3.5" disabled={loading}>
+        {loading ? 'Processing...' : 'Send B2B Inquiry via WhatsApp'}
+      </Button>
     </form>
   );
 }
-export { RFQForm };

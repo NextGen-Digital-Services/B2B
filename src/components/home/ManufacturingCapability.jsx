@@ -1,105 +1,91 @@
 import React from 'react';
-import useCounter from '../../hooks/useCounter';
+import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
 import { B2B_CONFIG } from '../../utils/helpers';
 
-// Helper component to trigger count-up on scroll per item
-function StatItem({ target, label, suffix = '' }) {
-  const { ref, count } = useCounter(target);
-  
-  // Format numbers nicely
-  const displayCount = target.includes(',') 
-    ? count.toLocaleString('en-US') 
-    : count;
-
-  return (
-    <div
-      ref={ref}
-      className="bg-card border border-border p-8 flex flex-col justify-between items-center text-center relative overflow-hidden rounded-[2px]"
-    >
-      <div className="absolute top-0 left-0 w-full h-[3px] bg-gold/30" />
-      <span className="text-4xl md:text-5xl font-serif text-primary font-bold">
-        {displayCount}{suffix}
-      </span>
-      <span className="text-[10px] md:text-xs font-sans font-bold uppercase tracking-widest text-muted mt-3">
-        {label}
-      </span>
-    </div>
-  );
-}
+const steps = [
+  { num: '01', title: 'Leather Selection', desc: 'Hand-sorted premium hides from LWG certified tanneries.' },
+  { num: '02', title: 'Precision Cutting', desc: 'Die-cut patterns with optimal yield from each hide.' },
+  { num: '03', title: 'Expert Stitching', desc: 'Heavy-duty seams with consistent tension and alignment.' },
+  { num: '04', title: 'Hand Finishing', desc: 'Edge-painting, burnishing, and hardware installation.' },
+  { num: '05', title: 'Quality Control', desc: 'Triple-gate inspection before export packaging.' },
+  { num: '06', title: 'Global Dispatch', desc: 'FOB Kolkata or CIF to 35+ markets worldwide.' },
+];
 
 export default function ManufacturingCapability() {
   return (
-    <section className="bg-[#FBF8F3] py-20 lg:py-28 border-b border-border font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* Left Block - Statement & Workflow (7/12 cols) */}
-          <div className="lg:col-span-6 space-y-6">
+    <section className="bg-ivory py-20 lg:py-32 border-b border-border relative">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+
+          {/* Left - Statement */}
+          <div className="lg:col-span-5 space-y-8">
             <SectionHeading
-              eyebrow="Tannery & Workshop"
-              title="Industrial Scale. Artisanal Precision."
-              description="Operating from our state-of-the-art Kolkata production complex, we manage the entire leather sourcing, cutting, splitting, reinforcement, and hardware installation chain under one roof."
+              eyebrow="03 / Craft"
+              title="From Material to Your Brand."
+              description="We manage the entire leather sourcing, cutting, stitching, and finishing chain under one roof at our Kolkata production complex."
               align="left"
             />
-            
-            <p className="text-sm text-muted font-light leading-relaxed">
-              We tan leather under LWG Gold guidelines, ensuring that water reclamation and chemical regulations align with strict EU and US standards. Our stitching lines utilize modern heavy-duty sewing systems to achieve consistent seam alignment and tension, even on triple-layer structural joins.
-            </p>
-            
-            <div className="mt-8 space-y-4">
-              <div className="flex items-start">
-                <span className="flex-shrink-0 bg-primary text-gold text-xs font-mono font-bold w-6 h-6 flex items-center justify-center rounded-[2px] mt-1 mr-4">
-                  01
-                </span>
-                <div>
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-charcoal">Design & CAD Prototyping</h4>
-                  <p className="text-xs text-muted mt-1">We turn paper drafts or physical samples into clean production pattern templates within 7 days.</p>
+
+            <div className="space-y-4">
+              <p className="text-sm text-muted font-light leading-relaxed">
+                Operating under LWG Gold guidelines with strict EU and US compliance standards. Every product passes through triple-gate quality control before export packaging.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
+              {[
+                { value: `${B2B_CONFIG.yearsInBusiness}+`, label: 'Years of Craft' },
+                { value: '25,000', label: 'Sq. Ft. Facility' },
+                { value: '15,000+', label: 'Monthly Capacity' },
+                { value: '35+', label: 'Export Markets' },
+              ].map((stat, i) => (
+                <div key={i} className="space-y-1">
+                  <span className="text-2xl font-serif font-bold text-ink">{stat.value}</span>
+                  <p className="text-[9px] text-muted font-mono uppercase tracking-[0.15em]">{stat.label}</p>
                 </div>
-              </div>
-              <div className="flex items-start">
-                <span className="flex-shrink-0 bg-primary text-gold text-xs font-mono font-bold w-6 h-6 flex items-center justify-center rounded-[2px] mt-1 mr-4">
-                  02
-                </span>
-                <div>
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-charcoal">Precision Die-Cutting & Skiving</h4>
-                  <p className="text-xs text-muted mt-1">Ensures exact edge thicknesses for smooth leather folds, clean hand-painted lacquer finishes, and zero seam bulk.</p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <span className="flex-shrink-0 bg-primary text-gold text-xs font-mono font-bold w-6 h-6 flex items-center justify-center rounded-[2px] mt-1 mr-4">
-                  03
-                </span>
-                <div>
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-charcoal">Triple-Gate Quality Control</h4>
-                  <p className="text-xs text-muted mt-1">Batch hides inspection, in-process seam audits, and a final manual inspection before export-container packing.</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Block - Dynamic Stats Counters (6/12 cols) */}
-          <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:mt-6">
-            <StatItem
-              target={B2B_CONFIG.yearsInBusiness}
-              suffix="+"
-              label="Years in Global Manufacturing"
-            />
-            <StatItem
-              target="25,000"
-              suffix=" Sq. Ft."
-              label="Production Facility Floor Space"
-            />
-            <StatItem
-              target="15,000"
-              suffix="+"
-              label="Units Monthly Production Capacity"
-            />
-            <StatItem
-              target={B2B_CONFIG.countriesExported.replace('+', '')}
-              suffix="+"
-              label="Countries Safely Exported To"
-            />
+          {/* Right - Process Sequence */}
+          <div className="lg:col-span-7 lg:pl-8">
+            <div className="space-y-0">
+              {steps.map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="group relative flex items-start space-x-6 py-6 border-b border-border hover:bg-card/50 transition-colors duration-300 px-4 -mx-4"
+                >
+                  {/* Step number */}
+                  <span className="section-number text-2xl flex-shrink-0 mt-0.5">
+                    {step.num}
+                  </span>
+
+                  {/* Content */}
+                  <div className="space-y-1.5">
+                    <h4 className="text-sm font-sans font-semibold uppercase tracking-wider text-ink group-hover:text-leather transition-colors duration-300">
+                      {step.title}
+                    </h4>
+                    <p className="text-xs text-muted font-light leading-relaxed">
+                      {step.desc}
+                    </p>
+                  </div>
+
+                  {/* Stitched line on hover */}
+                  <div className="absolute bottom-0 left-14 right-4 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                      backgroundImage: 'repeating-linear-gradient(90deg, var(--color-leather) 0, var(--color-leather) 3px, transparent 3px, transparent 7px)',
+                      opacity: 0.3,
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
 
         </div>

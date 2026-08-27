@@ -4,14 +4,7 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../shared/Button';
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: ''
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', company: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -25,169 +18,87 @@ export default function ContactForm() {
     e.preventDefault();
     setErrorMsg('');
     setLoading(true);
-
     try {
       if (supabase) {
-        const { error } = await supabase.from('contact_inquiries').insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            company: formData.company,
-            message: formData.message
-          }
-        ]);
+        const { error } = await supabase.from('contact_inquiries').insert([{
+          name: formData.name, email: formData.email, phone: formData.phone,
+          company: formData.company, message: formData.message,
+        }]);
         if (error) throw error;
-      } else {
-        console.log('Supabase offline. Submitting contact inquiry locally:', formData);
       }
-
       setSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        message: ''
-      });
-    } catch (err) {
-      console.error('Error submitting contact form:', err);
-      setErrorMsg('Failed to send message. Please verify network status and try again.');
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    } catch {
+      setErrorMsg('Failed to send message. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
+  const inputClass = "w-full bg-card border border-border py-2.5 px-4 text-xs font-sans text-ink focus:outline-none focus:border-leather transition-colors duration-300 placeholder-muted";
+
   return (
-    <form onSubmit={handleSubmit} className="font-sans border border-border bg-card p-6 md:p-8 rounded-[2px] space-y-5">
-      
-      <div className="border-b border-border pb-4">
-        <h3 className="text-base font-serif text-primary uppercase tracking-wide">
-          Message Sourcing Department
-        </h3>
-        <p className="text-xs text-muted mt-1 leading-relaxed">
-          For custom ODM designs, container scheduling, or direct executive communication.
+    <form onSubmit={handleSubmit} className="border border-border bg-card p-6 md:p-8 space-y-5">
+      <div className="border-b border-border-light pb-4">
+        <h3 className="text-base font-serif text-ink">Send an Inquiry</h3>
+        <p className="text-[10px] text-muted mt-1 font-mono uppercase tracking-wider">
+          For custom ODM designs, container scheduling, or direct communication.
         </p>
       </div>
 
       {success && (
-        <div className="bg-[#FAF5EC] border border-gold text-primary py-3.5 px-4 text-xs font-semibold">
-          Your inquiry has been successfully sent. An export manager will respond within 12 business hours.
+        <div className="border border-leather/30 bg-leather/5 py-3 px-4 text-xs text-leather font-medium">
+          Inquiry sent. An export manager will respond within 12 business hours.
         </div>
       )}
-
       {errorMsg && (
-        <div className="bg-primary/5 border border-primary text-primary py-3 px-4 text-xs font-medium">
+        <div className="border border-burgundy/30 bg-burgundy/5 py-3 px-4 text-xs text-burgundy font-medium">
           {errorMsg}
         </div>
       )}
 
       <div className="space-y-4">
-        
-        {/* Name */}
         <div className="space-y-1.5">
-          <label htmlFor="name" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <User className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Your Full Name *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <User className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Full Name *
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="e.g. Elena Rostova"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="text" name="name" required value={formData.name} onChange={handleChange}
+            placeholder="e.g. Elena Rostova" className={inputClass} />
         </div>
-
-        {/* Company */}
         <div className="space-y-1.5">
-          <label htmlFor="company" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Building className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Company registered name *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Building className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Company *
           </label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            required
-            value={formData.company}
-            onChange={handleChange}
-            placeholder="e.g. Maison Cuir France"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="text" name="company" required value={formData.company} onChange={handleChange}
+            placeholder="e.g. Maison Cuir France" className={inputClass} />
         </div>
-
-        {/* Email */}
         <div className="space-y-1.5">
-          <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Mail className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Corporate Email Address *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Mail className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Email *
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="e.g. procurement@maisoncuir.fr"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="email" name="email" required value={formData.email} onChange={handleChange}
+            placeholder="e.g. procurement@maisoncuir.fr" className={inputClass} />
         </div>
-
-        {/* Phone */}
         <div className="space-y-1.5">
-          <label htmlFor="phone" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <Phone className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Contact Mobile (with country code) *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <Phone className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Phone *
           </label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            required
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="e.g. +33 6 1234 5678"
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac"
-          />
+          <input type="tel" name="phone" required value={formData.phone} onChange={handleChange}
+            placeholder="e.g. +33 6 1234 5678" className={inputClass} />
         </div>
-
-        {/* Message */}
         <div className="space-y-1.5">
-          <label htmlFor="message" className="text-[10px] font-bold uppercase tracking-wider text-muted flex items-center">
-            <FileText className="w-3.5 h-3.5 mr-1.5 text-cognac" />
-            Inquiry Message *
+          <label className="text-[9px] font-mono uppercase tracking-[0.15em] text-muted flex items-center">
+            <FileText className="w-3 h-3 mr-1.5" strokeWidth={1.5} /> Message *
           </label>
-          <textarea
-            id="message"
-            name="message"
-            required
-            rows="5"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Please detail your leather grain choices, estimated order size, destination port, and target sampling dates."
-            className="w-full bg-[#FAF5EC] border border-border rounded-[2px] py-2.5 px-3.5 text-xs text-charcoal focus:outline-none focus:border-cognac resize-y"
-          />
+          <textarea name="message" required rows="5" value={formData.message} onChange={handleChange}
+            placeholder="Detail your leather grain choices, order size, destination port, and sampling dates."
+            className={`${inputClass} resize-y`} />
         </div>
-
       </div>
 
-      <div className="pt-2">
-        <Button
-          type="submit"
-          variant="primary"
-          className="w-full"
-          disabled={loading}
-        >
-          {loading ? 'Submitting Inquiry...' : 'Submit B2B Message'}
-        </Button>
-      </div>
-
+      <Button type="submit" variant="primary" className="w-full" disabled={loading}>
+        {loading ? 'Sending...' : 'Send B2B Inquiry'}
+      </Button>
     </form>
   );
 }
-export { ContactForm };

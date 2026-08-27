@@ -1,75 +1,53 @@
 import React from 'react';
 
 export default function ProductGallery({ product, selectedColor, setSelectedColor }) {
-  // Swatches are color strings matching standard hex codes
   const colors = product.customization_options.colors;
-  const hexCodes = product.images; // matching indices
+  const hexCodes = product.images;
 
   return (
-    <div className="space-y-6 font-sans">
-      
-      {/* Main Leather Sample Display */}
-      <div className="relative h-96 w-full border border-border flex flex-col justify-between p-8 text-ivory rounded-[2px] overflow-hidden select-none">
-        
-        {/* Color fill based on selection */}
+    <div className="space-y-6">
+      <div className="relative h-96 w-full border border-border flex flex-col justify-between p-8 text-ivory overflow-hidden">
         <div
           className="absolute inset-0 leather-grain transition-colors duration-500"
           style={{ backgroundColor: hexCodes[colors.indexOf(selectedColor)] || hexCodes[0] }}
         />
-
         <div className="relative z-10 flex justify-between items-start">
-          <span className="text-[10px] font-mono tracking-widest text-gold bg-primary-dark/80 border border-gold/20 py-1 px-3 uppercase">
-            Product Sample Canvas
-          </span>
-          <span className="text-[10px] font-mono tracking-widest text-ivory/80">
-            Grain Thickness: 1.8mm - 2.0mm
-          </span>
+          <span className="stamp text-ivory/50 border-ivory/20">Specimen Canvas</span>
+          <span className="text-[9px] text-ivory/40 font-mono">{product.specifications.dimensions}</span>
         </div>
-
         <div className="relative z-10 space-y-1">
-          <p className="text-xs uppercase tracking-widest text-gold">Selected Leather Color</p>
-          <p className="text-2xl font-serif text-ivory tracking-wide">{selectedColor}</p>
+          <p className="text-[10px] uppercase tracking-[0.2em] text-ivory/50 font-mono">Selected</p>
+          <p className="text-2xl font-serif text-ivory">{selectedColor}</p>
         </div>
-        
       </div>
 
-      {/* Toggles Swatches */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-charcoal mb-3">
-          Available Export Colors
-        </p>
-        <div className="flex flex-wrap gap-4">
+        <p className="text-[10px] text-muted font-mono uppercase tracking-[0.15em] mb-3">Available Colors</p>
+        <div className="flex flex-wrap gap-3">
           {colors.map((color, idx) => {
-            const hex = hexCodes[idx] || '#4A1420';
+            const hex = hexCodes[idx] || '#291A13';
             const isActive = color === selectedColor;
-
             return (
               <button
                 key={color}
                 onClick={() => setSelectedColor(color)}
-                className={`flex items-center space-x-2 border py-2 px-4 rounded-[2px] cursor-pointer transition-colors ${
+                className={`flex items-center space-x-2 border py-2 px-4 transition-all duration-300 ${
                   isActive
-                    ? 'border-gold bg-[#FAF5EC] text-primary'
-                    : 'border-border bg-card text-muted hover:border-gold'
+                    ? 'border-ink bg-ink text-ivory'
+                    : 'border-border bg-transparent text-muted hover:border-ink hover:text-ink'
                 }`}
-                aria-label={`Select ${color}`}
               >
-                {/* Color Dot Swatch */}
                 <span
-                  className="w-4 h-4 border border-gold/20 shadow-sm leather-grain inline-block"
+                  className="w-3.5 h-3.5 border border-white/20 leather-grain"
                   style={{ backgroundColor: hex }}
                 />
-                <span className="text-xs font-medium">{color}</span>
+                <span className="text-[10px] uppercase tracking-wider font-medium">{color}</span>
               </button>
             );
           })}
         </div>
-        <p className="text-[10px] text-muted mt-2">
-          * Custom pantone colors available upon request (subject to raw material MOQ).
-        </p>
+        <p className="text-[9px] text-muted mt-2 font-mono">Custom pantone colors available on request.</p>
       </div>
-
     </div>
   );
 }
-export { ProductGallery };

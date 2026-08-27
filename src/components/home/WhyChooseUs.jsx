@@ -1,66 +1,68 @@
 import React from 'react';
-import { Award, ShieldAlert, Truck, Users } from 'lucide-react';
+import { motion } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
 
-export default function WhyChooseUs() {
-  const points = [
-    {
-      icon: Award,
-      title: 'Premium Material Integrity',
-      desc: 'We source exclusively from LWG gold-rated tanneries. Our hides are hand-sorted to minimize natural scar marks, securing clean panel yield for your production lines.'
-    },
-    {
-      icon: Users,
-      title: 'Private Label Customization',
-      desc: 'Full OEM/ODM design flexibility. Emboss your brand logo, order custom-plated metallic zip sliders, or select bespoke jacquard lining fabrics.'
-    },
-    {
-      icon: ShieldAlert,
-      title: 'Compliance-Ready Exports',
-      desc: 'All bags pass REACH regulatory tests for chemicals. We provide fully documented lab certificates, eliminating customs clearance bottlenecks in Europe and North America.'
-    },
-    {
-      icon: Truck,
-      title: 'Container Logistics Handling',
-      desc: 'We pack using heavy-duty export cartons lined with anti-humidity silica gel bags. We handle full export documentation, booking FOB Kolkata or CIF shipping lanes.'
-    }
-  ];
+const trustPoints = [
+  { value: '50+', label: 'MOQ', sublabel: 'Minimum Order' },
+  { value: '500+', label: 'Custom Designs', sublabel: 'Delivered Annually' },
+  { value: '35+', label: 'Markets', sublabel: 'Countries Exported' },
+  { value: '18+', label: 'Years', sublabel: 'Of Craft' },
+];
 
+const features = [
+  'Prototype Availability',
+  'Custom Packaging',
+  'Private Labelling',
+  'Quality Control',
+  'Worldwide Shipping',
+];
+
+export default function WhyChooseUs() {
   return (
-    <section className="bg-ivory py-20 lg:py-28 border-b border-border font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <section className="bg-ivory py-20 lg:py-32 border-b border-border">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="The Westmere Advantage"
-          title="Engineered for International Wholesale Trade"
-          description="We operate as a direct industrial partner to global retail chains, boutique distributors, and corporate gift houses, offering reliable schedules and documented quality control."
+          eyebrow="05 / Trust"
+          title="Engineered for International Trade"
+          description="Reliable manufacturing partner for global retail chains, boutique distributors, and corporate gift houses."
           align="center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
-          {points.map((pt, idx) => {
-            const Icon = pt.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-card border border-border p-8 hover:border-gold/30 transition-all duration-300 flex items-start space-x-6 rounded-[2px]"
-              >
-                <div className="flex-shrink-0 bg-[#FAF5EC] border border-border p-3.5 rounded-[2px] text-cognac">
-                  <Icon className="w-6 h-6" strokeWidth={1.5} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-base font-serif text-primary uppercase tracking-wider font-semibold">
-                    {pt.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-muted leading-relaxed font-light">
-                    {pt.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+        {/* Trust Numbers */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mt-16">
+          {trustPoints.map((pt, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="text-center group"
+            >
+              <span className="block text-4xl lg:text-5xl font-serif font-bold text-ink group-hover:text-leather transition-colors duration-500">
+                {pt.value}
+              </span>
+              <span className="block text-[10px] font-sans font-medium uppercase tracking-[0.2em] text-ink mt-3">
+                {pt.label}
+              </span>
+              <span className="block text-[9px] font-mono text-muted tracking-wider mt-1">
+                {pt.sublabel}
+              </span>
+            </motion.div>
+          ))}
         </div>
 
+        {/* Features list */}
+        <div className="mt-16 pt-12 border-t border-border flex flex-wrap justify-center gap-x-10 gap-y-4">
+          {features.map((feat, i) => (
+            <div key={i} className="flex items-center space-x-3">
+              <div className="w-1.5 h-px bg-leather" />
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.15em] text-muted">
+                {feat}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

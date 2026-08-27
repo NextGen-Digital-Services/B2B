@@ -1,36 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingBag, Briefcase, Wallet, Compass, Luggage, BookOpen, Plus } from 'lucide-react';
+import { ArrowUpRight, Plus } from 'lucide-react';
 import { formatCurrency } from '../../utils/helpers';
 import useRFQCart from '../../hooks/useRFQCart';
-import Button from '../shared/Button';
-import Badge from '../shared/Badge';
-
-// Helper to get category specific icon
-const getCategoryIcon = (categoryId) => {
-  switch (categoryId) {
-    case 'handbags': return ShoppingBag;
-    case 'totes': return Briefcase;
-    case 'wallets': return Wallet;
-    case 'backpacks': return Compass;
-    case 'travel': return Luggage;
-    case 'corporate': return BookOpen;
-    default: return ShoppingBag;
-  }
-};
 
 export default function ProductCard({ product }) {
   const { addToRFQ } = useRFQCart();
-  const IconComponent = getCategoryIcon(product.category_id);
-  
-  // Starting price is the unit price of the first tier (smallest quantity)
   const startingPrice = product.price_tiers[0]?.unit_price || 0;
-  
-  // Primary color representation
-  const swatchColor = product.images[0] || '#4A1420';
+  const swatchColor = product.images[0] || '#291A13';
 
   const handleAdd = (e) => {
-    e.preventDefault(); // Stop navigation to detail page
+    e.preventDefault();
     e.stopPropagation();
     addToRFQ(product, product.moq, product.customization_options.colors[0]);
     alert(`${product.name} (${product.moq} units) added to RFQ cart.`);
@@ -39,71 +19,64 @@ export default function ProductCard({ product }) {
   return (
     <Link
       to={`/products/${product.slug}`}
-      className="group flex flex-col justify-between border border-border bg-card hover:border-gold/40 transition-all duration-300 hover:scale-[1.02] rounded-[2px] overflow-hidden"
+      className="group relative flex flex-col border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden"
     >
-      
-      {/* Editorial Swatch Display (Placeholder Image) */}
-      <div className="relative h-64 w-full flex items-center justify-center border-b border-border text-ivory overflow-hidden select-none">
-        
-        {/* Color background with leather grain */}
+      {/* Specimen Header */}
+      <div className="flex items-center justify-between px-5 py-3 border-b border-border-light">
+        <span className="text-[9px] text-muted font-mono tracking-wider uppercase">
+          Specimen / {product.id.slice(0, 4).toUpperCase()}
+        </span>
+        <span className="text-[9px] text-muted font-mono tracking-wider">
+          {product.moq}+ MOQ
+        </span>
+      </div>
+
+      {/* Color swatch area */}
+      <div className="relative h-56 w-full overflow-hidden">
         <div
           className="absolute inset-0 leather-grain transition-transform duration-700 group-hover:scale-105"
           style={{ backgroundColor: swatchColor }}
         />
-        
-        {/* Category Icon representation */}
-        <div className="relative z-10 p-6 rounded-full bg-primary-dark/30 border border-gold/10 backdrop-blur-xs flex items-center justify-center">
-          <IconComponent className="w-10 h-10 text-gold" strokeWidth={1.2} />
-        </div>
-
-        {/* Spec Label Overlay */}
-        <div className="absolute bottom-4 left-4 z-10">
-          <Badge text={product.material.split(' ')[0]} variant="gold" />
-        </div>
+        {/* Diagonal detail */}
+        <div className="absolute top-4 right-4 w-16 h-16 border border-ivory/10 transform rotate-45" />
       </div>
 
-      {/* Info Body */}
-      <div className="p-6 flex-grow flex flex-col justify-between space-y-4">
-        
-        <div className="space-y-1">
-          <span className="text-[9px] font-sans font-bold uppercase tracking-[0.15em] text-cognac">
-            Category: {product.category_id.toUpperCase()}
-          </span>
-          <h3 className="text-lg font-serif text-primary group-hover:text-cognac transition-colors leading-tight line-clamp-1">
+      {/* Info */}
+      <div className="p-5 flex-grow flex flex-col justify-between space-y-4">
+        <div className="space-y-2">
+          <h3 className="text-lg font-serif text-ink group-hover:text-leather transition-colors duration-300 leading-tight">
             {product.name}
           </h3>
-          <p className="text-xs text-muted font-sans font-light leading-relaxed line-clamp-2 mt-1">
-            {product.description}
+          <p className="text-[10px] text-muted font-mono uppercase tracking-wider">
+            {product.material}
           </p>
         </div>
 
-        {/* B2B Specs & Quote Info */}
-        <div className="pt-3 border-t border-border/60 flex items-center justify-between text-xs font-sans">
-          <div>
-            <p className="text-[10px] text-muted uppercase tracking-wider font-semibold">Min Order MOQ</p>
-            <p className="text-charcoal font-medium mt-0.5">{product.moq} Units</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] text-muted uppercase tracking-wider font-semibold">Est. Wholesales</p>
-            <p className="text-cognac font-bold mt-0.5">From {formatCurrency(startingPrice)}</p>
-          </div>
+        {/* Specs row */}
+        <div className="flex items-center justify-between text-[10px] text-muted font-mono pt-3 border-t border-border-light">
+          <span>{product.specifications.hardware}</span>
+          <span>{formatCurrency(startingPrice)} / unit</span>
         </div>
 
-        {/* Add to RFQ Action Button */}
-        <div className="pt-2">
-          <Button
-            variant="outline-dark"
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          <span className="flex-1 flex items-center text-[10px] uppercase tracking-[0.15em] font-medium text-ink group-hover:text-leather transition-colors duration-300">
+            View Specimen
+            <ArrowUpRight className="w-3 h-3 ml-1 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
+          <button
             onClick={handleAdd}
-            className="w-full text-[10px] py-2 px-4 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-ivory"
+            className="flex items-center justify-center w-8 h-8 border border-border hover:border-leather/40 hover:bg-leather/5 transition-all duration-300"
+            title="Add to RFQ"
           >
-            <Plus className="w-3.5 h-3.5 mr-1" strokeWidth={2} />
-            Add to RFQ
-          </Button>
+            <Plus className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />
+          </button>
         </div>
-
       </div>
 
+      {/* Corner marks */}
+      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-transparent group-hover:border-leather/20 transition-colors duration-500" />
+      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-transparent group-hover:border-leather/20 transition-colors duration-500" />
     </Link>
   );
 }
-export { ProductCard };

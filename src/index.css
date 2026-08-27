@@ -1,33 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Marcellus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
 
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #4A1420;
-  --color-primary-dark: #2E0D14;
+  --color-ivory: #F2EDE4;
+  --color-ink: #11100E;
+  --color-espresso: #291A13;
+  --color-leather: #70482F;
+  --color-burgundy: #6B2525;
   --color-cognac: #A9683B;
   --color-gold: #C6A15B;
-  --color-ivory: #F7F1E7;
-  --color-card: #FBF8F3;
-  --color-charcoal: #241812;
-  --color-muted: #6B5A4E;
-  --color-border: #E4D9C8;
+  --color-card: #F8F4EC;
+  --color-muted: #8A7D72;
+  --color-border: #D9CFC2;
+  --color-border-light: #E8E1D6;
 
-  --font-serif: 'Marcellus', serif;
-  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Cormorant', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Lora', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @layer base {
   body {
-    @apply bg-ivory text-charcoal font-sans antialiased selection:bg-cognac selection:text-white;
+    @apply bg-ivory text-ink font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  ::selection {
+    background-color: #70482F;
+    color: #F2EDE4;
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-wide;
+    @apply font-serif;
   }
 }
 
-/* Custom Utilities */
+.text-display {
+  font-family: 'Cormorant', Georgia, serif;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.text-label {
+  font-family: 'Lora', sans-serif;
+  font-weight: 500;
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.text-meta {
+  font-family: 'Lora', sans-serif;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .leather-grain {
   position: relative;
 }
@@ -37,26 +68,125 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.06;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='leather-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.8 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23leather-grain)'/%3E%3C/svg%3E");
 }
 
-/* Smooth custom scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+.paper-texture {
+  position: relative;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-ivory);
+.paper-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.1 0 0 0 0 0.06 0 0 0 0 0.05 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23paper)'/%3E%3C/svg%3E");
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: 4px;
+.stamp {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  font-family: 'Lora', sans-serif;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-muted);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-cognac);
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-ivory); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-leather); }
+
+html { scroll-behavior: smooth; }
+
+.section-number {
+  font-family: 'Cormorant', serif;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-border);
+}
+
+/* Notebook styles */
+.notebook-shadow {
+  box-shadow:
+    0 30px 60px -15px rgba(17, 16, 14, 0.4),
+    0 0 0 1px rgba(112, 72, 47, 0.15),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.notebook-cover {
+  background: linear-gradient(145deg, #291A13 0%, #1E120C 40%, #291A13 70%, #331F15 100%);
+  position: relative;
+}
+
+.notebook-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cfilter id='lc'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0 0.08 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23lc)'/%3E%3C/svg%3E");
+}
+
+.notebook-page {
+  background: linear-gradient(135deg, #F2EDE4 0%, #EDE6D8 50%, #E8E0D0 100%);
+  position: relative;
+}
+
+.notebook-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cfilter id='np'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.2 0 0 0 0.25 0'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23np)'/%3E%3C/svg%3E");
+}
+
+.notebook-binding {
+  background: linear-gradient(90deg, #1E120C 0%, #291A13 30%, #1E120C 70%, #150D08 100%);
+  box-shadow: inset -3px 0 10px rgba(0,0,0,0.4), inset 3px 0 10px rgba(0,0,0,0.4);
+}
+
+.tab-active {
+  background: linear-gradient(90deg, #291A13, #331F15);
+  color: #F2EDE4;
+  box-shadow: 3px 0 10px rgba(0,0,0,0.3);
+}
+
+.page-curl::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(225deg, var(--color-border) 0%, transparent 70%);
+  opacity: 0.3;
+}
+
+.stitch-line {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-leather) 0,
+    var(--color-leather) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  height: 1px;
+  opacity: 0.35;
+}
+
+.embossed-text {
+  text-shadow: 0 1px 1px rgba(255,255,255,0.4), 0 -1px 1px rgba(0,0,0,0.08);
+}
+
+.debossed-text {
+  text-shadow: 0 -1px 1px rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.15);
 }

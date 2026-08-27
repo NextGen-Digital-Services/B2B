@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClipboardCopy } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import useRFQCart from '../../hooks/useRFQCart';
 import Button from '../shared/Button';
 
@@ -14,10 +14,9 @@ export default function AddToRFQButton({ product, selectedColor }) {
   };
 
   const handleBlur = () => {
-    // Clamp to MOQ on blur
     if (quantity < product.moq) {
       setQuantity(product.moq);
-      alert(`Minimum order quantity for this item is ${product.moq} units.`);
+      alert(`Minimum order quantity is ${product.moq} units.`);
     }
   };
 
@@ -26,67 +25,46 @@ export default function AddToRFQButton({ product, selectedColor }) {
 
   const handleAdd = () => {
     if (quantity < product.moq) {
-      alert(`Cannot add: Quantity is below the required MOQ of ${product.moq} units.`);
+      alert(`Quantity must be at least ${product.moq} units.`);
       return;
     }
     addToRFQ(product, quantity, selectedColor);
-    alert(`Added ${quantity} units of ${product.name} (${selectedColor}) to your quote request.`);
+    alert(`Added ${quantity} units of ${product.name} (${selectedColor}) to your inquiry.`);
   };
 
   return (
-    <div className="font-sans space-y-4 border border-border bg-card p-6 rounded-[2px]">
-      <h4 className="text-xs uppercase tracking-widest font-bold text-primary border-b border-border pb-3">
+    <div className="space-y-4 border border-border bg-card p-6">
+      <h4 className="text-[10px] uppercase tracking-[0.2em] font-medium text-muted border-b border-border-light pb-3">
         Configure Quote Volume
       </h4>
-      
+
       <div className="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
-        
-        {/* Quantity selector input */}
-        <div className="flex items-center border border-border rounded-[2px] bg-[#FAF5EC] h-[48px] overflow-hidden">
-          <button
-            onClick={decrement}
-            className="px-4 hover:bg-gold/15 text-charcoal font-semibold cursor-pointer h-full border-r border-border"
-            aria-label="Decrease quantity by 10"
-          >
-            -
+        <div className="flex items-center border border-border bg-ivory h-12 overflow-hidden">
+          <button onClick={decrement} className="px-4 hover:bg-ink/5 text-ink cursor-pointer h-full border-r border-border transition-colors">
+            <Minus className="w-3.5 h-3.5" strokeWidth={1.5} />
           </button>
-          
           <input
             type="number"
             value={quantity}
             onChange={(e) => handleQtyChange(e.target.value)}
             onBlur={handleBlur}
-            className="w-20 text-center font-mono text-xs font-semibold focus:outline-none bg-transparent text-charcoal"
+            className="w-20 text-center font-mono text-xs text-ink focus:outline-none bg-transparent"
             min={product.moq}
             step={10}
           />
-          
-          <button
-            onClick={increment}
-            className="px-4 hover:bg-gold/15 text-charcoal font-semibold cursor-pointer h-full border-l border-border"
-            aria-label="Increase quantity by 10"
-          >
-            +
+          <button onClick={increment} className="px-4 hover:bg-ink/5 text-ink cursor-pointer h-full border-l border-border transition-colors">
+            <Plus className="w-3.5 h-3.5" strokeWidth={1.5} />
           </button>
         </div>
 
-        {/* Add to list trigger */}
-        <Button
-          variant="primary"
-          onClick={handleAdd}
-          className="flex-grow flex items-center justify-center h-[48px]"
-        >
-          <ClipboardCopy className="w-4 h-4 mr-2" strokeWidth={1.5} />
-          Add to RFQ List
+        <Button variant="primary" onClick={handleAdd} className="flex-grow flex items-center justify-center h-12">
+          Add to Inquiry
         </Button>
-
       </div>
-      
-      <p className="text-[10px] text-muted text-center sm:text-left">
-        * Select customized quantity (MOQ: {product.moq} units). Double-click inputs to type exact numbers.
-      </p>
 
+      <p className="text-[9px] text-muted text-center sm:text-left font-mono">
+        MOQ: {product.moq} units. Step: 10.
+      </p>
     </div>
   );
 }
-export { AddToRFQButton };

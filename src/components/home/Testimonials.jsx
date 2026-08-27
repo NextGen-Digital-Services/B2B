@@ -1,52 +1,56 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { testimonials } from '../../data/testimonials';
 import SectionHeading from '../shared/SectionHeading';
 
 export default function Testimonials() {
   return (
-    <section className="bg-[#FAF5EC] py-20 lg:py-28 border-b border-border font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+    <section className="bg-card py-20 lg:py-32 border-b border-border relative">
+      <div className="absolute inset-0 paper-texture pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
         <SectionHeading
-          eyebrow="International Partnerships"
+          eyebrow="06 / Partners"
           title="Verified Buyer Testimonials"
-          description="Read experiences from our global retail purchasing partners, private label brands, and corporate sourcing officers."
+          description="Experiences from our global retail purchasing partners and private label brands."
           align="center"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-          {testimonials.map((t) => (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          {testimonials.map((t, idx) => (
+            <motion.div
               key={t.id}
-              className="bg-card border border-border p-8 flex flex-col justify-between relative rounded-[2px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="group relative border border-border bg-ivory p-8 lg:p-10 hover:border-leather/20 transition-all duration-500"
             >
-              {/* Quote icon as background */}
-              <Quote className="absolute right-6 top-6 w-8 h-8 text-gold/15 pointer-events-none" strokeWidth={1} />
-              
-              <div>
-                <p className="text-sm sm:text-base text-charcoal italic leading-relaxed font-light">
-                  "{t.quote}"
-                </p>
+              {/* Quote mark */}
+              <div className="absolute top-6 right-8 text-4xl font-serif text-border select-none leading-none">
+                "
               </div>
 
-              <div className="mt-8 pt-6 border-t border-border flex justify-between items-end">
+              <p className="text-sm sm:text-base text-ink/80 italic font-serif leading-relaxed max-w-md">
+                {t.quote}
+              </p>
+
+              <div className="mt-8 pt-6 border-t border-border-light flex justify-between items-end">
                 <div>
-                  <h4 className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  <h4 className="text-xs font-sans font-semibold uppercase tracking-wider text-ink">
                     {t.client_name}
                   </h4>
-                  <p className="text-xs text-muted font-sans font-medium mt-0.5">
+                  <p className="text-[10px] text-muted font-sans mt-1">
                     {t.company_name}
                   </p>
                 </div>
-                <div className="text-[10px] uppercase tracking-widest text-gold font-mono font-bold bg-[#FAF5EC] border border-border py-1 px-3 rounded-[2px]">
+                <span className="stamp border-leather/20 text-leather">
                   {t.country}
-                </div>
+                </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );

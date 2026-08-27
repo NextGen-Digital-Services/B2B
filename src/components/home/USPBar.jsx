@@ -6,47 +6,64 @@ export default function USPBar() {
     {
       icon: Package,
       title: 'Flexible MOQs',
-      desc: 'Starts at 50 units per design to support high-end boutiques and niche retail.'
+      value: '50+',
+      label: 'Units per design',
     },
     {
       icon: ShieldCheck,
-      title: 'ISO 9001:2015 Audited',
-      desc: 'Strict QA process checklist applied across all raw material lots and seams.'
+      title: 'ISO Certified',
+      value: '9001',
+      label: 'Quality managed',
     },
     {
       icon: Globe,
-      title: 'Worldwide Export',
-      desc: 'FOB Kolkata and CIF container shipments handled directly by our customs team.'
+      title: 'Global Export',
+      value: '35+',
+      label: 'Countries served',
     },
     {
       icon: Sliders,
-      title: 'Private Label & OEM',
-      desc: 'Bespoke branding, customized metallic hardware, custom linings, and packaging.'
-    }
+      title: 'OEM / ODM',
+      value: '100%',
+      label: 'Custom available',
+    },
   ];
 
   return (
-    <section className="bg-card border-b border-border py-10 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="bg-card border-y border-border py-12 lg:py-16">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {usps.map((usp, idx) => {
             const Icon = usp.icon;
             return (
               <div
                 key={idx}
-                className="flex items-start space-x-4 border-l border-gold/20 pl-4 md:border-l-0 md:pl-0 md:first:border-l-0"
+                className="group relative flex flex-col items-center text-center space-y-3"
               >
-                <div className="flex-shrink-0 bg-[#FAF5EC] border border-border p-2.5 rounded-[2px] text-cognac">
+                {/* Icon */}
+                <div className="text-muted group-hover:text-leather transition-colors duration-300">
                   <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
+
+                {/* Value */}
+                <span className="text-2xl lg:text-3xl font-serif font-bold text-ink">
+                  {usp.value}
+                </span>
+
+                {/* Label */}
                 <div className="space-y-1">
-                  <h3 className="text-sm font-semibold tracking-wide text-primary uppercase font-sans">
+                  <p className="text-[10px] font-sans font-medium uppercase tracking-[0.15em] text-ink">
                     {usp.title}
-                  </h3>
-                  <p className="text-xs text-muted leading-relaxed">
-                    {usp.desc}
+                  </p>
+                  <p className="text-[9px] font-mono text-muted tracking-wider">
+                    {usp.label}
                   </p>
                 </div>
+
+                {/* Subtle divider between items */}
+                {idx < usps.length - 1 && (
+                  <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-border/60" />
+                )}
               </div>
             );
           })}

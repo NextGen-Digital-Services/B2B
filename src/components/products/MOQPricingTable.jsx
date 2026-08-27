@@ -3,51 +3,36 @@ import { formatCurrency } from '../../utils/helpers';
 
 export default function MOQPricingTable({ priceTiers, moq }) {
   return (
-    <div className="font-sans border border-border bg-card p-6 rounded-[2px] space-y-4">
-      
-      <div className="border-b border-border pb-3 flex justify-between items-center">
-        <h4 className="text-xs uppercase tracking-widest font-bold text-primary">
+    <div className="border border-border bg-card p-6 space-y-4">
+      <div className="border-b border-border-light pb-3 flex justify-between items-center">
+        <h4 className="text-[10px] uppercase tracking-[0.2em] font-medium text-muted">
           Wholesale Tier Pricing (FOB)
         </h4>
-        <span className="text-[10px] bg-primary text-gold uppercase tracking-wider py-1 px-3 rounded-[2px] font-semibold">
-          Min Order: {moq} Units
+        <span className="stamp bg-ink text-ivory border-ink">
+          MOQ: {moq}
         </span>
       </div>
 
-      {/* Grid Table */}
-      <div className="divide-y divide-border/60 text-xs">
-        
-        {/* Table Header */}
-        <div className="flex justify-between items-center py-2.5 font-bold text-muted uppercase tracking-wider">
-          <span>Order Volume (Units)</span>
-          <span className="text-right">Unit Price (USD)</span>
+      <div className="divide-y divide-border-light text-xs">
+        <div className="flex justify-between items-center py-2.5 font-mono text-[10px] text-muted uppercase tracking-[0.15em]">
+          <span>Volume</span>
+          <span>Unit Price</span>
         </div>
-
-        {/* Table Rows */}
         {priceTiers.map((tier, idx) => {
-          const qtyRange = tier.max_qty >= 999 
-            ? `${tier.min_qty}+ units` 
-            : `${tier.min_qty} - ${tier.max_qty} units`;
-
+          const qtyRange = tier.max_qty >= 999 ? `${tier.min_qty}+` : `${tier.min_qty} — ${tier.max_qty}`;
           return (
-            <div key={idx} className="flex justify-between items-center py-3 font-mono text-charcoal">
-              <span className="font-sans font-medium">{qtyRange}</span>
-              <span className="text-cognac font-bold text-sm">
-                {formatCurrency(tier.unit_price)}
-              </span>
+            <div key={idx} className="flex justify-between items-center py-3 font-mono text-ink">
+              <span className="text-xs">{qtyRange}</span>
+              <span className="text-sm font-medium">{formatCurrency(tier.unit_price)}</span>
             </div>
           );
         })}
       </div>
 
-      {/* Logistics and Terms declaration */}
-      <div className="pt-2 border-t border-border/40 text-[10px] text-muted space-y-1.5 leading-relaxed">
-        <p>• Pricing terms: **FOB Kolkata port, India** (Incoterms 2020).</p>
-        <p>• Standard Lead Time: **30 - 45 calendar days** from advance payment clearance.</p>
-        <p>• Customs documentation: Certificate of Origin, REACH Lab Certificates, packing list, and commercial invoice are provided with all shipments.</p>
+      <div className="pt-2 border-t border-border-light text-[9px] text-muted space-y-1 font-mono leading-relaxed">
+        <p>FOB Kolkata. Lead time: 30-45 days from payment.</p>
+        <p>Docs included: CO, REACH certs, packing list, invoice.</p>
       </div>
-
     </div>
   );
 }
-export { MOQPricingTable };

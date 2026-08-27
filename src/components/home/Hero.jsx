@@ -1,109 +1,238 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, FileDown } from 'lucide-react';
-import { B2B_CONFIG } from '../../utils/helpers';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import Button from '../shared/Button';
 
+const specWords = ['CRAFTED', 'LEATHER', 'BAGS', 'MADE', 'TO', 'LAST'];
+
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, -80]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -40]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
+
+  const [wordIndex, setWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % specWords.length);
+    }, 2200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative bg-primary-dark border-b border-gold/15 text-ivory py-20 lg:py-32 overflow-hidden">
-      
-      {/* Background Subtle Accent Box */}
-      <div className="absolute right-0 top-0 w-1/3 h-full bg-primary/10 pointer-events-none" />
+    <section className="relative min-h-screen bg-ink overflow-hidden">
+      {/* Animated grain overlay */}
+      <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          
-          {/* Left Column - Copy & CTA (60% equivalent) */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="lg:col-span-7 space-y-8"
-          >
-            <span className="inline-block text-[11px] font-sans font-bold uppercase tracking-[0.25em] text-gold">
-              Established {B2B_CONFIG.yearsInBusiness} Years Ago · Wholesale & Export
-            </span>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif leading-tight text-ivory">
-              Crafted in Leather.<br />
-              <span className="text-gold">Trusted Across Borders.</span>
-            </h1>
+      {/* Giant rotating background word */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+      >
+        <span className="text-[clamp(4rem,20vw,18rem)] font-serif font-bold text-ivory/[0.02] tracking-[-0.04em] leading-none whitespace-nowrap">
+          LEATHER
+        </span>
+      </motion.div>
 
-            <p className="text-base sm:text-lg text-muted font-sans font-light leading-relaxed max-w-xl">
-              {B2B_CONFIG.brandName} manufactures and exports premium leather bags to wholesalers, retailers, and corporate buyers in {B2B_CONFIG.countriesExported} countries. We specialize in OEM/ODM private-label capabilities with MOQs starting at just 50 units.
-            </p>
+      {/* Thin editorial lines */}
+      <div className="absolute top-0 left-4 lg:left-10 bottom-0 w-px bg-ivory/5" />
+      <div className="absolute top-0 right-4 lg:right-10 bottom-0 w-px bg-ivory/5" />
+      <div className="absolute top-1/4 left-0 right-0 h-px bg-ivory/[0.03]" />
+      <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Link to="/products">
-                <Button variant="primary" className="flex items-center">
-                  Request a Quote
-                  <ArrowRight className="w-4 h-4 ml-2" strokeWidth={1.5} />
+      <motion.div
+        style={{ opacity, scale }}
+        className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center py-20 sm:py-24 lg:py-32">
+
+          {/* Left - Creative Typography */}
+          <div className="lg:col-span-7 space-y-6 lg:space-y-10">
+            {/* Top meta row */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-wrap items-center gap-2 sm:gap-4"
+            >
+              <span className="stamp text-gold/60 border-gold/20">B2B Manufacturing</span>
+              <span className="text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider">EST. 2008</span>
+              <span className="text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider">01 / 08</span>
+            </motion.div>
+
+            {/* Giant headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <h1 className="text-[clamp(3rem,9vw,8rem)] leading-[0.88] tracking-[-0.03em] font-serif font-bold text-ivory">
+                MADE<br />
+                TO<br />
+                <span className="italic font-normal text-gold relative">
+                  LAST.
+                  <span className="absolute -bottom-2 left-0 w-full h-px bg-gold/30" />
+                </span>
+              </h1>
+            </motion.div>
+
+            {/* Rotating accent word */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="h-6 sm:h-8 overflow-hidden"
+            >
+              <motion.span
+                key={wordIndex}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="block text-xs sm:text-sm font-sans text-gold/40 tracking-[0.3em]"
+              >
+                {specWords[wordIndex]}
+              </motion.span>
+            </motion.div>
+
+            {/* Supporting */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="text-xs sm:text-sm text-ivory/50 font-light leading-relaxed max-w-md"
+            >
+              Premium leather goods manufactured for brands, retailers and corporate buyers. Factory-direct from Kolkata to 35+ countries.
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.9 }}
+              className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-5"
+            >
+              <Link to="/contact" className="w-full sm:w-auto">
+                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group bg-gold text-ink hover:bg-gold/90 hover:text-ivory border-gold">
+                  Request B2B Quote
+                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
                 </Button>
               </Link>
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert('Downloading wholesale catalog PDF file...');
-                }}
-              >
-                <Button variant="outline-gold" className="flex items-center">
-                  <FileDown className="w-4 h-4 mr-2" strokeWidth={1.5} />
-                  Download Catalogue
+              <Link to="/products" className="w-full sm:w-auto">
+                <Button variant="ghost" className="w-full sm:w-auto flex items-center justify-center group text-ivory/70 hover:text-ivory border-0 hover:bg-ivory/5">
+                  Explore Collection
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
                 </Button>
-              </a>
-            </div>
-            
-            {/* Quick trust seals */}
-            <div className="pt-6 border-t border-gold/10 flex flex-wrap gap-x-8 gap-y-3 text-[10px] uppercase tracking-wider text-muted font-sans">
-              <div><strong className="text-gold font-semibold">Incoterms:</strong> FOB Kolkata & CIF</div>
-              <div><strong className="text-gold font-semibold">Tannery Status:</strong> LWG Gold Certified</div>
-              <div><strong className="text-gold font-semibold">Audited:</strong> Sedex SMETA Member</div>
-            </div>
-          </motion.div>
+              </Link>
+            </motion.div>
 
-          {/* Right Column - Editorial Graphic Swatch Blocks (40% equivalent) */}
+            {/* Bottom meta */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+              className="flex flex-wrap items-center gap-2 sm:gap-4 lg:space-x-8 text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider pt-4 sm:pt-8"
+            >
+              <span>MOQ FROM 50 PCS</span>
+              <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
+              <span>OEM / ODM</span>
+              <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
+              <span>FOB KOLKATA</span>
+            </motion.div>
+          </div>
+
+          {/* Right - Creative Visual Composition */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: 'easeOut' }}
-            className="lg:col-span-5 relative h-[380px] sm:h-[450px] flex items-center justify-center"
+            style={{ y: y2 }}
+            className="lg:col-span-5 relative flex items-center justify-center"
           >
-            {/* Swatch 1: Oxblood Leather base */}
-            <div className="absolute top-8 left-8 w-4/5 h-[300px] bg-primary leather-grain border border-gold/20 shadow-2xl flex flex-col justify-between p-6">
-              <span className="text-[10px] font-mono tracking-widest text-gold/60 uppercase">
-                Swatch: Oxblood Burgundy Calfskin
-              </span>
-              <div className="space-y-1">
-                <p className="text-[11px] font-sans tracking-[0.2em] uppercase text-gold">Grade-A Leather</p>
-                <p className="text-[9px] font-mono text-ivory/50">LWG Environmental Code: WH-029</p>
-              </div>
-            </div>
+            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-md aspect-[3/4]">
+              {/* Main leather piece */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 bg-espresso leather-grain overflow-hidden"
+                style={{ clipPath: 'polygon(0% 0%, 98% 0%, 100% 97%, 2% 100%)' }}
+              >
+                <div className="absolute inset-3 sm:inset-4 border border-ivory/10" />
+                <div className="absolute inset-4 sm:inset-5 border border-ivory/5" />
+                <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-8 lg:p-10">
+                  <div className="flex justify-between items-start">
+                    <span className="stamp text-gold/50 border-gold/15 text-[7px] sm:text-[8px]">Specimen / 0042</span>
+                    <span className="text-[8px] sm:text-[9px] text-ivory/20 font-sans">WH-029</span>
+                  </div>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div className="w-12 sm:w-16 h-px bg-gold/30" />
+                    <p className="text-[9px] sm:text-[10px] text-ivory/40 font-sans tracking-wider uppercase">
+                      Full Grain / Cognac
+                    </p>
+                    <p className="text-lg sm:text-2xl font-serif text-ivory/90 leading-tight">
+                      Westmere<br />Leather
+                    </p>
+                    <p className="text-[8px] sm:text-[9px] text-ivory/25 font-sans">
+                      LWG Environmental Code
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
 
-            {/* Swatch 2: Cognac Leather overlay */}
-            <div className="absolute bottom-8 right-8 w-3/5 h-[220px] bg-cognac leather-grain border border-gold/30 shadow-2xl flex flex-col justify-between p-6 transform translate-x-4 translate-y-4">
-              <span className="text-[10px] font-mono tracking-widest text-ivory/70 uppercase">
-                Swatch: Saddle Cognac
-              </span>
-              <div>
-                <p className="text-[10px] font-serif tracking-[0.1em] text-ivory">Westmere Tanning</p>
-                <div className="w-8 h-[1px] bg-gold/50 my-1.5" />
-                <p className="text-[8px] font-mono text-ivory/60">Grain thickness: 1.8 - 2.0 mm</p>
-              </div>
-            </div>
+              {/* Overlapping cognac swatch */}
+              <motion.div
+                initial={{ opacity: 0, x: 30, y: 30 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 lg:-left-10 w-3/5 aspect-[4/3] bg-leather/90 leather-grain overflow-hidden"
+                style={{ clipPath: 'polygon(0% 3%, 97% 0%, 100% 96%, 3% 100%)' }}
+              >
+                <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
+                  <span className="stamp text-ivory/40 border-ivory/15 text-[7px] sm:text-[8px]">Saddle Cognac</span>
+                  <div>
+                    <p className="text-[8px] sm:text-[10px] text-ivory/50 font-sans">Grain: 1.8 — 2.0mm</p>
+                    <div className="w-5 sm:w-6 h-px bg-ivory/20 mt-2" />
+                  </div>
+                </div>
+              </motion.div>
 
-            {/* Accent Gold framing bracket */}
-            <div className="absolute inset-0 border border-gold/10 pointer-events-none m-4 translate-x-2 -translate-y-2" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary-dark/95 border border-gold/30 py-3 px-6 shadow-xl text-center backdrop-blur-sm z-10">
-              <p className="text-[9px] font-sans tracking-[0.25em] text-gold uppercase font-bold">Factory Direct</p>
-              <p className="text-xs font-serif text-ivory tracking-wide mt-1">Zero Middleman Markup</p>
+              {/* Floating burgundy accent */}
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 lg:-right-8 w-16 sm:w-20 lg:w-24 h-16 sm:h-20 lg:h-24 bg-burgundy/80 leather-grain flex items-center justify-center"
+                style={{ clipPath: 'polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%)' }}
+              >
+                <span className="text-[7px] sm:text-[8px] text-ivory/50 font-sans tracking-wider">BRG-033</span>
+              </motion.div>
+
+              {/* Corner marks */}
+              <div className="absolute -top-3 -right-3 lg:-top-4 lg:-right-4 w-6 sm:w-8 h-6 sm:h-8 border-t border-r border-ivory/10" />
+              <div className="absolute -bottom-3 -left-3 lg:-bottom-4 lg:-left-4 w-6 sm:w-8 h-6 sm:h-8 border-b border-l border-ivory/10" />
             </div>
           </motion.div>
-
         </div>
-      </div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.6 }}
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2"
+      >
+        <span className="text-[8px] sm:text-[9px] text-ivory/30 font-sans tracking-[0.3em] uppercase">Scroll</span>
+        <div className="w-px h-6 sm:h-8 bg-ivory/10 relative overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 w-full bg-gold/40"
+            initial={{ height: '0%' }}
+            animate={{ height: '100%' }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }

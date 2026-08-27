@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Button from '../components/shared/Button';
 
 export default function NotFound() {
   return (
@@ -9,23 +8,21 @@ export default function NotFound() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex-grow bg-ivory py-24 flex items-center justify-center font-sans text-center"
+      className="flex-grow bg-ivory pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 lg:pb-20 flex items-center justify-center text-center"
     >
-      <div className="max-w-md mx-auto px-4 space-y-6">
-        <h1 className="text-6xl font-serif text-primary">404</h1>
-        <h2 className="text-xl font-serif text-charcoal uppercase tracking-wider">Page Not Found</h2>
+      <div className="max-w-md mx-auto px-6 space-y-6">
+        <span className="stamp text-leather border-leather/30">Error</span>
+        <h1 className="text-6xl font-serif text-ink">404</h1>
+        <h2 className="text-xl font-serif text-ink uppercase tracking-wider">Specimen Not Found</h2>
         <p className="text-xs text-muted leading-relaxed font-light">
-          The requested trade desk URL or catalog specification file could not be located on our export servers.
+          The requested page could not be located in our archive.
         </p>
-        <div className="pt-4">
-          <Link to="/">
-            <Button variant="primary">
-              Return to Trade Homepage
-            </Button>
-          </Link>
-        </div>
+        <Link to="/" className="inline-block mt-4">
+          <span className="text-[10px] uppercase tracking-[0.15em] font-medium text-ink hover:text-leather transition-colors border-b border-ink hover:border-leather pb-0.5">
+            Return to Archive
+          </span>
+        </Link>
       </div>
     </motion.div>
   );
 }
-export { NotFound };
