@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
-import { products } from '../data/products';
+import { useProducts, useProductReviews } from '../context/ZycoonContext';
 import ProductGallery from '../components/products/ProductGallery';
-import MOQPricingTable from '../components/products/MOQPricingTable';
 import AddToRFQButton from '../components/products/AddToRFQButton';
 import SampleRequestForm from '../components/forms/SampleRequestForm';
 import ProductCard from '../components/products/ProductCard';
+import ProductReviews from '../components/products/ProductReviews';
 
 export default function ProductDetail() {
   const { slug } = useParams();
+  const products = useProducts();
   const product = products.find((p) => p.slug === slug);
+  const reviews = useProductReviews().filter((r) => r.product_id === product?.id) || [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -147,9 +149,6 @@ export default function ProductDetail() {
               </div>
             </div>
 
-            {/* Pricing */}
-            <MOQPricingTable priceTiers={product.price_tiers} moq={product.moq} />
-
             {/* Actions */}
             {selectedColor && (
               <AddToRFQButton product={product} selectedColor={selectedColor} />
@@ -160,6 +159,9 @@ export default function ProductDetail() {
             )}
           </div>
         </div>
+
+        {/* Client Reviews */}
+        {reviews.length > 0 && <ProductReviews reviews={reviews} />}
 
         {/* Related */}
         {relatedProducts.length > 0 && (

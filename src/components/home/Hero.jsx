@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Button from '../shared/Button';
+import Magnetic from '../shared/Magnetic';
 
 const specWords = ['CRAFTED', 'LEATHER', 'BAGS', 'MADE', 'TO', 'LAST'];
 
@@ -115,18 +116,22 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.9 }}
               className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-5"
             >
-              <Link to="/contact" className="w-full sm:w-auto">
-                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group bg-gold text-ink hover:bg-gold/90 hover:text-ivory border-gold">
-                  Request B2B Quote
-                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
-                </Button>
-              </Link>
-              <Link to="/products" className="w-full sm:w-auto">
-                <Button variant="ghost" className="w-full sm:w-auto flex items-center justify-center group text-ivory/70 hover:text-ivory border-0 hover:bg-ivory/5">
-                  Explore Collection
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
-                </Button>
-              </Link>
+              <Magnetic strength={6} className="w-full sm:w-auto">
+                <Link to="/contact" className="w-full sm:w-auto">
+                  <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group bg-gold text-ink hover:bg-gold/90 hover:text-ivory border-gold">
+                    Request B2B Quote
+                    <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                  </Button>
+                </Link>
+              </Magnetic>
+              <Magnetic strength={6} className="w-full sm:w-auto">
+                <Link to="/products" className="w-full sm:w-auto">
+                  <Button variant="ghost" className="w-full sm:w-auto flex items-center justify-center group text-ivory/70 hover:text-ivory border-0 hover:bg-ivory/5">
+                    Explore Collection
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                  </Button>
+                </Link>
+              </Magnetic>
             </motion.div>
 
             {/* Bottom meta */}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ClipboardList } from 'lucide-react';
 import useRFQCart from '../../hooks/useRFQCart';
 import MobileMenu from './MobileMenu';
@@ -68,11 +69,20 @@ export default function Navbar() {
                 id="rfq-cart-nav-btn"
               >
                 <ClipboardList className="w-5 h-5" strokeWidth={1.5} />
-                {distinctItemsCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-cognac text-ivory text-[9px] font-bold rounded-full w-5 h-5 flex items-center justify-center border border-espresso">
-                    {distinctItemsCount}
-                  </span>
-                )}
+                <AnimatePresence>
+                  {distinctItemsCount > 0 && (
+                    <motion.span
+                      key="badge"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.5 }}
+                      transition={{ type: 'spring', duration: 0.5, bounce: 0.3 }}
+                      className="absolute -top-1.5 -right-1.5 bg-cognac text-ivory text-[9px] font-bold rounded-full w-5 h-5 flex items-center justify-center border border-espresso"
+                    >
+                      {distinctItemsCount}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </Link>
 
               <button

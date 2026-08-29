@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Package, ShieldCheck, Globe, Sliders } from 'lucide-react';
+import AnimatedNumber from '../shared/AnimatedNumber';
+import useGsapReveal from '../../hooks/useGsapReveal';
 
 export default function USPBar() {
+  const scopeRef = useRef(null);
+  useGsapReveal(scopeRef);
+
   const usps = [
     {
       icon: Package,
@@ -29,15 +34,22 @@ export default function USPBar() {
     },
   ];
 
+  const numFrom = (value) => {
+    const match = value.match(/^(\d+)(.*)$/);
+    return match ? { value: Number(match[1]), suffix: match[2] } : { value: 0, suffix: value };
+  };
+
   return (
-    <section className="bg-card border-y border-border py-12 lg:py-16">
+    <section className="bg-card border-y border-border py-12 lg:py-16" ref={scopeRef}>
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {usps.map((usp, idx) => {
             const Icon = usp.icon;
+            const { value, suffix } = numFrom(usp.value);
             return (
               <div
                 key={idx}
+                data-reveal
                 className="group relative flex flex-col items-center text-center space-y-3"
               >
                 {/* Icon */}
@@ -46,9 +58,11 @@ export default function USPBar() {
                 </div>
 
                 {/* Value */}
-                <span className="text-2xl lg:text-3xl font-serif font-bold text-ink">
-                  {usp.value}
-                </span>
+                <AnimatedNumber
+                  value={value}
+                  suffix={suffix}
+                  className="text-2xl lg:text-3xl font-serif font-bold text-ink"
+                />
 
                 {/* Label */}
                 <div className="space-y-1">

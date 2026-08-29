@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionHeading from '../shared/SectionHeading';
+import AnimatedNumber from '../shared/AnimatedNumber';
 import { B2B_CONFIG } from '../../utils/helpers';
+
+if (typeof window !== 'undefined' && !gsap.core.globals().ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const steps = [
   { num: '01', title: 'Leather Selection', desc: 'Hand-sorted premium hides from LWG certified tanneries.' },
@@ -12,7 +19,50 @@ const steps = [
   { num: '06', title: 'Global Dispatch', desc: 'FOB Mumbai or CIF to 35+ markets worldwide.' },
 ];
 
+const parseStat = (value) => {
+  const match = value.replace(/,/g, '').match(/^(\d+)(.*)$/);
+  return {
+    value: match ? Number(match[1]) : 0,
+    suffix: match ? match[2] : '',
+    format: value.includes(','),
+  };
+};
+
 export default function ManufacturingCapability() {
+  const stepsRef = useRef(null);
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (!lineRef.current || !stepsRef.current) return;
+      const reduce =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      gsap.set(lineRef.current, { transformOrigin: 'top', scaleY: reduce ? 1 : 0 });
+      if (!reduce) {
+        gsap.to(lineRef.current, {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: stepsRef.current,
+            start: 'top 75%',
+            end: 'bottom 55%',
+            scrub: 0.6,
+          },
+        });
+      }
+    }, stepsRef);
+    return () => ctx.revert();
+  }, []);
+
+  const stats = [
+    { value: `${B2B_CONFIG.yearsInBusiness}+`, label: 'Years of Craft' },
+    { value: '25,000', label: 'Sq. Ft. Facility' },
+    { value: '15,000+', label: 'Monthly Capacity' },
+    { value: '35+', label: 'Export Markets' },
+  ];
+
   return (
     <section className="bg-ivory py-20 lg:py-32 border-b border-border relative">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -35,22 +85,34 @@ export default function ManufacturingCapability() {
 
             {/* Stats */}
             <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
-              {[
-                { value: `${B2B_CONFIG.yearsInBusiness}+`, label: 'Years of Craft' },
-                { value: '25,000', label: 'Sq. Ft. Facility' },
-                { value: '15,000+', label: 'Monthly Capacity' },
-                { value: '35+', label: 'Export Markets' },
-              ].map((stat, i) => (
-                <div key={i} className="space-y-1">
-                  <span className="text-2xl font-serif font-bold text-ink">{stat.value}</span>
-                  <p className="text-[9px] text-muted font-mono uppercase tracking-[0.15em]">{stat.label}</p>
-                </div>
-              ))}
+              {stats.map((stat, i) => {
+                const { value, suffix, format } = parseStat(stat.value);
+                return (
+                  <div key={i} className="space-y-1">
+                    <AnimatedNumber
+                      value={value}
+                      suffix={suffix}
+                      format={format}
+                      className="text-2xl font-serif font-bold text-ink"
+                    />
+                    <p className="text-[9px] text-muted font-mono uppercase tracking-[0.15em]">{stat.label}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Right - Process Sequence */}
-          <div className="lg:col-span-7 lg:pl-8">
+          <div className="lg:col-span-7 lg:pl-8 relative" ref={stepsRef}>
+            {/* Scroll-drawn stitch line */}
+            <div
+              ref={lineRef}
+              className="absolute left-[5px] lg:left-[5px] top-3 bottom-3 w-px pointer-events-none"
+              style={{
+                backgroundImage: 'repeating-linear-gradient(180deg, var(--color-leather) 0, var(--color-leather) 3px, transparent 3px, transparent 7px)',
+                opacity: 0.35,
+              }}
+            />
             <div className="space-y-0">
               {steps.map((step, idx) => (
                 <motion.div

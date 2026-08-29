@@ -1,6 +1,6 @@
 import React from 'react';
 import { Search } from 'lucide-react';
-import { categories } from '../../data/categories';
+import { useCategories } from '../../context/ZycoonContext';
 
 export default function ProductFilters({
   searchQuery,
@@ -10,6 +10,7 @@ export default function ProductFilters({
   sortBy,
   setSortBy,
 }) {
+  const categories = useCategories();
   return (
     <div className="mb-10 space-y-6">
       {/* Category Tabs */}
@@ -63,8 +64,6 @@ export default function ProductFilters({
             <option value="name-asc">Name A-Z</option>
             <option value="moq-asc">MOQ Low-High</option>
             <option value="moq-desc">MOQ High-Low</option>
-            <option value="price-asc">Price Low-High</option>
-            <option value="price-desc">Price High-Low</option>
           </select>
         </div>
       </div>

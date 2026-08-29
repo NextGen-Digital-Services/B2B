@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { buildWhatsAppContactUrl } from '../../utils/helpers';
 import Button from '../shared/Button';
+import Magnetic from '../shared/Magnetic';
 
 export default function CTASection() {
   const whatsappUrl = buildWhatsAppContactUrl();
@@ -38,18 +39,22 @@ export default function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-            <Link to="/products" className="w-full sm:w-auto">
-              <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group">
-                Request B2B Quote
-                <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
-              </Button>
-            </Link>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <Button variant="outline-light" className="w-full sm:w-auto flex items-center justify-center">
-                <MessageSquare className="w-4 h-4 mr-2" strokeWidth={1.5} />
-                Chat on WhatsApp
-              </Button>
-            </a>
+            <Magnetic strength={5} className="w-full sm:w-auto">
+              <Link to="/products" className="w-full sm:w-auto">
+                <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group">
+                  Request B2B Quote
+                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                </Button>
+              </Link>
+            </Magnetic>
+            <Magnetic strength={5} className="w-full sm:w-auto">
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+                <Button variant="outline-light" className="w-full sm:w-auto flex items-center justify-center">
+                  <MessageSquare className="w-4 h-4 mr-2" strokeWidth={1.5} />
+                  Chat on WhatsApp
+                </Button>
+              </a>
+            </Magnetic>
           </div>
 
           <p className="text-[9px] text-ivory/30 font-mono uppercase tracking-[0.2em] pt-4">

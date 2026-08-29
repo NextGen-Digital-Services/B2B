@@ -1,0 +1,6 @@
+# Supabase local config
+config.toml
+.temp
+.branches
+pooler.url
+

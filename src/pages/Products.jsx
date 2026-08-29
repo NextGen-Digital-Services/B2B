@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { products } from '../data/products';
+import { useProducts } from '../context/ZycoonContext';
 import ProductFilters from '../components/products/ProductFilters';
 import ProductGrid from '../components/products/ProductGrid';
 import SectionHeading from '../components/shared/SectionHeading';
 
 export default function Products() {
   const location = useLocation();
+  const products = useProducts();
 
   const getInitialCategory = () => {
     const params = new URLSearchParams(location.search);
@@ -43,11 +44,9 @@ export default function Products() {
     if (sortBy === 'name-asc') result.sort((a, b) => a.name.localeCompare(b.name));
     else if (sortBy === 'moq-asc') result.sort((a, b) => a.moq - b.moq);
     else if (sortBy === 'moq-desc') result.sort((a, b) => b.moq - a.moq);
-    else if (sortBy === 'price-asc') result.sort((a, b) => (a.price_tiers[0]?.unit_price || 0) - (b.price_tiers[0]?.unit_price || 0));
-    else if (sortBy === 'price-desc') result.sort((a, b) => (b.price_tiers[0]?.unit_price || 0) - (a.price_tiers[0]?.unit_price || 0));
 
     setFilteredProducts(result);
-  }, [searchQuery, selectedCategory, sortBy]);
+  }, [searchQuery, selectedCategory, sortBy, products]);
 
   return (
     <motion.div

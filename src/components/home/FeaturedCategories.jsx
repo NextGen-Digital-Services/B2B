@@ -1,10 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import { categories } from '../../data/categories';
+import { useCategories } from '../../context/ZycoonContext';
 import SectionHeading from '../shared/SectionHeading';
 
+const EASE_OUT = [0.23, 1, 0.32, 1];
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+};
+
 export default function FeaturedCategories() {
+  const categories = useCategories();
   return (
     <section className="bg-ivory py-20 lg:py-32 border-b border-border">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
@@ -17,16 +31,27 @@ export default function FeaturedCategories() {
         />
 
         {/* Asymmetrical Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12"
+        >
           {categories.map((cat, idx) => (
-            <Link
+            <motion.div
               key={cat.id}
+              variants={item}
+              whileHover={{ translateY: -4 }}
+              transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}
+              className={[
+                idx === 0 ? 'md:row-span-2 lg:row-span-1' : '',
+                idx % 3 === 0 ? 'lg:col-span-2 aspect-[16/10]' : 'aspect-[4/5]',
+              ].join(' ')}
+            >
+            <Link
               to={`/products?category=${cat.id}`}
-              className={`group relative border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden ${
-                idx === 0 ? 'md:row-span-2 lg:row-span-1' : ''
-              } ${
-                idx % 3 === 0 ? 'lg:col-span-2 aspect-[16/10]' : 'aspect-[4/5]'
-              }`}
+              className={`group relative flex flex-col h-full border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden`}
             >
               {/* Colored leather texture background */}
               <div
@@ -79,8 +104,9 @@ export default function FeaturedCategories() {
               <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-transparent group-hover:border-leather/20 transition-colors duration-500" />
               <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-transparent group-hover:border-leather/20 transition-colors duration-500" />
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>

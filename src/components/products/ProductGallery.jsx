@@ -3,14 +3,21 @@ import React from 'react';
 export default function ProductGallery({ product, selectedColor, setSelectedColor }) {
   const colors = product.customization_options.colors;
   const hexCodes = product.images;
+  const isUrl = (v) => typeof v === 'string' && (v.startsWith('http') || v.startsWith('/') || v.startsWith('data:'));
+  const primary = hexCodes[colors.indexOf(selectedColor)] || hexCodes[0];
+  const primaryIsPhoto = isUrl(primary);
 
   return (
     <div className="space-y-6">
       <div className="relative h-96 w-full border border-border flex flex-col justify-between p-8 text-ivory overflow-hidden">
-        <div
-          className="absolute inset-0 leather-grain transition-colors duration-500"
-          style={{ backgroundColor: hexCodes[colors.indexOf(selectedColor)] || hexCodes[0] }}
-        />
+        {primaryIsPhoto ? (
+          <img src={primary} alt={selectedColor} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" />
+        ) : (
+          <div
+            className="absolute inset-0 leather-grain transition-colors duration-500"
+            style={{ backgroundColor: primary }}
+          />
+        )}
         <div className="relative z-10 flex justify-between items-start">
           <span className="stamp text-ivory/50 border-ivory/20">Specimen Canvas</span>
           <span className="text-[9px] text-ivory/40 font-mono">{product.specifications.dimensions}</span>
@@ -37,10 +44,14 @@ export default function ProductGallery({ product, selectedColor, setSelectedColo
                     : 'border-border bg-transparent text-muted hover:border-ink hover:text-ink'
                 }`}
               >
-                <span
-                  className="w-3.5 h-3.5 border border-white/20 leather-grain"
-                  style={{ backgroundColor: hex }}
-                />
+                {isUrl(hex) ? (
+                  <img src={hex} alt={color} className="w-3.5 h-3.5 border border-white/20 object-cover" />
+                ) : (
+                  <span
+                    className="w-3.5 h-3.5 border border-white/20 leather-grain"
+                    style={{ backgroundColor: hex }}
+                  />
+                )}
                 <span className="text-[10px] uppercase tracking-wider font-medium">{color}</span>
               </button>
             );

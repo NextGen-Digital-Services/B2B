@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeading from '../shared/SectionHeading';
+import useGsapReveal from '../../hooks/useGsapReveal';
 
 const materials = [
   {
@@ -57,9 +58,11 @@ const materials = [
 
 export default function MaterialArchive() {
   const [active, setActive] = useState(materials[1]);
+  const scopeRef = useRef(null);
+  useGsapReveal(scopeRef);
 
   return (
-    <section className="bg-ink py-20 lg:py-32 relative overflow-hidden">
+    <section className="bg-ink py-20 lg:py-32 relative overflow-hidden" ref={scopeRef}>
       {/* Subtle grain */}
       <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
@@ -74,7 +77,7 @@ export default function MaterialArchive() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-12">
           {/* Left - Material Swatches */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5" data-reveal>
             <div className="space-y-3">
               {materials.map((mat) => (
                 <button
@@ -116,7 +119,7 @@ export default function MaterialArchive() {
           </div>
 
           {/* Right - Material Details */}
-          <div className="lg:col-span-7 lg:pl-10">
+          <div className="lg:col-span-7 lg:pl-10" data-reveal>
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.id}

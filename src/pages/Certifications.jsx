@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Award, ShieldCheck, CheckCircle } from 'lucide-react';
 import { certifications } from '../data/certifications';
 import SectionHeading from '../components/shared/SectionHeading';
+import useSplitReveal from '../hooks/useSplitReveal';
 
 export default function Certifications() {
+  const splitRef = useRef(null);
+  useSplitReveal(splitRef);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -13,14 +17,14 @@ export default function Certifications() {
       transition={{ duration: 0.5 }}
       className="flex-grow"
     >
-      <section className="bg-ink py-16 sm:py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 leather-grain opacity-20 pointer-events-none" />
+      <section ref={splitRef} className="bg-ivory border-b border-border py-16 sm:py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 leather-grain opacity-10 pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
-          <span className="stamp text-ivory/40 border-ivory/15 mb-6 inline-block">Verified Standards</span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-ivory leading-[1.05] max-w-3xl">
+          <span className="stamp text-muted border-border mb-6 inline-block">Verified Standards</span>
+          <h1 data-split className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05] max-w-3xl">
             International Compliance & Certifications
           </h1>
-          <p className="mt-6 text-sm text-ivory/50 font-light max-w-2xl leading-relaxed">
+          <p className="mt-6 text-sm text-muted font-light max-w-2xl leading-relaxed">
             We undergo routine third-party audits to verify chemical safety, structural quality controls, and fair workplace operations.
           </p>
         </div>

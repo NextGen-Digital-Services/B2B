@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { testimonials } from '../../data/testimonials';
+import { Star } from 'lucide-react';
+import { useTestimonials } from '../../context/ZycoonContext';
 import SectionHeading from '../shared/SectionHeading';
 
 export default function Testimonials() {
+  const testimonials = useTestimonials();
+
   return (
     <section className="bg-card py-20 lg:py-32 border-b border-border relative">
       <div className="absolute inset-0 paper-texture pointer-events-none" />
@@ -30,6 +33,18 @@ export default function Testimonials() {
               <div className="absolute top-6 right-8 text-4xl font-serif text-border select-none leading-none">
                 "
               </div>
+
+              {t.rating > 0 && (
+                <div className="flex items-center space-x-1 mb-4">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <Star
+                      key={n}
+                      className={`w-3 h-3 ${n <= t.rating ? 'text-gold fill-gold' : 'text-border'}`}
+                      strokeWidth={1.5}
+                    />
+                  ))}
+                </div>
+              )}
 
               <p className="text-sm sm:text-base text-ink/80 italic font-serif leading-relaxed max-w-md">
                 {t.quote}

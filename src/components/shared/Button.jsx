@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Button({
   children,
@@ -20,15 +21,17 @@ export default function Button({
   };
 
   return (
-    <button
+    <motion.button
       type={type}
       onClick={onClick}
+      whileTap={disabled ? undefined : { scale: 0.97 }}
+      transition={{ duration: 0.12, ease: 'easeOut' }}
       className={`${variants[variant] || variants.primary} ${className}`}
       disabled={disabled}
       {...props}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }
 export { Button };

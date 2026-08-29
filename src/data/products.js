@@ -2,6 +2,7 @@ export const products = [
   {
     id: 'sovereign-handbag',
     category_id: 'handbags',
+    serial: 'ZC-001',
     name: 'Sovereign Full-Grain Handbag',
     slug: 'sovereign-full-grain-handbag',
     description: 'A masterpiece of classic geometry and structural integrity. Built for high-end boutique retail, the Sovereign features hand-painted edges, a padded tablet divider, and reinforced handle mounts designed for premium service life.',
@@ -31,6 +32,7 @@ export const products = [
   {
     id: 'toscana-tote',
     category_id: 'totes',
+    serial: 'ZC-002',
     name: 'Toscana Executive Tote',
     slug: 'toscana-executive-tote',
     description: 'Designed for the modern professional. The Toscana features high-tensile dual handles, flat-bottom design with protective brass feet, and an integrated padded compartment fitting laptops up to 15.6 inches.',
@@ -60,6 +62,7 @@ export const products = [
   {
     id: 'vanguard-wallet',
     category_id: 'wallets',
+    serial: 'ZC-003',
     name: 'Vanguard Saffiano Wallet',
     slug: 'vanguard-saffiano-wallet',
     description: 'A sleek, cross-grain scratch-resistant wallet designed for high volume distribution. Incorporates 6 card slots, a cash slot, and a military-grade RFID blocking internal mesh.',
@@ -89,6 +92,7 @@ export const products = [
   {
     id: 'metropolitan-backpack',
     category_id: 'backpacks',
+    serial: 'ZC-004',
     name: 'Metropolitan Tech Backpack',
     slug: 'metropolitan-tech-backpack',
     description: 'An premium backpack balancing classic heritage with modern functionality. Highlights include heavy-duty YKK zippers, hidden anti-theft back pocket, and a multi-layered padded harness system for comfort during travel.',
@@ -118,6 +122,7 @@ export const products = [
   {
     id: 'heritage-duffel',
     category_id: 'travel',
+    serial: 'ZC-005',
     name: 'Heritage Cabin Duffel',
     slug: 'heritage-cabin-duffel',
     description: 'The ultimate weekender. Sized strictly to meet standard international flight carry-on dimensions. Reinforced handles extend all the way under the base for load bearing support, paired with thick brass buckles.',
@@ -147,6 +152,7 @@ export const products = [
   {
     id: 'classic-portfolio',
     category_id: 'corporate',
+    serial: 'ZC-006',
     name: 'Classic A4 Leather Portfolio',
     slug: 'classic-a4-leather-portfolio',
     description: 'Perfect for executive gifting and high-level corporate distributions. Features a standard A4 notepad slot, leather pen loop, integrated business card pockets, and a tablet pocket.',

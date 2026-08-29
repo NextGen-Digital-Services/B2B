@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight } from 'lucide-react';
 
 export default function MobileMenu({ isOpen, onClose, navLinks, isActive }) {
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const lenis = typeof window !== 'undefined' ? window.__lenis : null;
+    if (lenis) lenis.stop();
+    document.body.style.overflow = 'hidden';
+    return () => {
+      if (lenis) lenis.start();
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -43,27 +54,33 @@ export default function MobileMenu({ isOpen, onClose, navLinks, isActive }) {
 
             <nav className="px-6 py-10 space-y-0">
               {navLinks.map((link, idx) => (
-                <Link
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  onClick={onClose}
-                  className={`group flex items-center justify-between py-4 border-b border-border-light transition-colors duration-300 ${
-                    isActive(link.path) ? 'text-ink' : 'text-muted hover:text-ink'
-                  }`}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.25 + idx * 0.05, ease: [0.23, 1, 0.32, 1] }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <span className="section-number text-sm">
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-sm tracking-wider uppercase font-sans font-medium">
-                      {link.name}
-                    </span>
-                  </div>
-                  <ArrowRight
-                    className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                    strokeWidth={1.5}
-                  />
-                </Link>
+                  <Link
+                    to={link.path}
+                    onClick={onClose}
+                    className={`group flex items-center justify-between py-4 border-b border-border-light transition-colors duration-300 ${
+                      isActive(link.path) ? 'text-ink' : 'text-muted hover:text-ink'
+                    }`}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <span className="section-number text-sm">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-sm tracking-wider uppercase font-sans font-medium">
+                        {link.name}
+                      </span>
+                    </div>
+                    <ArrowRight
+                      className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                      strokeWidth={1.5}
+                    />
+                  </Link>
+                </motion.div>
               ))}
             </nav>
 

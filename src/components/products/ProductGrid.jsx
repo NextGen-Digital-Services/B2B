@@ -1,5 +1,18 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import ProductCard from './ProductCard';
+
+const EASE_OUT = [0.23, 1, 0.32, 1];
+
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+};
 
 export default function ProductGrid({ products }) {
   if (products.length === 0) {
@@ -12,10 +25,18 @@ export default function ProductGrid({ products }) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.1 }}
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+    >
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <motion.div key={product.id} variants={item}>
+          <ProductCard product={product} />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

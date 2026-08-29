@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { products } from '../../data/products';
-import { formatCurrency } from '../../utils/helpers';
+import { useProducts } from '../../context/ZycoonContext';
+import useGsapReveal from '../../hooks/useGsapReveal';
 
 const chapters = [
   { id: 'all', label: 'ALL', num: '00' },
@@ -110,7 +110,7 @@ function ArchivePage({ product, layout, index }) {
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-ink leading-tight">{product.name}</h3>
             <div className="w-10 sm:w-12 h-px bg-leather/40" />
             <p className="text-[11px] sm:text-xs text-muted leading-relaxed">{product.description}</p>
-            <p className="text-[8px] sm:text-[9px] text-muted font-sans tracking-wider pt-2">MOQ: {product.moq}+ | FROM {formatCurrency(product.price_tiers[0]?.unit_price || 0)}</p>
+            <p className="text-[8px] sm:text-[9px] text-muted font-sans tracking-wider pt-2">MOQ: {product.moq}+ | SERIAL: {product.serial}</p>
             <Link to={`/products/${product.slug}`} className="inline-flex items-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium text-leather hover:text-espresso transition-colors pt-2">
               View Specimen <ArrowRight className="w-3 h-3 ml-2" />
             </Link>
@@ -152,7 +152,7 @@ function ArchivePage({ product, layout, index }) {
             <div><p className="text-[7px] sm:text-[8px] text-muted font-sans tracking-wider">HARDWARE</p><p className="text-[10px] sm:text-[11px] text-ink">{product.specifications.hardware}</p></div>
             <div><p className="text-[7px] sm:text-[8px] text-muted font-sans tracking-wider">WEIGHT</p><p className="text-[10px] sm:text-[11px] text-ink">{product.specifications.weight}</p></div>
             <div><p className="text-[7px] sm:text-[8px] text-muted font-sans tracking-wider">MOQ</p><p className="text-[10px] sm:text-[11px] text-ink">{product.moq} PCS</p></div>
-            <div><p className="text-[7px] sm:text-[8px] text-muted font-sans tracking-wider">PRICE</p><p className="text-[10px] sm:text-[11px] text-ink font-medium">From {formatCurrency(product.price_tiers[0]?.unit_price || 0)}</p></div>
+            <div><p className="text-[7px] sm:text-[8px] text-muted font-sans tracking-wider">SERIAL</p><p className="text-[10px] sm:text-[11px] text-ink font-medium">{product.serial}</p></div>
           </div>
         </div>
         <Link to={`/products/${product.slug}`} className="mt-4 sm:mt-6 flex items-center text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium text-leather hover:text-espresso transition-colors">
@@ -189,6 +189,7 @@ function EndPage() {
 
 /* ── Main Component ── */
 export default function LeatherNotebookArchive() {
+  const products = useProducts();
   const [activeChapter, setActiveChapter] = useState('all');
   const [currentPage, setCurrentPage] = useState(0);
   const [notebookOpen, setNotebookOpen] = useState(false); // eslint-disable-line no-unused-vars
@@ -200,6 +201,7 @@ export default function LeatherNotebookArchive() {
   const containerRef = useRef(null);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
+  useGsapReveal(containerRef);
 
   const filteredProducts = activeChapter === 'all'
     ? products
@@ -361,11 +363,11 @@ export default function LeatherNotebookArchive() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-10">
 
         {/* Entry text */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16 space-y-3 sm:space-y-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16 space-y-3 sm:space-y-4" data-reveal>
           <span className="stamp text-leather border-leather/30">The Zycoon Collection</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05]">THE COLLECTION</h2>
           <p className="text-xs sm:text-sm text-muted font-light max-w-lg mx-auto">
-            Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Scroll to turn pages.
+            Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Discover our complete range and find the right styles for bulk orders, private label, and custom branding.
           </p>
         </div>
 

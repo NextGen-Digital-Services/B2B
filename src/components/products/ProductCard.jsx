@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
-import { formatCurrency } from '../../utils/helpers';
 import useRFQCart from '../../hooks/useRFQCart';
 
 export default function ProductCard({ product }) {
   const { addToRFQ } = useRFQCart();
-  const startingPrice = product.price_tiers[0]?.unit_price || 0;
   const swatchColor = product.images[0] || '#291A13';
+  const hasPhoto = typeof swatchColor === 'string' && (swatchColor.startsWith('http') || swatchColor.startsWith('/') || swatchColor.startsWith('data:'));
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -17,10 +17,15 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <Link
-      to={`/products/${product.slug}`}
-      className="group relative flex flex-col border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden"
+    <motion.div
+      whileHover={{ translateY: -4 }}
+      transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}
+      className="h-full"
     >
+      <Link
+        to={`/products/${product.slug}`}
+        className="group relative flex flex-col h-full border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden"
+      >
       {/* Specimen Header */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-border-light">
         <span className="text-[9px] text-muted font-mono tracking-wider uppercase">
@@ -31,12 +36,20 @@ export default function ProductCard({ product }) {
         </span>
       </div>
 
-      {/* Color swatch area */}
+      {/* Image area */}
       <div className="relative h-56 w-full overflow-hidden">
-        <div
-          className="absolute inset-0 leather-grain transition-transform duration-700 group-hover:scale-105"
-          style={{ backgroundColor: swatchColor }}
-        />
+        {hasPhoto ? (
+          <img
+            src={swatchColor}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div
+            className="absolute inset-0 leather-grain transition-transform duration-700 group-hover:scale-105"
+            style={{ backgroundColor: swatchColor }}
+          />
+        )}
         {/* Diagonal detail */}
         <div className="absolute top-4 right-4 w-16 h-16 border border-ivory/10 transform rotate-45" />
       </div>
@@ -55,7 +68,6 @@ export default function ProductCard({ product }) {
         {/* Specs row */}
         <div className="flex items-center justify-between text-[10px] text-muted font-mono pt-3 border-t border-border-light">
           <span>{product.specifications.hardware}</span>
-          <span>{formatCurrency(startingPrice)} / unit</span>
         </div>
 
         {/* Actions */}
@@ -77,6 +89,7 @@ export default function ProductCard({ product }) {
       {/* Corner marks */}
       <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-transparent group-hover:border-leather/20 transition-colors duration-500" />
       <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-transparent group-hover:border-leather/20 transition-colors duration-500" />
-    </Link>
+      </Link>
+    </motion.div>
   );
 }

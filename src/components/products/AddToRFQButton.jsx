@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import useRFQCart from '../../hooks/useRFQCart';
 import Button from '../shared/Button';
+import Magnetic from '../shared/Magnetic';
 
 export default function AddToRFQButton({ product, selectedColor }) {
   const { addToRFQ } = useRFQCart();
@@ -57,9 +58,11 @@ export default function AddToRFQButton({ product, selectedColor }) {
           </button>
         </div>
 
-        <Button variant="primary" onClick={handleAdd} className="flex-grow flex items-center justify-center h-12">
-          Add to Inquiry
-        </Button>
+        <Magnetic strength={4} className="flex-grow">
+          <Button variant="primary" onClick={handleAdd} className="w-full flex items-center justify-center h-12">
+            Add to Inquiry
+          </Button>
+        </Magnetic>
       </div>
 
       <p className="text-[9px] text-muted text-center sm:text-left font-mono">

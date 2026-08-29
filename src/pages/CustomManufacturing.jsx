@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PenTool, ShieldAlert, Cpu, Award } from 'lucide-react';
 import SectionHeading from '../components/shared/SectionHeading';
 import Button from '../components/shared/Button';
+import useSplitReveal from '../hooks/useSplitReveal';
 
 export default function CustomManufacturing() {
+  const splitRef = useRef(null);
+  useSplitReveal(splitRef);
+
   const steps = [
     { num: '01', title: 'Specifications & Intake', desc: 'Submit your tech pack, CAD outline, or physical benchmark bag. Specify target sizes, pocket requirements, and reinforcement board hardness.' },
     { num: '02', title: 'Material Sourcing', desc: 'Choose from vegetable-tanned, chrome-tanned, or cross-grain Saffiano leather. We source exact pantones from audited LWG Gold tanneries.' },
@@ -23,14 +27,14 @@ export default function CustomManufacturing() {
       transition={{ duration: 0.5 }}
       className="flex-grow"
     >
-      <section className="bg-ink py-16 sm:py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 leather-grain opacity-20 pointer-events-none" />
+      <section ref={splitRef} className="bg-ivory border-b border-border py-16 sm:py-20 lg:py-32 relative overflow-hidden">
+        <div className="absolute inset-0 leather-grain opacity-10 pointer-events-none" />
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
-          <span className="stamp text-ivory/40 border-ivory/15 mb-6 inline-block">OEM / ODM Solutions</span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-ivory leading-[1.05] max-w-3xl">
+          <span className="stamp text-muted border-border mb-6 inline-block">OEM / ODM Solutions</span>
+          <h1 data-split className="text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05] max-w-3xl">
             Private Label Leather Goods Manufacturing
           </h1>
-          <p className="mt-6 text-sm text-ivory/50 font-light max-w-2xl leading-relaxed">
+          <p className="mt-6 text-sm text-muted font-light max-w-2xl leading-relaxed">
             From design sheet to loaded container. We operate as the direct backend workshop for premium fashion labels globally.
           </p>
         </div>
