@@ -16,12 +16,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-5">
-              <span className="font-serif text-lg tracking-[0.3em] font-semibold text-ivory">
-                WESTMERE
-              </span>
-              <span className="block text-[8px] tracking-[0.3em] uppercase text-gold/60 -mt-0.5">
-                LEATHER EXPORTERS
-              </span>
+              <img
+                src="/zycoon-logo.png"
+                alt="Zycoon"
+                className="h-9 w-auto object-contain brightness-0 invert opacity-90"
+              />
             </Link>
             <p className="text-xs text-ivory/40 leading-relaxed mb-6">
               Premium wholesale leather goods manufacturing, private label supply, and worldwide container exports.
@@ -52,7 +51,7 @@ export default function Footer() {
                 { name: 'Collection', path: '/products' },
                 { name: 'Custom Manufacturing', path: '/custom-manufacturing' },
                 { name: 'Export & Shipping', path: '/export-wholesale' },
-                { name: 'Gallery', path: '/gallery' },
+                { name: 'Workshop', path: '/gallery' },
                 { name: 'About', path: '/about' },
               ].map((link) => (
                 <li key={link.path}>
@@ -103,8 +102,8 @@ export default function Footer() {
         <div className="text-center mt-6 pt-4 border-t border-ivory/5">
           <p className="text-[9px] text-ivory/20 font-mono tracking-wider">
             Designed and Developed by{' '}
-            <a href="https://westmere.io" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-gold/70 transition-colors underline underline-offset-2 decoration-ivory/10 hover:decoration-gold/30">
-              Westmere
+            <a href="mailto:zycoonbags@gmail.com" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-gold/70 transition-colors underline underline-offset-2 decoration-ivory/10 hover:decoration-gold/30">
+              Zycoon
             </a>
           </p>
         </div>

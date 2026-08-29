@@ -18,7 +18,7 @@ export default function Navbar() {
     { name: 'Custom', path: '/custom-manufacturing' },
     { name: 'Export', path: '/export-wholesale' },
     { name: 'Certifications', path: '/certifications' },
-    { name: 'Gallery', path: '/gallery' },
+    { name: 'Workshop', path: '/gallery' },
     { name: 'About', path: '/about' },
     { name: 'B2B Contact', path: '/contact' },
   ];
@@ -33,13 +33,12 @@ export default function Navbar() {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex flex-col select-none group">
-                <span className="text-xl md:text-2xl font-serif tracking-[0.25em] text-ivory transition-colors duration-300 group-hover:text-gold">
-                  WESTMERE
-                </span>
-                <span className="text-[9px] font-sans tracking-[0.3em] uppercase text-gold/80 -mt-0.5">
-                  LEATHER EXPORTERS
-                </span>
+              <Link to="/" className="flex flex-col select-none group justify-center">
+                <img
+                  src="/zycoon-logo.png"
+                  alt="Zycoon"
+                  className="h-9 md:h-10 w-auto object-contain brightness-0 invert transition-opacity duration-300 group-hover:opacity-85"
+                />
               </Link>
             </div>
 

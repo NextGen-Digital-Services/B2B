@@ -9,7 +9,7 @@ const steps = [
   { num: '03', title: 'Expert Stitching', desc: 'Heavy-duty seams with consistent tension and alignment.' },
   { num: '04', title: 'Hand Finishing', desc: 'Edge-painting, burnishing, and hardware installation.' },
   { num: '05', title: 'Quality Control', desc: 'Triple-gate inspection before export packaging.' },
-  { num: '06', title: 'Global Dispatch', desc: 'FOB Kolkata or CIF to 35+ markets worldwide.' },
+  { num: '06', title: 'Global Dispatch', desc: 'FOB Mumbai or CIF to 35+ markets worldwide.' },
 ];
 
 export default function ManufacturingCapability() {
@@ -23,7 +23,7 @@ export default function ManufacturingCapability() {
             <SectionHeading
               eyebrow="03 / Craft"
               title="From Material to Your Brand."
-              description="We manage the entire leather sourcing, cutting, stitching, and finishing chain under one roof at our Kolkata production complex."
+              description="We manage the entire leather sourcing, cutting, stitching, and finishing chain under one roof at our Mumbai production studio."
               align="left"
             />
 

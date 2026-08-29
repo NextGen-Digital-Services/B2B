@@ -105,7 +105,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.7 }}
               className="text-xs sm:text-sm text-ivory/50 font-light leading-relaxed max-w-md"
             >
-              Premium leather goods manufactured for brands, retailers and corporate buyers. Factory-direct from Kolkata to 35+ countries.
+              Premium leather goods manufactured for brands, retailers and corporate buyers. Factory-direct from Mumbai to 35+ countries.
             </motion.p>
 
             {/* CTAs */}
@@ -170,9 +170,11 @@ export default function Hero() {
                     <p className="text-[9px] sm:text-[10px] text-ivory/40 font-sans tracking-wider uppercase">
                       Full Grain / Cognac
                     </p>
-                    <p className="text-lg sm:text-2xl font-serif text-ivory/90 leading-tight">
-                      Westmere<br />Leather
-                    </p>
+                    <img
+                      src="/zycoon-logo.png"
+                      alt="Zycoon"
+                      className="w-32 sm:w-44 h-auto object-contain brightness-0 invert"
+                    />
                     <p className="text-[8px] sm:text-[9px] text-ivory/25 font-sans">
                       LWG Environmental Code
                     </p>

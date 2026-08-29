@@ -56,7 +56,7 @@ export default function RFQForm({ cartItems, onClearCart }) {
       <div className="border border-border bg-card p-8 text-center space-y-4">
         <h3 className="text-xl font-serif text-ink">Inquiry Submitted</h3>
         <p className="text-xs text-muted leading-relaxed">
-          Redirecting to WhatsApp to connect with our export manager...
+          Redirecting to WhatsApp to connect with our sales team...
         </p>
         <div className="animate-pulse inline-block h-0.5 w-16 bg-leather" />
       </div>
@@ -70,7 +70,7 @@ export default function RFQForm({ cartItems, onClearCart }) {
       <div className="border-b border-border-light pb-4">
         <h3 className="text-base font-serif text-ink">Submit Quote Requirements</h3>
         <p className="text-[10px] text-muted mt-1 font-mono uppercase tracking-wider">
-          Provide your business credentials for an official FOB price quote.
+          Provide your business credentials for an official wholesale price quote.
         </p>
       </div>
 

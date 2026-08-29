@@ -18,9 +18,9 @@ export default function Contact() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="Contact"
-          title="Start a Project."
-          description="Speak directly to our export managers regarding design specifications, pricing terms, production timelines, or custom leather development."
+          eyebrow="B2B Contact"
+          title="Let's Work Together."
+          description="Speak directly with the Zycoon team about wholesale orders, product requirements, pricing, production timelines, or custom branding. Whether you're a retailer, distributor, corporate buyer, or brand, we're ready to discuss your requirements."
           align="left"
         />
 
@@ -30,7 +30,7 @@ export default function Contact() {
           <div className="lg:col-span-5 space-y-6">
             <div className="border border-border p-8 space-y-6">
               <h3 className="text-xs font-sans font-medium uppercase tracking-[0.2em] text-muted border-b border-border-light pb-3">
-                Export HQ Office
+                Zycoon Studio & Workshop
               </h3>
               <div className="space-y-5 text-xs text-ink">
                 <div className="flex items-start">
@@ -52,7 +52,7 @@ export default function Contact() {
                 <div className="flex items-start">
                   <Phone className="w-4 h-4 text-leather mr-3 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
                   <div>
-                    <p className="text-[9px] uppercase font-medium tracking-wider text-muted mb-0.5">WhatsApp</p>
+                    <p className="text-[9px] uppercase font-medium tracking-wider text-muted mb-0.5">Phone / WhatsApp</p>
                     <p className="font-mono">{B2B_CONFIG.whatsappNumber}</p>
                   </div>
                 </div>
@@ -60,7 +60,7 @@ export default function Contact() {
                   <Clock className="w-4 h-4 text-leather mr-3 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
                   <div>
                     <p className="text-[9px] uppercase font-medium tracking-wider text-muted mb-0.5">Hours</p>
-                    <p className="font-light">Mon — Sat: 9:00 AM — 6:00 PM IST</p>
+                    <p className="font-light">{B2B_CONFIG.businessHours} IST</p>
                   </div>
                 </div>
               </div>

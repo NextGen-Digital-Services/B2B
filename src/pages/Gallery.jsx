@@ -22,9 +22,9 @@ export default function Gallery() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="Workshop Tour"
-          title="Factory Operations & Lookbook"
-          description="A behind-the-scenes view of our Kolkata production facilities with standardized quality gates at every stage."
+          eyebrow="Workshop"
+          title="The Zycoon Collection"
+          description="Explore our complete range of bags and backpacks, designed and manufactured by Zycoon. Browse our latest styles and proven designs, available for wholesale, bulk orders, and custom branding."
           align="left"
         />
 

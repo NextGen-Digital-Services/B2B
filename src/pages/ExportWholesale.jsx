@@ -29,13 +29,13 @@ export default function ExportWholesale() {
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
           eyebrow="Delivery Terms"
-          title="FOB Kolkata & CIF Arrangements"
+          title="FOB Mumbai & CIF Arrangements"
           description="We support international standards to ensure risk transfer is clearly documented at every checkpoint."
           align="left"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
           {[
-            { icon: Ship, title: 'FOB Kolkata Port', desc: 'Standard pricing covers transport to Kolkata ocean port, local export clearances, and carrier loading fees.' },
+            { icon: Ship, title: 'FOB Mumbai Port', desc: 'Standard pricing covers transport to Mumbai (Nhava Sheva) port, local export clearances, and carrier loading fees.' },
             { icon: Ship, title: 'CIF (Cost, Insurance & Freight)', desc: 'We arrange ocean transit to your target destination port with insurance under Institute Cargo Clauses.' },
           ].map((term, idx) => (
             <div key={idx} className="border border-border bg-card p-8 hover:border-leather/30 transition-colors">

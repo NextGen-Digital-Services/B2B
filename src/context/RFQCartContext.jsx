@@ -5,7 +5,7 @@ const RFQCartContext = createContext();
 export const RFQCartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const stored = localStorage.getItem('westmere_rfq_cart');
+      const stored = localStorage.getItem('zycoon_rfq_cart');
       return stored ? JSON.parse(stored) : [];
     } catch (e) {
       console.error('Failed to parse RFQ cart from localStorage:', e);
@@ -14,7 +14,7 @@ export const RFQCartProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('westmere_rfq_cart', JSON.stringify(cartItems));
+    localStorage.setItem('zycoon_rfq_cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToRFQ = (product, quantity, color) => {

@@ -53,7 +53,7 @@ export default function CTASection() {
           </div>
 
           <p className="text-[9px] text-ivory/30 font-mono uppercase tracking-[0.2em] pt-4">
-            Mon — Sat | 9:00 AM — 6:00 PM IST
+            Mon — Sat | 10:00 AM — 9:00 PM IST
           </p>
         </motion.div>
       </div>

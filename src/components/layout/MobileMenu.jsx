@@ -27,9 +27,11 @@ export default function MobileMenu({ isOpen, onClose, navLinks, isActive }) {
             className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-ivory z-50 lg:hidden overflow-y-auto"
           >
             <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-              <span className="font-serif text-sm tracking-[0.3em] font-semibold text-ink">
-                ATELIER
-              </span>
+              <img
+                src="/zycoon-logo.png"
+                alt="Zycoon"
+                className="h-7 w-auto object-contain"
+              />
               <button
                 onClick={onClose}
                 className="p-2 text-muted hover:text-ink transition-colors"

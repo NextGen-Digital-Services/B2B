@@ -26,6 +26,50 @@ export default function About() {
         </div>
       </section>
 
+      {/* Our Story */}
+      <section className="bg-ivory py-20 lg:py-32 border-b border-border">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
+              <SectionHeading
+                eyebrow="Our Story"
+                title="The Zycoon Journey"
+                description="From a Mumbai workshop to a trusted manufacturing partner for retailers, distributors, corporate buyers and brands."
+              />
+              <p className="text-sm text-muted leading-relaxed font-light">
+                Zycoon began with a simple belief: thoughtfully made bags should not demand a compromise between craft and cost. Today, every Zycoon piece is designed, sampled and produced under one roof in Mumbai — with the same attention to stitching, hardware and leather grading that earned our first wholesale accounts.
+              </p>
+              <p className="text-sm text-muted leading-relaxed font-light">
+                The story of Zycoon is written on the machine floor: where hides are cut, edges are skived, and every seam is sealed by hand-tuned sewing lines before a bag ever reaches your shelf.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7 grid grid-cols-2 gap-4">
+              {[
+                { label: 'Products', note: 'Signature bags & backpacks', color: '#4A1420' },
+                { label: 'Machinery & Workshop', note: 'Cutting & stitching lines', color: '#291A13' },
+                { label: 'Raw Materials', note: 'Leather, hardware & linings', color: '#A9683B' },
+                { label: 'Brand & Logo', note: 'Zycoon identity', color: '#241812' },
+              ].map((tile, i) => (
+                <div key={i} className="group relative border border-border overflow-hidden aspect-[4/3] flex items-end">
+                  <div
+                    className="absolute inset-0 leather-grain transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundColor: tile.color }}
+                  />
+                  <div className="relative z-10 p-5 w-full flex flex-col justify-between">
+                    <p className="text-[9px] font-mono tracking-widest text-ivory/50 uppercase">Photo — Pending</p>
+                    <div>
+                      <h4 className="text-sm font-serif text-ivory">{tile.label}</h4>
+                      <p className="text-[10px] text-ivory/50 mt-0.5">{tile.note}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content */}
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
@@ -55,7 +99,7 @@ export default function About() {
             <div className="absolute top-4 left-4 w-2/3 h-[240px] bg-espresso leather-grain p-6 flex flex-col justify-between text-ivory">
               <span className="text-[9px] font-mono tracking-widest text-ivory/50 uppercase">Workshop Division</span>
               <div>
-                <p className="text-sm font-serif">Kolkata Production Office</p>
+                <p className="text-sm font-serif">Mumbai Production Studio</p>
                 <p className="text-[10px] text-ivory/50 mt-1">25,000 Sq. Ft. Floor Area</p>
               </div>
             </div>
@@ -100,7 +144,7 @@ export default function About() {
         <h2 className="text-3xl font-serif text-ink">Over a Decade of Export Excellence</h2>
         <div className="max-w-3xl mx-auto space-y-8 text-left mt-12">
           {[
-            { year: '2008', title: 'Founding', desc: 'Established Kolkata Leather Complex Workshop. Started with 12 manual artisans exporting small wallets.' },
+            { year: '2008', title: 'Founding', desc: 'Established the Mumbai workshop. Started with a small team of artisans exporting crafted bags and small leather goods.' },
             { year: '2014', title: 'ISO Audit', desc: 'Acquired ISO 9001:2015 QA Certification. Upgraded tooling to meet German calibration standards.' },
             { year: '2021', title: 'Green Transition', desc: 'LWG Environmental Sourcing Standard. Achieved 100% REACH chemical compliance.' },
           ].map((item, i) => (

@@ -30,7 +30,7 @@ export default function MOQPricingTable({ priceTiers, moq }) {
       </div>
 
       <div className="pt-2 border-t border-border-light text-[9px] text-muted space-y-1 font-mono leading-relaxed">
-        <p>FOB Kolkata. Lead time: 30-45 days from payment.</p>
+        <p>FOB Mumbai. Lead time: 30-45 days from payment.</p>
         <p>Docs included: CO, REACH certs, packing list, invoice.</p>
       </div>
     </div>

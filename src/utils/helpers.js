@@ -1,13 +1,16 @@
 // Central business configuration constants
 export const B2B_CONFIG = {
-  brandName: 'Westmere Leather Exporters',
-  factoryLocation: 'Kolkata Leather Complex, India',
+  brandName: 'Zycoon',
+  brandShortName: 'Zycoon',
+  tagline: 'Bags & Backpacks',
+  factoryLocation: 'Shop 2-3, Ground Floor, Mohamedi Manzil, YMCA Road, Agripada, Mumbai Central, Mumbai, Maharashtra 400008',
   yearsInBusiness: '18',
   productionCapacity: '15,000+',
   countriesExported: '35+',
-  whatsappNumber: '+919876543210',
-  whatsappRaw: '919876543210', // Raw numbers only for api.whatsapp.com
-  businessEmail: 'export@westmereleather.com',
+  whatsappNumber: '+91 91365 42289',
+  whatsappRaw: '919136542289', // Raw numbers only for api.whatsapp.com
+  businessEmail: 'zycoonbags@gmail.com',
+  businessHours: 'Mon — Sat: 10:00 AM — 9:00 PM',
   certifications: 'ISO 9001:2015, REACH Compliance, LWG Gold Rated, Sedex Certified'
 };
 
@@ -26,13 +29,13 @@ export const buildWhatsAppRFQUrl = (companyName, country, cartItems) => {
     .map((item) => `- ${item.product_name} (${item.selected_color}) | Qty: ${item.quantity} (MOQ: ${item.moq})`)
     .join('\n');
 
-  const text = `Hello Westmere Export Team,\n\nI would like to request a wholesale price quote for the following items:\n\n${itemsText}\n\nCompany Name: ${companyName}\nCountry: ${country}\n\nPlease get back to us with the FOB Kolkata pricing and shipping timeline.\n\nThank you!`;
+  const text = `Hello Zycoon Team,\n\nI would like to request a wholesale price quote for the following items:\n\n${itemsText}\n\nCompany Name: ${companyName}\nCountry: ${country}\n\nPlease get back to us with the pricing and shipping timeline.\n\nThank you!`;
   
   return `https://api.whatsapp.com/send?phone=${B2B_CONFIG.whatsappRaw}&text=${encodeURIComponent(text)}`;
 };
 
 // Generate prefilled WhatsApp URL for generic contact
 export const buildWhatsAppContactUrl = () => {
-  const text = `Hello Westmere Team, we are interested in your B2B wholesale catalog and custom manufacturing capabilities. Can you connect us with an export manager?`;
+  const text = `Hello Zycoon Team, we are interested in your B2B wholesale catalog and custom manufacturing capabilities. Can you connect us with a sales representative?`;
   return `https://api.whatsapp.com/send?phone=${B2B_CONFIG.whatsappRaw}&text=${encodeURIComponent(text)}`;
 };

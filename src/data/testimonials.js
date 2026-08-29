@@ -4,7 +4,7 @@ export const testimonials = [
     client_name: 'Marcus Vance',
     company_name: 'Vance & Co. Retail Group',
     country: 'United Kingdom',
-    quote: 'Westmere has been our manufacturing partner for the past four seasons. Their attention to structural sewing and consistent leather grade matching is outstanding. Delivery in London arrived exactly within our FOB timeline.',
+    quote: 'Zycoon has been our manufacturing partner for the past four seasons. Their attention to structural sewing and consistent leather grade matching is outstanding. Delivery in London arrived exactly within our FOB timeline.',
     created_at: '2026-02-15T08:00:00Z'
   },
   {
@@ -20,7 +20,7 @@ export const testimonials = [
     client_name: 'Kenji Tanaka',
     company_name: 'Tanaka Sourcing & Corporate Gifts',
     country: 'Japan',
-    quote: 'The quality of the classic Nappa leather portfolios was highly praised by our corporate end-clients. Westmeres compliance with REACH standards was fully documented, making customs clearance in Osaka hassle-free.',
+    quote: 'The quality of the classic Nappa leather portfolios was highly praised by our corporate end-clients. Zycoon\'s compliance with REACH standards was fully documented, making customs clearance in Osaka hassle-free.',
     created_at: '2026-04-05T08:00:00Z'
   },
   {
