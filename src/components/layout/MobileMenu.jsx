@@ -39,7 +39,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks, isActive }) {
           >
             <div className="flex items-center justify-between px-6 h-16 border-b border-border">
               <img
-                src="/zycoon-logo.png"
+                src="/zycoon-logo-white.png"
                 alt="Zycoon"
                 className="h-7 w-auto object-contain"
               />

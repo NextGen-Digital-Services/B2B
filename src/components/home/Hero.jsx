@@ -176,7 +176,7 @@ export default function Hero() {
                       Full Grain / Cognac
                     </p>
                     <img
-                      src="/zycoon-logo.png"
+                      src="/zycoon-logo-white.png"
                       alt="Zycoon"
                       className="w-32 sm:w-44 h-auto object-contain"
                     />

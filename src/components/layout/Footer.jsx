@@ -17,9 +17,9 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-3 mb-5">
               <img
-                src="/zycoon-handwritten.png"
+                src="/zycoon-logo-white.png"
                 alt="Zycoon"
-                className="h-10 w-auto object-contain brightness-0 invert opacity-90"
+                className="h-10 w-auto object-contain opacity-90"
               />
             </Link>
             <p className="text-xs text-ivory/40 leading-relaxed mb-6">
