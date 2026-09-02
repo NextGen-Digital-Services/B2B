@@ -38,7 +38,7 @@ export default function Navbar() {
                 <img
                   src="/zycoon-logo-white.png"
                   alt="Zycoon"
-                  className="h-10 md:h-12 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                  className="h-12 md:h-14 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </Link>
             </div>
