@@ -11,7 +11,7 @@ export default function USPBar() {
     {
       icon: Package,
       title: 'Flexible MOQs',
-      value: '50+',
+      value: '100+',
       label: 'Units per design',
     },
     {
@@ -22,9 +22,9 @@ export default function USPBar() {
     },
     {
       icon: Globe,
-      title: 'Global Export',
-      value: '35+',
-      label: 'Countries served',
+      title: 'Pan India',
+      value: '19+',
+      label: 'Cities served',
     },
     {
       icon: Sliders,

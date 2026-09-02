@@ -4,10 +4,10 @@ import SectionHeading from '../shared/SectionHeading';
 import AnimatedNumber from '../shared/AnimatedNumber';
 
 const trustPoints = [
-  { value: '50+', label: 'MOQ', sublabel: 'Minimum Order' },
-  { value: '500+', label: 'Custom Designs', sublabel: 'Delivered Annually' },
+  { value: '100+', label: 'MOQ', sublabel: 'Minimum Order' },
+  { value: '19+', label: 'Pan India', sublabel: 'Cities Served' },
   { value: '35+', label: 'Markets', sublabel: 'Countries Exported' },
-  { value: '18+', label: 'Years', sublabel: 'Of Craft' },
+  { value: '19+', label: 'Years', sublabel: 'Of Craft' },
 ];
 
 const features = [

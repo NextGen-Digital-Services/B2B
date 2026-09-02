@@ -16,7 +16,7 @@ const steps = [
   { num: '03', title: 'Expert Stitching', desc: 'Heavy-duty seams with consistent tension and alignment.' },
   { num: '04', title: 'Hand Finishing', desc: 'Edge-painting, burnishing, and hardware installation.' },
   { num: '05', title: 'Quality Control', desc: 'Triple-gate inspection before export packaging.' },
-  { num: '06', title: 'Global Dispatch', desc: 'FOB Mumbai or CIF to 35+ markets worldwide.' },
+  { num: '06', title: 'Global Dispatch', desc: `FOB Mumbai or CIF to ${B2B_CONFIG.countriesExported} markets worldwide.` },
 ];
 
 const parseStat = (value) => {
@@ -60,7 +60,7 @@ export default function ManufacturingCapability() {
     { value: `${B2B_CONFIG.yearsInBusiness}+`, label: 'Years of Craft' },
     { value: '25,000', label: 'Sq. Ft. Facility' },
     { value: '15,000+', label: 'Monthly Capacity' },
-    { value: '35+', label: 'Export Markets' },
+    { value: B2B_CONFIG.countriesExported, label: 'Export Markets' },
   ];
 
   return (

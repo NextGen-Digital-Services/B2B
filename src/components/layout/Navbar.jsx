@@ -34,12 +34,15 @@ export default function Navbar() {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex flex-col select-none group justify-center">
+              <Link to="/" className="flex items-center select-none group">
                 <img
                   src="/zycoon-logo.png"
                   alt="Zycoon"
-                  className="h-9 md:h-10 w-auto object-contain brightness-0 invert transition-opacity duration-300 group-hover:opacity-85"
+                  className="h-9 md:h-11 w-auto object-contain transition-opacity duration-300 group-hover:opacity-85"
                 />
+                <span className="ml-2 lg:ml-2.5 font-serif text-xl md:text-2xl tracking-[0.18em] text-ivory group-hover:text-gold transition-colors duration-300">
+                  ZYCOON
+                </span>
               </Link>
             </div>
 

@@ -60,7 +60,7 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-2 sm:gap-4"
             >
               <span className="stamp text-gold/60 border-gold/20">B2B Manufacturing</span>
-              <span className="text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider">EST. 2008</span>
+              <span className="text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider">EST. 2007</span>
               <span className="text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider">01 / 08</span>
             </motion.div>
 
@@ -106,7 +106,7 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.7 }}
               className="text-xs sm:text-sm text-ivory/50 font-light leading-relaxed max-w-md"
             >
-              Premium leather goods manufactured for brands, retailers and corporate buyers. Factory-direct from Mumbai to 35+ countries.
+              Premium bags and backpacks manufactured for brands, retailers and corporate buyers. Factory-direct from Mumbai, with a wide range of materials, designs and custom requirements.
             </motion.p>
 
             {/* CTAs */}
@@ -141,11 +141,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 1.3 }}
               className="flex flex-wrap items-center gap-2 sm:gap-4 lg:space-x-8 text-[9px] sm:text-[10px] text-ivory/30 font-sans tracking-wider pt-4 sm:pt-8"
             >
-              <span>MOQ FROM 50 PCS</span>
+              <span>MOQ FROM 100 PCS</span>
               <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
               <span>OEM / ODM</span>
               <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
-              <span>FOB KOLKATA</span>
+              <span>FOR MUMBAI</span>
             </motion.div>
           </div>
 
@@ -178,7 +178,7 @@ export default function Hero() {
                     <img
                       src="/zycoon-logo.png"
                       alt="Zycoon"
-                      className="w-32 sm:w-44 h-auto object-contain brightness-0 invert"
+                      className="w-32 sm:w-44 h-auto object-contain"
                     />
                     <p className="text-[8px] sm:text-[9px] text-ivory/25 font-sans">
                       LWG Environmental Code

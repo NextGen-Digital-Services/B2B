@@ -4,13 +4,14 @@ export const B2B_CONFIG = {
   brandShortName: 'Zycoon',
   tagline: 'Bags & Backpacks',
   factoryLocation: 'Shop 2-3, Ground Floor, Mohamedi Manzil, YMCA Road, Agripada, Mumbai Central, Mumbai, Maharashtra 400008',
-  yearsInBusiness: '18',
+  yearsInBusiness: '19',
   productionCapacity: '15,000+',
   countriesExported: '35+',
+  moqMinimum: 100,
   whatsappNumber: '+91 91365 42289',
   whatsappRaw: '919136542289', // Raw numbers only for api.whatsapp.com
   businessEmail: 'zycoonbags@gmail.com',
-  businessHours: 'Mon — Sat: 10:00 AM — 9:00 PM',
+  businessHours: 'Mon — Sat: 10:00 AM — 8:00 PM',
   certifications: 'ISO 9001:2015, REACH Compliance, LWG Gold Rated, Sedex Certified'
 };
 

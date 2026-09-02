@@ -7,9 +7,9 @@ export const products = [
     slug: 'sovereign-full-grain-handbag',
     description: 'A masterpiece of classic geometry and structural integrity. Built for high-end boutique retail, the Sovereign features hand-painted edges, a padded tablet divider, and reinforced handle mounts designed for premium service life.',
     material: 'Vesta Top-Grain Calfskin Leather',
-    moq: 50,
+    moq: 100,
     price_tiers: [
-      { min_qty: 50, max_qty: 99, unit_price: 85.00 },
+      { min_qty: 100, max_qty: 249, unit_price: 85.00 },
       { min_qty: 100, max_qty: 249, unit_price: 75.00 },
       { min_qty: 250, max_qty: 999, unit_price: 65.00 }
     ],
@@ -97,9 +97,9 @@ export const products = [
     slug: 'metropolitan-tech-backpack',
     description: 'An premium backpack balancing classic heritage with modern functionality. Highlights include heavy-duty YKK zippers, hidden anti-theft back pocket, and a multi-layered padded harness system for comfort during travel.',
     material: 'Full-Grain Pull-Up Harness Leather',
-    moq: 50,
+    moq: 100,
     price_tiers: [
-      { min_qty: 50, max_qty: 99, unit_price: 95.00 },
+      { min_qty: 100, max_qty: 249, unit_price: 95.00 },
       { min_qty: 100, max_qty: 249, unit_price: 85.00 },
       { min_qty: 250, max_qty: 999, unit_price: 75.00 }
     ],
@@ -127,9 +127,9 @@ export const products = [
     slug: 'heritage-cabin-duffel',
     description: 'The ultimate weekender. Sized strictly to meet standard international flight carry-on dimensions. Reinforced handles extend all the way under the base for load bearing support, paired with thick brass buckles.',
     material: 'Thick Full-Grain Cowhide (Crazy Horse Finish)',
-    moq: 30,
+    moq: 100,
     price_tiers: [
-      { min_qty: 30, max_qty: 49, unit_price: 120.00 },
+      { min_qty: 100, max_qty: 249, unit_price: 120.00 },
       { min_qty: 50, max_qty: 99, unit_price: 110.00 },
       { min_qty: 100, max_qty: 499, unit_price: 95.00 }
     ],

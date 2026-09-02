@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageSquare } from 'lucide-react';
-import { buildWhatsAppContactUrl } from '../../utils/helpers';
+import { buildWhatsAppContactUrl, B2B_CONFIG } from '../../utils/helpers';
 import Button from '../shared/Button';
 import Magnetic from '../shared/Magnetic';
 
@@ -58,7 +58,7 @@ export default function CTASection() {
           </div>
 
           <p className="text-[9px] text-ivory/30 font-mono uppercase tracking-[0.2em] pt-4">
-            Mon — Sat | 10:00 AM — 9:00 PM IST
+            {B2B_CONFIG.businessHours} IST
           </p>
         </motion.div>
       </div>

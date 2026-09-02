@@ -91,7 +91,7 @@ export default function CustomManufacturing() {
               <h3 className="text-lg font-serif text-ink">Custom Manufacturing MOQ</h3>
               <div className="space-y-3.5 text-xs font-mono">
                 {[
-                  { label: 'Catalog Customization', value: '50 units / color' },
+                  { label: 'Catalog Customization', value: '100 units / color' },
                   { label: 'Custom Design (Your CADs)', value: '100 units / design' },
                   { label: 'Bespoke Cast Hardware', value: '500 units / mold' },
                   { label: 'Custom Jacquard Linings', value: '1,000 meters / weave' },

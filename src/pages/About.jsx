@@ -25,7 +25,7 @@ export default function About() {
             Artisanal Heritage Backed by Global Industrial Capacity
           </h1>
           <p className="mt-6 text-sm text-muted font-light max-w-2xl leading-relaxed">
-            Since 2008, {B2B_CONFIG.brandName} has supplied luxury fashion brands, high-street retail chains, and boutique distributors worldwide with premium manufactured leather bags.
+            Since 2007, {B2B_CONFIG.brandName} has supplied luxury fashion brands, high-street retail chains, and boutique distributors worldwide with premium manufactured leather bags.
           </p>
         </div>
       </section>
@@ -148,7 +148,7 @@ export default function About() {
         <h2 className="text-3xl font-serif text-ink">Over a Decade of Export Excellence</h2>
         <div className="max-w-3xl mx-auto space-y-8 text-left mt-12">
           {[
-            { year: '2008', title: 'Founding', desc: 'Established the Mumbai workshop. Started with a small team of artisans exporting crafted bags and small leather goods.' },
+            { year: '2007', title: 'Founding', desc: 'Established the Mumbai workshop. Started with a small team of artisans exporting crafted bags and small leather goods.' },
             { year: '2014', title: 'ISO Audit', desc: 'Acquired ISO 9001:2015 QA Certification. Upgraded tooling to meet German calibration standards.' },
             { year: '2021', title: 'Green Transition', desc: 'LWG Environmental Sourcing Standard. Achieved 100% REACH chemical compliance.' },
           ].map((item, i) => (

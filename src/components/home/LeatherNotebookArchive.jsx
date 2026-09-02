@@ -25,9 +25,11 @@ function NotebookCover({ onOpen }) {
       <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-gold/60 rounded-bl-sm" />
       <div className="absolute bottom-2 right-2 w-8 h-8 border-b-2 border-r-2 border-gold/60 rounded-br-sm" />
       <div className="relative text-center space-y-4 sm:space-y-6">
-        <div className="w-16 h-16 sm:w-20 sm:h-20 border-2 border-gold/50 rounded-full flex items-center justify-center mx-auto">
-          <span className="text-2xl sm:text-3xl font-serif text-gold/70">Z</span>
-        </div>
+        <img
+          src="/zycoon-logo.png"
+          alt="Zycoon"
+          className="w-14 h-14 sm:w-20 sm:h-20 object-contain mx-auto"
+        />
         <div className="space-y-2 sm:space-y-3">
           <p className="text-[10px] sm:text-[11px] text-ivory/60 font-sans tracking-[0.3em] uppercase">The Zycoon Collection</p>
           <div className="flex items-center justify-center gap-3">
@@ -36,7 +38,7 @@ function NotebookCover({ onOpen }) {
             <div className="w-8 sm:w-10 h-px bg-gold/40" />
           </div>
           <h3 className="text-lg sm:text-2xl lg:text-3xl font-serif text-ivory/80 tracking-[0.15em] leading-tight">THE ZYCOON</h3>
-          <h3 className="text-lg sm:text-2xl lg:text-3xl font-serif text-ivory/80 tracking-[0.15em] leading-tight">COLLECTION</h3>
+          <h3 className="text-lg sm:text-2xl lg:text-3xl font-serif text-ivory/80 tracking-[0.15em] leading-tight">RANGE.</h3>
           <div className="flex items-center justify-center gap-3 mt-2">
             <div className="w-8 sm:w-10 h-px bg-gold/40" />
             <div className="w-1.5 h-1.5 border border-gold/50 rotate-45" />
@@ -364,8 +366,8 @@ export default function LeatherNotebookArchive() {
 
         {/* Entry text */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 space-y-3 sm:space-y-4" data-reveal>
-          <span className="stamp text-leather border-leather/30">The Zycoon Collection</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05]">THE COLLECTION</h2>
+          <span className="stamp text-leather border-leather/30">OUR COLLECTION</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05]">The Zycoon Collection</h2>
           <p className="text-xs sm:text-sm text-muted font-light max-w-lg mx-auto">
             Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Discover our complete range and find the right styles for bulk orders, private label, and custom branding.
           </p>
