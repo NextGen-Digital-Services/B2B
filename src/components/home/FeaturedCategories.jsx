@@ -24,8 +24,8 @@ export default function FeaturedCategories() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
 
         <SectionHeading
-          eyebrow="01 / Collection"
-          title="Explore Our Product Archive"
+          eyebrow="01 / Zycoon Collection"
+          title="THE ZYCOON RANGE"
           description="Premium full-grain and top-grain leather goods engineered for longevity, high retail margin, and international market appeal."
           align="left"
         />

@@ -58,8 +58,8 @@ export default function Products() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="Collection"
-          title="Product Archive"
+          eyebrow="Zycoon Collection"
+          title="ZYCOON COLLECTION"
           description="Browse our baseline collection. All designs can be ordered directly, or customized with custom leather grains, hardware finishes, and logo stampings."
           align="left"
         />

@@ -127,7 +127,7 @@ export default function Hero() {
               <Magnetic strength={6} className="w-full sm:w-auto">
                 <Link to="/products" className="w-full sm:w-auto">
                   <Button variant="ghost" className="w-full sm:w-auto flex items-center justify-center group text-ivory/70 hover:text-ivory border-0 hover:bg-ivory/5">
-                    Explore Collection
+                    View All Products
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
                   </Button>
                 </Link>

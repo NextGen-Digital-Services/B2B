@@ -14,8 +14,8 @@ export default function Testimonials() {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
         <SectionHeading
           eyebrow="06 / Partners"
-          title="Verified Buyer Testimonials"
-          description="Experiences from our global retail purchasing partners and private label brands."
+          title="Trusted by Businesses. Built for Long-Term Partnerships."
+          description="Hear from the retailers, businesses, and brands who work with Zycoon."
           align="center"
         />
 

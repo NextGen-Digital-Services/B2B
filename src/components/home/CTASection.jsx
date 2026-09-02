@@ -27,22 +27,22 @@ export default function CTASection() {
           className="space-y-8"
         >
           <span className="stamp text-ivory/40 border-ivory/15">
-            Direct Manufacturer & Exporter
+            DIRECT MANUFACTURER & SUPPLIER
           </span>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-ivory leading-[1.05]">
-            Start a Project.
+            Let's Work Together.
           </h2>
 
           <p className="text-sm text-ivory/50 font-light max-w-lg mx-auto leading-relaxed">
-            From standard catalog customization to fully custom CAD shapes and private labeling. Submit your target designs or choose from our catalog.
+            From ready-to-order designs to custom requirements, speak with our team about wholesale orders, bulk quantities, custom branding, and production.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
             <Magnetic strength={5} className="w-full sm:w-auto">
               <Link to="/products" className="w-full sm:w-auto">
                 <Button variant="primary" className="w-full sm:w-auto flex items-center justify-center group">
-                  Request B2B Quote
+                  REQUEST B2B QUOTE
                   <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
                 </Button>
               </Link>
@@ -51,7 +51,7 @@ export default function CTASection() {
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                 <Button variant="outline-light" className="w-full sm:w-auto flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 mr-2" strokeWidth={1.5} />
-                  Chat on WhatsApp
+                  CHAT ON WHATSAPP
                 </Button>
               </a>
             </Magnetic>

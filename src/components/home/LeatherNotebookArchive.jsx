@@ -39,6 +39,7 @@ function NotebookCover({ onOpen }) {
           </div>
           <h3 className="text-lg sm:text-2xl lg:text-3xl font-serif text-ivory/80 tracking-[0.15em] leading-tight">THE ZYCOON</h3>
           <h3 className="text-lg sm:text-2xl lg:text-3xl font-serif text-ivory/80 tracking-[0.15em] leading-tight">RANGE.</h3>
+          <p className="text-[10px] sm:text-[11px] text-ivory/50 font-sans tracking-[0.2em] uppercase mt-2">Bags Made by Zycoon</p>
           <div className="flex items-center justify-center gap-3 mt-2">
             <div className="w-8 sm:w-10 h-px bg-gold/40" />
             <div className="w-1.5 h-1.5 border border-gold/50 rotate-45" />
@@ -366,11 +367,15 @@ export default function LeatherNotebookArchive() {
 
         {/* Entry text */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16 space-y-3 sm:space-y-4" data-reveal>
-          <span className="stamp text-leather border-leather/30">OUR COLLECTION</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05]">The Zycoon Collection</h2>
+          <span className="stamp text-leather border-leather/30">OUR PRODUCTS</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-ink leading-[1.05]">THE ZYCOON RANGE</h2>
           <p className="text-xs sm:text-sm text-muted font-light max-w-lg mx-auto">
-            Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Discover our complete range and find the right styles for bulk orders, private label, and custom branding.
+            Explore our complete range of bags and backpacks, designed and manufactured by Zycoon. From everyday essentials to business and travel bags, discover products made for wholesale, bulk orders, and custom branding.
           </p>
+          <Link to="/products" className="inline-flex items-center gap-2 mt-4 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] font-medium text-leather hover:text-espresso transition-colors duration-300 group">
+            VIEW ALL PRODUCTS
+            <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
         </div>
 
         {/* Chapter tabs */}

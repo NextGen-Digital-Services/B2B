@@ -17,17 +17,13 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-3 mb-5">
               <img
-                src="/zycoon-logo.png"
+                src="/zycoon-handwritten.png"
                 alt="Zycoon"
-                className="h-11 w-auto object-contain"
+                className="h-10 w-auto object-contain brightness-0 invert opacity-90"
               />
-              <div className="flex flex-col">
-                <span className="font-serif text-lg tracking-[0.18em] text-ivory/90">ZYCOON</span>
-                <span className="text-[8px] font-sans tracking-[0.25em] text-ivory/40 uppercase">Bags & Backpacks</span>
-              </div>
             </Link>
             <p className="text-xs text-ivory/40 leading-relaxed mb-6">
-              Premium wholesale leather goods manufacturing, private label supply, and worldwide container exports.
+              Manufacturer & Supplier of Bags and Backpacks for Wholesale, OEM & Private Label.
             </p>
             <div className="space-y-3 text-[11px] text-ivory/60">
               <div className="flex items-start">
