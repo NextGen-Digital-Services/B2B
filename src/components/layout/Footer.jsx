@@ -19,7 +19,7 @@ export default function Footer() {
               <img
                 src="/brand-icon.png"
                 alt="Zycoon Icon"
-                className="h-12 w-auto object-contain mix-blend-screen"
+                className="h-12 w-auto object-contain mix-blend-multiply"
               />
               <img
                 src="/zycoon-logo-white.png"
