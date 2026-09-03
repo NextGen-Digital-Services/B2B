@@ -17,14 +17,14 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <Link to="/" className="inline-flex items-center gap-2 mb-5">
               <img
-                src="/brand-icon.jpeg"
+                src="/brand-icon.png"
                 alt="Zycoon Icon"
-                className="h-9 w-auto object-contain"
+                className="h-12 w-auto object-contain mix-blend-screen"
               />
               <img
                 src="/zycoon-logo-white.png"
                 alt="Zycoon"
-                className="h-16 w-auto object-contain opacity-90"
+                className="h-20 w-auto object-contain opacity-90"
               />
             </Link>
             <p className="text-xs text-ivory/40 leading-relaxed mb-6">

@@ -36,14 +36,14 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center select-none group gap-2">
                 <img
-                  src="/brand-icon.jpeg"
+                  src="/brand-icon.png"
                   alt="Zycoon Icon"
-                  className="h-9 md:h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-85"
+                  className="h-12 md:h-14 w-auto object-contain mix-blend-screen transition-opacity duration-300 group-hover:opacity-85"
                 />
                 <img
                   src="/zycoon-logo-white.png"
                   alt="Zycoon"
-                  className="h-14 md:h-16 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                  className="h-16 md:h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </Link>
             </div>

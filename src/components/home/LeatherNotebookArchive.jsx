@@ -26,9 +26,9 @@ function NotebookCover({ onOpen }) {
       <div className="absolute bottom-2 right-2 w-8 h-8 border-b-2 border-r-2 border-gold/60 rounded-br-sm" />
       <div className="relative text-center space-y-4 sm:space-y-6">
         <img
-          src="/brand-icon.jpeg"
+          src="/brand-icon.png"
           alt="Zycoon"
-          className="w-16 h-16 sm:w-20 sm:h-20 object-contain mx-auto"
+          className="w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto mix-blend-screen"
         />
         <div className="space-y-2 sm:space-y-3">
           <p className="text-[10px] sm:text-[11px] text-ivory/60 font-sans tracking-[0.3em] uppercase">The Zycoon Collection</p>
