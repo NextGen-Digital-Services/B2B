@@ -28,7 +28,7 @@ function NotebookCover({ onOpen }) {
         <img
           src="/brand-icon.png"
           alt="Zycoon"
-          className="w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto mix-blend-multiply"
+          className="w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto"
         />
         <div className="space-y-2 sm:space-y-3">
           <p className="text-[10px] sm:text-[11px] text-ivory/60 font-sans tracking-[0.3em] uppercase">The Zycoon Collection</p>
