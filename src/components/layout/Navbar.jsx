@@ -34,7 +34,12 @@ export default function Navbar() {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center select-none group">
+              <Link to="/" className="flex items-center select-none group gap-2">
+                <img
+                  src="/brand-icon.jpeg"
+                  alt="Zycoon Icon"
+                  className="h-9 md:h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-85"
+                />
                 <img
                   src="/zycoon-logo-white.png"
                   alt="Zycoon"

@@ -15,7 +15,12 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-flex items-center gap-3 mb-5">
+            <Link to="/" className="inline-flex items-center gap-2 mb-5">
+              <img
+                src="/brand-icon.jpeg"
+                alt="Zycoon Icon"
+                className="h-9 w-auto object-contain"
+              />
               <img
                 src="/zycoon-logo-white.png"
                 alt="Zycoon"
