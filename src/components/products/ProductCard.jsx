@@ -42,17 +42,17 @@ export default function ProductCard({ product }) {
           <img
             src={swatchColor}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
         ) : (
           <div
-            className="absolute inset-0 leather-grain transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 leather-grain z-0 transition-transform duration-700 group-hover:scale-105"
             style={{ backgroundColor: swatchColor }}
           />
         )}
         {/* Diagonal detail */}
-        <div className="absolute top-4 right-4 w-16 h-16 border border-ivory/10 transform rotate-45" />
+        <div className="absolute top-4 right-4 w-16 h-16 border border-ivory/10 transform rotate-45 z-10" />
       </div>
 
       {/* Info */}

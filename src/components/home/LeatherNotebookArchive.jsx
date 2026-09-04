@@ -69,11 +69,11 @@ function ArchivePage({ product, layout, index }) {
       <div className="grid grid-cols-1 md:grid-cols-2 h-full">
         <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
           {hasPhoto ? (
-            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" />
           ) : (
-            <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+            <div className="absolute inset-0 leather-grain z-0" style={{ backgroundColor: firstImage }} />
           )}
-          <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8">
+          <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8 z-20">
             <span className="stamp text-ivory/40 border-ivory/15 self-start">Specimen / {String(index + 1).padStart(2, '0')}</span>
             <div className="space-y-1 sm:space-y-2">
               <p className="text-[9px] sm:text-[10px] text-ivory/50 font-sans tracking-wider uppercase">{product.material}</p>
@@ -126,11 +126,11 @@ function ArchivePage({ product, layout, index }) {
         </div>
         <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
           {hasPhoto ? (
-            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" />
           ) : (
-            <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+            <div className="absolute inset-0 leather-grain z-0" style={{ backgroundColor: firstImage }} />
           )}
-          <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8">
+          <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8 z-20">
             <span className="stamp text-ivory/40 border-ivory/15 self-end">MOQ {product.moq}+</span>
             <p className="text-[9px] sm:text-[10px] text-ivory/40 font-sans">{product.specifications.hardware}</p>
           </div>
@@ -145,9 +145,9 @@ function ArchivePage({ product, layout, index }) {
     <div className="grid grid-cols-1 md:grid-cols-12 h-full">
       <div className="md:col-span-5 relative overflow-hidden min-h-[140px] sm:min-h-0 bg-ink">
         {hasPhoto ? (
-          <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover z-0" loading="lazy" />
         ) : (
-          <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+          <div className="absolute inset-0 leather-grain z-0" style={{ backgroundColor: firstImage }} />
         )}
         <div className="absolute inset-4 sm:inset-6 border border-ivory/10" />
         <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
@@ -465,7 +465,7 @@ export default function LeatherNotebookArchive() {
                   }}
                 >
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent pointer-events-none z-40"
+                    className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent pointer-events-none z-10"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: turning ? 0.3 : 0 }}
                     transition={{ duration: 0.5 }}
