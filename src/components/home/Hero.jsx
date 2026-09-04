@@ -138,7 +138,7 @@ export default function Hero() {
           </div>
 
           {/* Right - Two Floating Backpacks Composition */}
-          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]">
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] overflow-visible">
             
             {/* Floating shadow for teal backpack */}
             <div className="absolute top-[55%] left-[45%] w-[280px] h-[40px] bg-black/20 rounded-[100%] blur-[30px] pointer-events-none" />
@@ -159,10 +159,10 @@ export default function Hero() {
               <img
                 src="/bagpack1.png"
                 alt="ZYCOON teal and cream backpack"
-                className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                className="w-full h-auto"
                 style={{
                   transform: 'rotate(-5deg)',
-                  filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.25))',
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))',
                 }}
                 decoding="async"
               />
@@ -182,17 +182,17 @@ export default function Hero() {
               <img
                 src="/bagpack2.png"
                 alt="ZYCOON brown leather backpack"
-                className="w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                className="w-full h-auto"
                 style={{
                   transform: 'rotate(6deg)',
-                  filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.3))',
+                  filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.45))',
                 }}
                 decoding="async"
               />
             </motion.div>
 
             {/* Subtle ambient glow behind products */}
-            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-gold/[0.02] rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-gold/[0.03] rounded-full blur-[80px] pointer-events-none" />
           </div>
         </div>
       </div>
