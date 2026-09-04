@@ -29,7 +29,31 @@ function readLocal() {
   try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch { return []; }
 }
 function writeLocal(rows) {
-  localStorage.setItem(LOCAL_KEY, JSON.stringify(rows));
+  try {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(rows));
+  } catch (e) {
+    // If localStorage is full, try removing old images to free space
+    if (e?.name === 'QuotaExceededError' || e?.code === 22) {
+      console.warn('localStorage full, attempting to compress images...');
+      const compressed = rows.map(p => ({
+        ...p,
+        images: (p.images || []).map(img => {
+          if (img && img.startsWith('data:') && img.length > 50000) {
+            // Keep only first 20KB of base64 data as a placeholder
+            return img.substring(0, 20000) + '...[truncated]';
+          }
+          return img;
+        })
+      }));
+      try {
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(compressed));
+      } catch {
+        // Last resort: clear images from localStorage
+        const noImages = rows.map(p => ({ ...p, images: [] }));
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(noImages));
+      }
+    }
+  }
 }
 
 // ── mapping ───────────────────────────────────────────────────
@@ -138,15 +162,37 @@ export async function setProductActive(id, active) {
 }
 
 // ── image upload ──────────────────────────────────────────────
+async function compressImage(file, maxWidth = 800, quality = 0.7) {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > maxWidth) {
+          height = (height * maxWidth) / width;
+          width = maxWidth;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 export async function uploadProductImage(file, slug = 'image') {
   if (!supabase) {
-    // demo mode: store as base64 data url
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
+    // demo mode: compress and store as base64 data url
+    return compressImage(file, 600, 0.6);
   }
   const ext = (file.name.split('.').pop() || 'png').toLowerCase();
   const cleanSlug = slug.replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'image';
