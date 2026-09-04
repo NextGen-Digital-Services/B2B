@@ -89,7 +89,14 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
     try {
       const url = await uploadProductImage(file, form.slug);
       console.log('Image URL received:', url?.substring(0, 50) + '...');
-      set((f) => ({ ...f, images: [...f.images.filter(isImageUrl), url] }));
+      
+      // Update form state with new image
+      setForm((prev) => {
+        const newImages = [...prev.images.filter(isImageUrl), url];
+        console.log('New images array:', newImages);
+        return { ...prev, images: newImages };
+      });
+      
       console.log('Image added to form');
     } catch (err) {
       console.error('Upload failed:', err);
@@ -206,9 +213,6 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
         <p className="text-[10px] text-muted leading-relaxed">
           Upload product photos. First image becomes the card thumbnail.
         </p>
-        <div className="text-[9px] text-muted font-mono mb-2">
-          Images: {form.images.length} | {form.images.map((img, i) => img.startsWith('http') ? `#${i+1}: URL` : `#${i+1}: ${img}`).join(', ')}
-        </div>
         <div className="flex flex-wrap gap-3 items-start">
           {form.images.map((img, idx) => (
             <div key={idx} className="relative group">
