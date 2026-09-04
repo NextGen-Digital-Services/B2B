@@ -138,20 +138,20 @@ export default function Hero() {
           </div>
 
           {/* Right - Two Floating Backpacks Composition */}
-          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] overflow-visible">
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[500px] sm:min-h-[600px] lg:min-h-[700px] overflow-visible">
             
             {/* Floating shadow for teal backpack */}
-            <div className="absolute top-[55%] left-[45%] w-[280px] h-[40px] bg-black/20 rounded-[100%] blur-[30px] pointer-events-none" />
+            <div className="absolute top-[60%] left-[30%] w-[400px] h-[60px] bg-black/25 rounded-[100%] blur-[40px] pointer-events-none" />
             
             {/* Floating shadow for brown backpack */}
-            <div className="absolute top-[65%] left-[55%] w-[240px] h-[35px] bg-black/15 rounded-[100%] blur-[25px] pointer-events-none" />
+            <div className="absolute top-[70%] left-[50%] w-[350px] h-[50px] bg-black/20 rounded-[100%] blur-[35px] pointer-events-none" />
 
             {/* Teal/Cream Backpack - Primary, larger, higher, slightly left */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[8%] left-[5%] sm:top-[10%] sm:left-[8%] w-[55%] sm:w-[50%] lg:w-[48%] z-20"
+              className="absolute top-[0%] left-[-5%] sm:top-[2%] sm:left-[0%] w-[70%] sm:w-[65%] lg:w-[60%] z-20"
               style={{
                 animation: 'float-teal 6s ease-in-out infinite',
               }}
@@ -162,7 +162,7 @@ export default function Hero() {
                 className="w-full h-auto"
                 style={{
                   transform: 'rotate(-5deg)',
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))',
+                  filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.5))',
                 }}
                 decoding="async"
               />
@@ -173,7 +173,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[25%] left-[35%] sm:top-[28%] sm:left-[38%] w-[48%] sm:w-[45%] lg:w-[42%] z-10"
+              className="absolute top-[20%] left-[30%] sm:top-[22%] sm:left-[35%] w-[60%] sm:w-[55%] lg:w-[50%] z-10"
               style={{
                 animation: 'float-brown 7s ease-in-out infinite',
                 animationDelay: '-2s',
@@ -185,14 +185,14 @@ export default function Hero() {
                 className="w-full h-auto"
                 style={{
                   transform: 'rotate(6deg)',
-                  filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.45))',
+                  filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.55))',
                 }}
                 decoding="async"
               />
             </motion.div>
 
             {/* Subtle ambient glow behind products */}
-            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-gold/[0.03] rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-[10%] left-[10%] w-[80%] h-[80%] bg-gold/[0.03] rounded-full blur-[100px] pointer-events-none" />
           </div>
         </div>
       </div>
