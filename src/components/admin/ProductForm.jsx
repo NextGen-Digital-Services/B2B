@@ -207,6 +207,7 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
           Upload product photos (first one becomes the card thumbnail) or add hex swatch colors. Colours shown here map 1:1 to the Available Colors list above.
         </p>
         <div className="flex flex-wrap gap-3 items-start">
+          {console.log('Current images:', form.images)}
           {form.images.map((img, idx) => (
             <div key={idx} className="relative group">
               <ImageThumb value={img} />
