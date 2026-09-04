@@ -204,10 +204,12 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
       {/* Images */}
       <Section title="05 · Images">
         <p className="text-[10px] text-muted leading-relaxed">
-          Upload product photos (first one becomes the card thumbnail) or add hex swatch colors. Colours shown here map 1:1 to the Available Colors list above.
+          Upload product photos. First image becomes the card thumbnail.
         </p>
+        <div className="text-[9px] text-muted font-mono mb-2">
+          Images: {form.images.length} | {form.images.map((img, i) => img.startsWith('http') ? `#${i+1}: URL` : `#${i+1}: ${img}`).join(', ')}
+        </div>
         <div className="flex flex-wrap gap-3 items-start">
-          {console.log('Current images:', form.images)}
           {form.images.map((img, idx) => (
             <div key={idx} className="relative group">
               <ImageThumb value={img} />
@@ -224,17 +226,6 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
             {uploading ? '…' : <Upload className="w-4 h-4" strokeWidth={1.5} />}
             <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
           </label>
-          <div className="flex gap-3">
-            {['#291A13', '#4A1420', '#A9683B', '#6B5A4E', '#C6A15B'].map((hex) => (
-              <button
-                key={hex}
-                onClick={() => set((f) => ({ ...f, images: [...f.images, hex] }))}
-                className="w-8 h-8 border border-border hover:border-ink transition-colors leather-grain"
-                style={{ backgroundColor: hex }}
-                title={`Add swatch ${hex}`}
-              />
-            ))}
-          </div>
         </div>
       </Section>
 
