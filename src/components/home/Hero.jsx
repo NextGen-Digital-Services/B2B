@@ -157,7 +157,7 @@ export default function Hero() {
               }}
             >
               <img
-                src="/bagpack1.png"
+                src="/bagpack1.png?v=2"
                 alt="ZYCOON teal and cream backpack"
                 className="w-full h-auto"
                 style={{
@@ -180,7 +180,7 @@ export default function Hero() {
               }}
             >
               <img
-                src="/bagpack2.png"
+                src="/bagpack2.png?v=2"
                 alt="ZYCOON brown leather backpack"
                 className="w-full h-auto"
                 style={{
