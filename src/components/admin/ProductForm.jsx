@@ -81,13 +81,19 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
   const handleFile = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    
+    console.log('File selected:', file.name, file.size, file.type);
     setUploading(true);
     setError('');
+    
     try {
       const url = await uploadProductImage(file, form.slug);
+      console.log('Image URL received:', url?.substring(0, 50) + '...');
       set((f) => ({ ...f, images: [...f.images.filter(isImageUrl), url] }));
+      console.log('Image added to form');
     } catch (err) {
-      setError(err?.message || 'Image upload failed.');
+      console.error('Upload failed:', err);
+      setError(`Upload failed: ${err?.message || 'Unknown error'}`);
     } finally {
       setUploading(false);
       e.target.value = '';

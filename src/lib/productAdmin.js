@@ -190,19 +190,35 @@ async function compressImage(file, maxWidth = 800, quality = 0.7) {
 }
 
 export async function uploadProductImage(file, slug = 'image') {
+  console.log('Upload started:', file.name, 'Supabase:', !!supabase);
+  
   if (!supabase) {
     // demo mode: compress and store as base64 data url
+    console.log('Demo mode - compressing image');
     return compressImage(file, 600, 0.6);
   }
+  
   const ext = (file.name.split('.').pop() || 'png').toLowerCase();
   const cleanSlug = slug.replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'image';
   const path = `${Date.now()}-${cleanSlug}.${ext}`;
-  const { error } = await supabase.storage
+  
+  console.log('Uploading to path:', path);
+  
+  const { data, error } = await supabase.storage
     .from('product-images')
     .upload(path, file, { upsert: true, cacheControl: '3600' });
-  if (error) throw error;
-  const { data } = supabase.storage.from('product-images').getPublicUrl(path);
-  return data.publicUrl;
+  
+  if (error) {
+    console.error('Upload error:', error);
+    throw new Error(`Upload failed: ${error.message}`);
+  }
+  
+  console.log('Upload success:', data);
+  
+  const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(path);
+  console.log('Public URL:', urlData.publicUrl);
+  
+  return urlData.publicUrl;
 }
 
 // ── misc ──────────────────────────────────────────────────────
