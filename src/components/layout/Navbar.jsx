@@ -34,7 +34,7 @@ export default function Navbar() {
 
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center select-none group gap-2">
+              <Link to="/" className="flex items-center select-none group gap-0">
                 <img
                   src="/brand-icon.png"
                   alt="Zycoon Icon"
@@ -43,7 +43,7 @@ export default function Navbar() {
                 <img
                   src="/zycoon-logo-white.png"
                   alt="Zycoon"
-                  className="h-16 md:h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                  className="h-16 md:h-20 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300 -ml-1"
                 />
               </Link>
             </div>

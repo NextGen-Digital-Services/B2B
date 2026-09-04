@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center py-20 sm:py-24 lg:py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16">
 
           {/* Left - Creative Typography */}
           <div className="lg:col-span-6 space-y-6 lg:space-y-10">
@@ -168,12 +168,12 @@ export default function Hero() {
               />
             </motion.div>
 
-            {/* Brown Backpack - Secondary, much larger, positioned lower right */}
+            {/* Brown Backpack - Secondary, slightly smaller than teal, positioned lower right */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[35%] left-[15%] sm:top-[38%] sm:left-[20%] w-[200%] sm:w-[190%] lg:w-[180%] z-10"
+              className="absolute top-[35%] left-[18%] sm:top-[38%] sm:left-[22%] w-[185%] sm:w-[175%] lg:w-[168%] z-10"
               style={{
                 animation: 'float-brown 7s ease-in-out infinite',
                 animationDelay: '-2s',
