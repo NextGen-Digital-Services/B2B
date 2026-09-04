@@ -36,7 +36,7 @@ export default function Hero() {
       <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16">
 
           {/* Left - Creative Typography */}
           <div className="lg:col-span-6 space-y-6 lg:space-y-10">

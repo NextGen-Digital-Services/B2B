@@ -31,7 +31,7 @@ function NotebookCover({ onOpen }) {
           className="w-20 h-20 sm:w-24 sm:h-24 object-contain mx-auto"
         />
         <div className="space-y-2 sm:space-y-3">
-          <p className="text-[10px] sm:text-[11px] text-ivory/60 font-sans tracking-[0.3em] uppercase">The Zycoon Range</p>
+          <p className="text-[10px] sm:text-[11px] text-ivory/60 font-sans tracking-[0.3em] uppercase">The Zycoon Collection</p>
           <div className="flex items-center justify-center gap-3">
             <div className="w-8 sm:w-10 h-px bg-gold/40" />
             <div className="w-1.5 h-1.5 border border-gold/50 rotate-45" />
