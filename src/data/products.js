@@ -23,7 +23,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-1.webp'],
+    images: ['#4A1420', '#A9683B', '#241812'],
     lead_time_days: 35,
     is_featured: true,
     created_at: '2026-01-15T08:00:00Z'
@@ -53,7 +53,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-3.webp'],
+    images: ['#A9683B', '#4A1420', '#6B5A4E'],
     lead_time_days: 40,
     is_featured: true,
     created_at: '2026-02-10T08:00:00Z'
@@ -83,7 +83,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-5.webp'],
+    images: ['#241812', '#A9683B', '#2E0D14'],
     lead_time_days: 30,
     is_featured: true,
     created_at: '2026-03-01T08:00:00Z'
@@ -112,7 +112,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-7.webp'],
+    images: ['#241812', '#A9683B', '#6B5A4E'],
     lead_time_days: 45,
     is_featured: false,
     created_at: '2026-03-12T08:00:00Z'
@@ -141,7 +141,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-9.webp'],
+    images: ['#6B5A4E', '#A9683B', '#4A1420'],
     lead_time_days: 45,
     is_featured: true,
     created_at: '2026-03-18T08:00:00Z'
@@ -171,7 +171,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-2.webp'],
+    images: ['#241812', '#A9683B', '#2E0D14'],
     lead_time_days: 25,
     is_featured: false,
     created_at: '2026-04-02T08:00:00Z'
@@ -201,7 +201,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-4.webp'],
+    images: ['#A9683B', '#241812', '#4A1420'],
     lead_time_days: 50,
     is_featured: true,
     created_at: '2026-04-15T08:00:00Z'
@@ -231,7 +231,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-6.webp'],
+    images: ['#6B5A4E', '#241812', '#A9683B'],
     lead_time_days: 25,
     is_featured: false,
     created_at: '2026-05-01T08:00:00Z'
@@ -261,7 +261,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-8.webp'],
+    images: ['#A9683B', '#6B5A4E', '#241812'],
     lead_time_days: 20,
     is_featured: false,
     created_at: '2026-05-10T08:00:00Z'
@@ -291,7 +291,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['/product-images/product-10.webp'],
+    images: ['#241812', '#A9683B', '#6B5A4E'],
     lead_time_days: 30,
     is_featured: false,
     created_at: '2026-05-20T08:00:00Z'
