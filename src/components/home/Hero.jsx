@@ -9,10 +9,8 @@ const specWords = ['CRAFTED BY ZYCOON', 'MADE TO LAST', 'EST. 2007'];
 
 export default function Hero() {
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, -80]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -40]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const scale = useTransform(scrollY, [0, 400], [1, 0.95]);
+  const y1 = useTransform(scrollY, [0, 500], [0, -40]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -20]);
 
   const [wordIndex, setWordIndex] = useState(0);
 
@@ -34,7 +32,7 @@ export default function Hero() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
       >
         <span className="text-[clamp(4rem,20vw,18rem)] font-serif font-bold text-ivory/[0.02] tracking-[-0.04em] leading-none whitespace-nowrap">
-          ZYCOON
+          BAGPACKS
         </span>
       </motion.div>
 
@@ -45,7 +43,6 @@ export default function Hero() {
       <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
       <motion.div
-        style={{ opacity, scale }}
         className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center py-20 sm:py-24 lg:py-32">

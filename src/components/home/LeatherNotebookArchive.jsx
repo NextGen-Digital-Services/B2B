@@ -249,14 +249,18 @@ export default function LeatherNotebookArchive() {
     }, 100);
   }, [turning, currentPage, totalPages]);
 
-  // Mouse wheel (desktop)
+  // Mouse wheel (desktop) - capture phase to block page scroll
   useEffect(() => {
     const THRESHOLD = 80;
-    const COOLDOWN = 1000;
+    const COOLDOWN = 800;
 
     const handleWheel = (e) => {
       if (!hovering) return;
+      
+      // Always prevent scroll when hovering over diary
       e.preventDefault();
+      e.stopPropagation();
+      
       const now = Date.now();
       if (now - lastScrollTime.current < COOLDOWN) return;
 
@@ -274,15 +278,15 @@ export default function LeatherNotebookArchive() {
       }
 
       clearTimeout(window.__nbScrollReset);
-      window.__nbScrollReset = setTimeout(() => { scrollAccum.current = 0; }, 200);
+      window.__nbScrollReset = setTimeout(() => { scrollAccum.current = 0; }, 150);
     };
 
     const el = containerRef.current;
     if (el) {
-      el.addEventListener('wheel', handleWheel, { passive: false });
+      el.addEventListener('wheel', handleWheel, { passive: false, capture: true });
     }
     return () => {
-      if (el) el.removeEventListener('wheel', handleWheel);
+      if (el) el.removeEventListener('wheel', handleWheel, { capture: true });
     };
   }, [currentPage, totalPages, turnToPage, hovering]);
 
