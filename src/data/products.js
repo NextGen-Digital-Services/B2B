@@ -24,7 +24,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#4A1420', '#A9683B', '#241812'], // Oxblood, Cognac, Charcoal colors represent the bags
+    images: ['/product-images/product-1.webp', '/product-images/product-2.webp'],
     lead_time_days: 35,
     is_featured: true,
     created_at: '2026-01-15T08:00:00Z'
@@ -54,7 +54,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#A9683B', '#4A1420', '#6B5A4E'], // Cognac, Oxblood, Taupe
+    images: ['/product-images/product-3.webp', '/product-images/product-4.webp'],
     lead_time_days: 40,
     is_featured: true,
     created_at: '2026-02-10T08:00:00Z'
@@ -84,7 +84,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#241812', '#A9683B', '#2E0D14'], // Charcoal, Cognac, Dark Burgundy
+    images: ['/product-images/product-5.webp', '/product-images/product-6.webp'],
     lead_time_days: 30,
     is_featured: true,
     created_at: '2026-03-01T08:00:00Z'
@@ -114,7 +114,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#241812', '#A9683B', '#6B5A4E'], // Charcoal, Cognac, Taupe
+    images: ['/product-images/product-7.webp', '/product-images/product-8.webp'],
     lead_time_days: 45,
     is_featured: false,
     created_at: '2026-03-12T08:00:00Z'
@@ -144,7 +144,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#6B5A4E', '#A9683B', '#4A1420'], // Taupe, Cognac, Oxblood
+    images: ['/product-images/product-9.webp', '/product-images/product-10.webp'],
     lead_time_days: 45,
     is_featured: true,
     created_at: '2026-03-18T08:00:00Z'
@@ -174,7 +174,7 @@ export const products = [
       logo_branding: true,
       custom_packaging: true
     },
-    images: ['#241812', '#A9683B', '#2E0D14'], // Charcoal, Cognac, Primary Dark
+    images: ['/product-images/product-1.webp', '/product-images/product-2.webp'],
     lead_time_days: 25,
     is_featured: false,
     created_at: '2026-04-02T08:00:00Z'
