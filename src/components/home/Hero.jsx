@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import Button from '../shared/Button';
 import Magnetic from '../shared/Magnetic';
 
-const specWords = ['CRAFTED', 'BAGPACKS', 'BAGS', 'MADE', 'TO', 'LAST'];
+const specWords = ['CRAFTED BY ZYCOON', 'MADE TO LAST', 'EST. 2007'];
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -28,13 +28,13 @@ export default function Hero() {
       {/* Animated grain overlay */}
       <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
-      {/* Giant rotating background word */}
+      {/* Giant background word */}
       <motion.div
         style={{ y: y1 }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
       >
         <span className="text-[clamp(4rem,20vw,18rem)] font-serif font-bold text-ivory/[0.02] tracking-[-0.04em] leading-none whitespace-nowrap">
-          BAGPACKS
+          ZYCOON
         </span>
       </motion.div>
 
