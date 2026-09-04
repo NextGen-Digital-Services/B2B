@@ -61,13 +61,18 @@ function NotebookCover({ onOpen }) {
 
 /* ── Page Layouts ── */
 function ArchivePage({ product, layout, index }) {
-  const hex = product.images[0] || '#291A13';
+  const firstImage = product.images[0] || '#291A13';
+  const hasPhoto = typeof firstImage === 'string' && (firstImage.startsWith('/') || firstImage.startsWith('http'));
 
   if (layout === 'hero') {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-        <div className="relative overflow-hidden min-h-[180px] sm:min-h-0" style={{ backgroundColor: hex }}>
-          <div className="absolute inset-0 leather-grain" />
+        <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
+          {hasPhoto ? (
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+          )}
           <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8">
             <span className="stamp text-ivory/40 border-ivory/15 self-start">Specimen / {String(index + 1).padStart(2, '0')}</span>
             <div className="space-y-1 sm:space-y-2">
@@ -119,8 +124,12 @@ function ArchivePage({ product, layout, index }) {
             </Link>
           </div>
         </div>
-        <div className="relative overflow-hidden min-h-[180px] sm:min-h-0" style={{ backgroundColor: hex }}>
-          <div className="absolute inset-0 leather-grain" />
+        <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
+          {hasPhoto ? (
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+          ) : (
+            <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+          )}
           <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6 lg:p-8">
             <span className="stamp text-ivory/40 border-ivory/15 self-end">MOQ {product.moq}+</span>
             <p className="text-[9px] sm:text-[10px] text-ivory/40 font-sans">{product.specifications.hardware}</p>
@@ -134,8 +143,12 @@ function ArchivePage({ product, layout, index }) {
   // technical
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 h-full">
-      <div className="md:col-span-5 relative overflow-hidden min-h-[140px] sm:min-h-0" style={{ backgroundColor: hex }}>
-        <div className="absolute inset-0 leather-grain" />
+      <div className="md:col-span-5 relative overflow-hidden min-h-[140px] sm:min-h-0 bg-ink">
+        {hasPhoto ? (
+          <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+        ) : (
+          <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
+        )}
         <div className="absolute inset-4 sm:inset-6 border border-ivory/10" />
         <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
           <p className="text-[8px] sm:text-[9px] text-ivory/30 font-sans tracking-wider mb-1">LEATHER</p>

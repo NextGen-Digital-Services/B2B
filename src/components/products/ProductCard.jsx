@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Image area */}
-      <div className="relative h-56 w-full overflow-hidden">
+      <div className="relative h-56 w-full overflow-hidden bg-ink">
         {hasPhoto ? (
           <img
             src={swatchColor}
