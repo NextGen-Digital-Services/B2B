@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Button from '../shared/Button';
 import Magnetic from '../shared/Magnetic';
@@ -8,10 +8,6 @@ import Magnetic from '../shared/Magnetic';
 const specWords = ['CRAFTED BY ZYCOON', 'MADE TO LAST', 'EST. 2007'];
 
 export default function Hero() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, -40]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -20]);
-
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
@@ -22,19 +18,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-ink overflow-hidden">
+    <section className="relative min-h-screen bg-ink">
       {/* Animated grain overlay */}
       <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
       {/* Giant background word */}
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-      >
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="text-[clamp(4rem,20vw,18rem)] font-serif font-bold text-ivory/[0.02] tracking-[-0.04em] leading-none whitespace-nowrap">
           BAGPACKS
         </span>
-      </motion.div>
+      </div>
 
       {/* Thin editorial lines */}
       <div className="absolute top-0 left-4 lg:left-10 bottom-0 w-px bg-ivory/5" />
@@ -147,10 +140,7 @@ export default function Hero() {
           </div>
 
           {/* Right - Creative Visual Composition */}
-          <motion.div
-            style={{ y: y2 }}
-            className="lg:col-span-5 relative flex items-center justify-center"
-          >
+          <div className="lg:col-span-5 relative flex items-center justify-center">
             <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-md aspect-[3/4]">
               {/* Main leather piece */}
               <motion.div
@@ -216,7 +206,7 @@ export default function Hero() {
               <div className="absolute -top-3 -right-3 lg:-top-4 lg:-right-4 w-6 sm:w-8 h-6 sm:h-8 border-t border-r border-ivory/10" />
               <div className="absolute -bottom-3 -left-3 lg:-bottom-4 lg:-left-4 w-6 sm:w-8 h-6 sm:h-8 border-b border-l border-ivory/10" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
