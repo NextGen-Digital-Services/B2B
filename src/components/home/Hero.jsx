@@ -18,7 +18,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-ink">
+    <section className="relative min-h-screen bg-ink overflow-hidden">
       {/* Animated grain overlay */}
       <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
@@ -35,13 +35,11 @@ export default function Hero() {
       <div className="absolute top-1/4 left-0 right-0 h-px bg-ivory/[0.03]" />
       <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
-      <motion.div
-        className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10"
-      >
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-4 items-center py-20 sm:py-24 lg:py-32">
 
           {/* Left - Creative Typography */}
-          <div className="lg:col-span-7 space-y-6 lg:space-y-10">
+          <div className="lg:col-span-6 space-y-6 lg:space-y-10">
             {/* Top meta row */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -135,87 +133,76 @@ export default function Hero() {
               <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
               <span>OEM / ODM</span>
               <span className="w-4 sm:w-8 h-px bg-ivory/10 hidden sm:block" />
-              <span>FOR MUMBAI</span>
+              <span>FROM MUMBAI</span>
             </motion.div>
           </div>
 
-          {/* Right - Creative Visual Composition */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
-            <div className="relative w-full max-w-[280px] sm:max-w-sm lg:max-w-md aspect-[3/4]">
-              {/* Main leather piece */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-0 bg-espresso leather-grain overflow-hidden"
-                style={{ clipPath: 'polygon(0% 0%, 98% 0%, 100% 97%, 2% 100%)' }}
-              >
-                <div className="absolute inset-3 sm:inset-4 border border-ivory/10" />
-                <div className="absolute inset-4 sm:inset-5 border border-ivory/5" />
-                <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-8 lg:p-10">
-                  <div className="flex justify-between items-start">
-                    <span className="stamp text-gold/50 border-gold/15 text-[7px] sm:text-[8px]">Specimen / 0042</span>
-                    <span className="text-[8px] sm:text-[9px] text-ivory/20 font-sans">WH-029</span>
-                  </div>
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="w-12 sm:w-16 h-px bg-gold/30" />
-                    <p className="text-[9px] sm:text-[10px] text-ivory/40 font-sans tracking-wider uppercase">
-                      Full Grain / Cognac
-                    </p>
-                    <img
-                      src="/zycoon-logo-white.png"
-                      alt="Zycoon"
-                      className="w-32 sm:w-44 h-auto object-contain"
-                    />
-                    <p className="text-[8px] sm:text-[9px] text-ivory/25 font-sans">
-                      LWG Environmental Code
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+          {/* Right - Two Floating Backpacks Composition */}
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px]">
+            
+            {/* Floating shadow for teal backpack */}
+            <div className="absolute top-[55%] left-[45%] w-[280px] h-[40px] bg-black/20 rounded-[100%] blur-[30px] pointer-events-none" />
+            
+            {/* Floating shadow for brown backpack */}
+            <div className="absolute top-[65%] left-[55%] w-[240px] h-[35px] bg-black/15 rounded-[100%] blur-[25px] pointer-events-none" />
 
-              {/* Overlapping cognac swatch */}
-              <motion.div
-                initial={{ opacity: 0, x: 30, y: 30 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 1, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 lg:-left-10 w-3/5 aspect-[4/3] bg-leather/90 leather-grain overflow-hidden"
-                style={{ clipPath: 'polygon(0% 3%, 97% 0%, 100% 96%, 3% 100%)' }}
-              >
-                <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
-                  <span className="stamp text-ivory/40 border-ivory/15 text-[7px] sm:text-[8px]">Saddle Cognac</span>
-                  <div>
-                    <p className="text-[8px] sm:text-[10px] text-ivory/50 font-sans">Grain: 1.8 — 2.0mm</p>
-                    <div className="w-5 sm:w-6 h-px bg-ivory/20 mt-2" />
-                  </div>
-                </div>
-              </motion.div>
+            {/* Teal/Cream Backpack - Primary, larger, higher, slightly left */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-[8%] left-[5%] sm:top-[10%] sm:left-[8%] w-[55%] sm:w-[50%] lg:w-[48%] z-20"
+              style={{
+                animation: 'float-teal 6s ease-in-out infinite',
+              }}
+            >
+              <img
+                src="/bagpack1.png"
+                alt="ZYCOON teal and cream backpack"
+                className="w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                style={{
+                  transform: 'rotate(-5deg)',
+                  filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.25))',
+                }}
+                decoding="async"
+              />
+            </motion.div>
 
-              {/* Floating burgundy accent */}
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1 }}
-                className="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 lg:-right-8 w-16 sm:w-20 lg:w-24 h-16 sm:h-20 lg:h-24 bg-burgundy/80 leather-grain flex items-center justify-center"
-                style={{ clipPath: 'polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%)' }}
-              >
-                <span className="text-[7px] sm:text-[8px] text-ivory/50 font-sans tracking-wider">BRG-033</span>
-              </motion.div>
+            {/* Brown Backpack - Secondary, smaller, lower, right */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-[25%] left-[35%] sm:top-[28%] sm:left-[38%] w-[48%] sm:w-[45%] lg:w-[42%] z-10"
+              style={{
+                animation: 'float-brown 7s ease-in-out infinite',
+                animationDelay: '-2s',
+              }}
+            >
+              <img
+                src="/bagpack2.png"
+                alt="ZYCOON brown leather backpack"
+                className="w-full h-auto drop-shadow-[0_25px_50px_rgba(0,0,0,0.35)]"
+                style={{
+                  transform: 'rotate(6deg)',
+                  filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.3))',
+                }}
+                decoding="async"
+              />
+            </motion.div>
 
-              {/* Corner marks */}
-              <div className="absolute -top-3 -right-3 lg:-top-4 lg:-right-4 w-6 sm:w-8 h-6 sm:h-8 border-t border-r border-ivory/10" />
-              <div className="absolute -bottom-3 -left-3 lg:-bottom-4 lg:-left-4 w-6 sm:w-8 h-6 sm:h-8 border-b border-l border-ivory/10" />
-            </div>
+            {/* Subtle ambient glow behind products */}
+            <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-gold/[0.02] rounded-full blur-[80px] pointer-events-none" />
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.6 }}
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 z-30"
       >
         <span className="text-[8px] sm:text-[9px] text-ivory/30 font-sans tracking-[0.3em] uppercase">Scroll</span>
         <div className="w-px h-6 sm:h-8 bg-ivory/10 relative overflow-hidden">
@@ -227,6 +214,26 @@ export default function Hero() {
           />
         </div>
       </motion.div>
+
+      {/* Floating animation keyframes */}
+      <style>{`
+        @keyframes float-teal {
+          0%, 100% { transform: translateY(0px) rotate(-5deg); }
+          50% { transform: translateY(-8px) rotate(-4deg); }
+        }
+        @keyframes float-brown {
+          0%, 100% { transform: translateY(0px) rotate(6deg); }
+          50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes float-teal {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+          }
+          @keyframes float-brown {
+            0%, 100% { transform: translateY(0px) rotate(6deg); }
+          }
+        }
+      `}</style>
     </section>
   );
 }
