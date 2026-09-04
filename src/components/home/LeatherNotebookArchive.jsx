@@ -219,9 +219,12 @@ export default function LeatherNotebookArchive() {
   const touchStartY = useRef(0);
   useGsapReveal(containerRef);
 
+  // Only show products that are marked for diary
+  const diaryProducts = products.filter((p) => p.show_in_diary !== false);
+  
   const filteredProducts = activeChapter === 'all'
-    ? products
-    : products.filter((p) => p.category_id === activeChapter);
+    ? diaryProducts
+    : diaryProducts.filter((p) => p.category_id === activeChapter);
 
   const allPages = [
     { type: 'cover' },

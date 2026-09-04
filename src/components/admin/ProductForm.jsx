@@ -152,10 +152,14 @@ export default function ProductForm({ product, onSave, onCancel, onDelete, onTog
               {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
           </Field>
-          <div className="flex items-end space-x-6 pb-1">
+          <div className="flex items-end space-x-6 pb-1 flex-wrap gap-y-3">
             <label className="flex items-center space-x-2 cursor-pointer">
               <input type="checkbox" checked={form.is_featured} onChange={(e) => set({ is_featured: e.target.checked })} className="accent-leather" />
               <span className="text-[9px] font-mono uppercase tracking-wider text-muted">Featured</span>
+            </label>
+            <label className="flex items-center space-x-2 cursor-pointer">
+              <input type="checkbox" checked={form.show_in_diary} onChange={(e) => set({ show_in_diary: e.target.checked })} className="accent-leather" />
+              <span className="text-[9px] font-mono uppercase tracking-wider text-muted">Show in Diary</span>
             </label>
             <label className="flex items-center space-x-2 cursor-pointer">
               <input type="checkbox" checked={form.active !== false} onChange={(e) => set({ active: e.target.checked })} className="accent-leather" />

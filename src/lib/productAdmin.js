@@ -15,6 +15,7 @@ export const PRODUCT_FIELDS = [
   'images',
   'lead_time_days',
   'is_featured',
+  'show_in_diary',
   'active',
   'created_at',
 ];
@@ -73,6 +74,7 @@ function mapRow(r) {
     images: Array.isArray(r.images) ? r.images : [],
     lead_time_days: typeof r.lead_time_days === 'number' ? r.lead_time_days : 30,
     is_featured: !!r.is_featured,
+    show_in_diary: r.show_in_diary !== false,
     active: r.active !== false,
     created_at: r.created_at,
   };
@@ -116,6 +118,7 @@ export async function upsertProduct(product) {
     images: product.images,
     lead_time_days: Number(product.lead_time_days) || 30,
     is_featured: !!product.is_featured,
+    show_in_diary: product.show_in_diary !== false,
     active: product.active !== false,
   };
   if (supabase) {
@@ -247,6 +250,7 @@ export function newProductShape() {
     images: [],
     lead_time_days: 30,
     is_featured: false,
+    show_in_diary: true,
     active: true,
   };
 }

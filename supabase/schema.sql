@@ -25,6 +25,7 @@ create table if not exists public.products (
   images                jsonb default '[]'::jsonb, -- hex colors or image urls
   lead_time_days        integer default 30,
   is_featured           boolean default false,
+  show_in_diary         boolean default true,      -- show in leather diary section
   active                boolean default true,      -- false = hidden from public site
   created_at            timestamptz default now(),
   updated_at            timestamptz default now()
