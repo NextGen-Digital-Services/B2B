@@ -60,7 +60,7 @@ function NotebookCover({ onOpen }) {
 }
 
 /* ── Page Layouts ── */
-function ArchivePage({ product, layout, index }) {
+function ArchivePage({ product, layout, index, totalProducts }) {
   const firstImage = product.images[0] || '#291A13';
   const hasPhoto = typeof firstImage === 'string' && (firstImage.startsWith('/') || firstImage.startsWith('http'));
 
@@ -160,7 +160,7 @@ function ArchivePage({ product, layout, index }) {
         <div className="space-y-3 sm:space-y-4">
           <div className="flex justify-between items-start gap-2">
             <span className="stamp text-leather border-leather/30">Archive Entry</span>
-            <span className="text-[8px] sm:text-[9px] text-muted font-sans">{String(index + 1).padStart(2, '0')} / {String(products.length).padStart(2, '0')}</span>
+            <span className="text-[8px] sm:text-[9px] text-muted font-sans">{String(index + 1).padStart(2, '0')} / {String(totalProducts).padStart(2, '0')}</span>
           </div>
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif text-ink leading-tight">{product.name}</h3>
           <p className="text-[11px] sm:text-xs text-muted leading-relaxed line-clamp-3">{product.description}</p>
@@ -488,6 +488,7 @@ export default function LeatherNotebookArchive() {
                       product={allPages[currentPage].product}
                       layout={allPages[currentPage].layout}
                       index={currentPage - 1}
+                      totalProducts={filteredProducts.length}
                     />
                   ) : null}
                 </motion.div>
