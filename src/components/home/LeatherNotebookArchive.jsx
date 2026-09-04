@@ -69,7 +69,7 @@ function ArchivePage({ product, layout, index }) {
       <div className="grid grid-cols-1 md:grid-cols-2 h-full">
         <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
           {hasPhoto ? (
-            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           ) : (
             <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
           )}
@@ -126,7 +126,7 @@ function ArchivePage({ product, layout, index }) {
         </div>
         <div className="relative overflow-hidden min-h-[180px] sm:min-h-0 bg-ink">
           {hasPhoto ? (
-            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+            <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
           ) : (
             <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
           )}
@@ -145,7 +145,7 @@ function ArchivePage({ product, layout, index }) {
     <div className="grid grid-cols-1 md:grid-cols-12 h-full">
       <div className="md:col-span-5 relative overflow-hidden min-h-[140px] sm:min-h-0 bg-ink">
         {hasPhoto ? (
-          <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={firstImage} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         ) : (
           <div className="absolute inset-0 leather-grain" style={{ backgroundColor: firstImage }} />
         )}

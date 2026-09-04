@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import Button from '../shared/Button';
 import Magnetic from '../shared/Magnetic';
 
-const specWords = ['CRAFTED', 'LEATHER', 'BAGS', 'MADE', 'TO', 'LAST'];
+const specWords = ['CRAFTED', 'BAGPACKS', 'BAGS', 'MADE', 'TO', 'LAST'];
 
 export default function Hero() {
   const { scrollY } = useScroll();
@@ -34,7 +34,7 @@ export default function Hero() {
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
       >
         <span className="text-[clamp(4rem,20vw,18rem)] font-serif font-bold text-ivory/[0.02] tracking-[-0.04em] leading-none whitespace-nowrap">
-          LEATHER
+          BAGPACKS
         </span>
       </motion.div>
 
