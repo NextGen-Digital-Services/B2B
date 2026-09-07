@@ -21,10 +21,6 @@ export default function Products() {
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   useEffect(() => {
-    setSelectedCategory(getInitialCategory());
-  }, [location.search]);
-
-  useEffect(() => {
     let result = [...products];
 
     if (selectedCategory !== 'all') {
