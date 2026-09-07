@@ -15,7 +15,7 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="inline-flex items-center gap-0 mb-3">
+            <Link to="/" className="inline-flex items-center gap-0 mb-1">
               <img
                 src="/brand-icon.png"
                 alt="Zycoon Icon"
@@ -27,7 +27,7 @@ export default function Footer() {
                 className="h-20 w-auto object-contain opacity-90 -ml-1"
               />
             </Link>
-            <p className="text-[10px] text-ivory/50 font-sans tracking-[0.2em] uppercase mb-4">Bags and Backpacks</p>
+            <p className="text-[10px] text-ivory/50 font-sans tracking-[0.2em] uppercase mb-4 pl-8">Bags and Backpacks</p>
             <p className="text-xs text-ivory/40 leading-relaxed mb-6">
               Manufacturer & Supplier of Bags and Backpacks for Wholesale, OEM & Private Label.
             </p>

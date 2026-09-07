@@ -58,9 +58,9 @@ export default function Products() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="Zycoon Collection"
-          title="ZYCOON COLLECTION"
-          description="Browse our baseline collection. All designs can be ordered directly, or customized with custom leather grains, hardware finishes, and logo stampings."
+          eyebrow="OUR COLLECTION"
+          title="The Zycoon Collection"
+          description="Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Discover our complete range and find the right styles for bulk orders, private label, and custom branding"
           align="left"
         />
 

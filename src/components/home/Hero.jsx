@@ -61,9 +61,8 @@ export default function Hero() {
               <h1 className="text-[clamp(3rem,9vw,8rem)] leading-[0.88] tracking-[-0.03em] font-serif font-bold text-ivory">
                 MADE<br />
                 TO<br />
-                <span className="italic font-normal text-gold relative">
+                <span className="italic font-normal text-gold">
                   LAST.
-                  <span className="absolute -bottom-2 left-0 w-full h-px bg-gold/30" />
                 </span>
               </h1>
             </motion.div>

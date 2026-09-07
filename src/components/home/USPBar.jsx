@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { Package, ShieldCheck, Globe, Sliders } from 'lucide-react';
-import AnimatedNumber from '../shared/AnimatedNumber';
+import { Package, ShieldCheck, Layers, Wrench } from 'lucide-react';
 import useGsapReveal from '../../hooks/useGsapReveal';
 
 export default function USPBar() {
@@ -10,34 +9,29 @@ export default function USPBar() {
   const usps = [
     {
       icon: Package,
-      title: 'Flexible MOQs',
-      value: '100+',
-      label: 'Units per design',
+      title: 'Flexible MOQ',
+      value: '50+',
+      subtitle: 'Minimum Order Quantity',
     },
     {
       icon: ShieldCheck,
-      title: 'ISO Certified',
-      value: '9001',
-      label: 'Quality managed',
+      title: 'Quality First',
+      value: 'Consistent Standards',
+      subtitle: 'Rigorous in-house quality checks at every stage',
     },
     {
-      icon: Globe,
-      title: 'Pan India',
-      value: '19+',
-      label: 'Cities served',
+      icon: Layers,
+      title: 'Multiple Materials',
+      value: 'Versatile Production',
+      subtitle: 'Work with a wide range of materials and finishes',
     },
     {
-      icon: Sliders,
+      icon: Wrench,
       title: 'OEM / ODM',
-      value: '100%',
-      label: 'Custom available',
+      value: 'Custom Manufacturing',
+      subtitle: 'Your brand, your specification, end to end support',
     },
   ];
-
-  const numFrom = (value) => {
-    const match = value.match(/^(\d+)(.*)$/);
-    return match ? { value: Number(match[1]), suffix: match[2] } : { value: 0, suffix: value };
-  };
 
   return (
     <section className="bg-card border-y border-border py-12 lg:py-16" ref={scopeRef}>
@@ -45,7 +39,6 @@ export default function USPBar() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {usps.map((usp, idx) => {
             const Icon = usp.icon;
-            const { value, suffix } = numFrom(usp.value);
             return (
               <div
                 key={idx}
@@ -57,20 +50,18 @@ export default function USPBar() {
                   <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
 
-                {/* Value */}
-                <AnimatedNumber
-                  value={value}
-                  suffix={suffix}
-                  className="text-2xl lg:text-3xl font-serif font-bold text-ink"
-                />
+                {/* Value / Heading */}
+                <p className="text-2xl lg:text-3xl font-serif font-bold text-ink">
+                  {usp.value}
+                </p>
 
                 {/* Label */}
                 <div className="space-y-1">
                   <p className="text-[10px] font-sans font-medium uppercase tracking-[0.15em] text-ink">
                     {usp.title}
                   </p>
-                  <p className="text-[9px] font-mono text-muted tracking-wider">
-                    {usp.label}
+                  <p className="text-[9px] font-mono text-muted tracking-wider leading-relaxed">
+                    {usp.subtitle}
                   </p>
                 </div>
 
