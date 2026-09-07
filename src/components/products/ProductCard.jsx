@@ -37,12 +37,12 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Image area */}
-      <div className="relative h-56 w-full overflow-hidden bg-ink">
+      <div className="relative h-72 w-full overflow-hidden bg-ivory">
         {hasPhoto ? (
           <img
             src={swatchColor}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 w-full h-full object-contain z-0 transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
         ) : (
