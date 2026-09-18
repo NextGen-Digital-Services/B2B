@@ -3,10 +3,10 @@ import Hero from '../components/home/Hero';
 import USPBar from '../components/home/USPBar';
 import LeatherNotebookArchive from '../components/home/LeatherNotebookArchive';
 import MaterialArchive from '../components/home/MaterialArchive';
-import ManufacturingCapability from '../components/home/ManufacturingCapability';
-import CustomManufacturing from '../components/home/CustomManufacturing';
+import MarketMovement from '../components/home/MarketMovement';
+import MaterialToProduct from '../components/home/MaterialToProduct';
+import BuiltForToday from '../components/home/BuiltForToday';
 import WhyChooseUs from '../components/home/WhyChooseUs';
-import Testimonials from '../components/home/Testimonials';
 import CTASection from '../components/home/CTASection';
 
 export default function Home() {
@@ -16,10 +16,10 @@ export default function Home() {
       <USPBar />
       <LeatherNotebookArchive />
       <MaterialArchive />
-      <ManufacturingCapability />
-      <CustomManufacturing />
+      <MarketMovement />
+      <MaterialToProduct />
+      <BuiltForToday />
       <WhyChooseUs />
-      <Testimonials />
       <CTASection />
     </div>
   );

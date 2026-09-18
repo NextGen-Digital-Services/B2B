@@ -9,26 +9,26 @@ export default function USPBar() {
   const usps = [
     {
       icon: Package,
-      title: 'Flexible MOQ',
-      value: '50+',
-      subtitle: 'Minimum Order Quantity',
+      value: '100+',
+      title: 'FLEXIBLE MOQ',
+      subtitle: 'Minimum order quantity',
     },
     {
       icon: ShieldCheck,
-      title: 'Quality First',
-      value: 'Consistent Standards',
+      value: 'QUALITY FIRST',
+      title: 'CONSISTENT STANDARDS',
       subtitle: 'Rigorous in-house quality checks at every stage',
     },
     {
       icon: Layers,
-      title: 'Multiple Materials',
-      value: 'Versatile Production',
+      value: 'MULTIPLE MATERIALS',
+      title: 'VERSATILE PRODUCTION',
       subtitle: 'Work with a wide range of materials and finishes',
     },
     {
       icon: Wrench,
-      title: 'OEM / ODM',
-      value: 'Custom Manufacturing',
+      value: 'OEM / ODM',
+      title: 'CUSTOM MANUFACTURING',
       subtitle: 'Your brand, your specification, end to end support',
     },
   ];
@@ -45,17 +45,14 @@ export default function USPBar() {
                 data-reveal
                 className="group relative flex flex-col items-center text-center space-y-3"
               >
-                {/* Icon */}
                 <div className="text-muted group-hover:text-leather transition-colors duration-300">
                   <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
 
-                {/* Value / Heading */}
                 <p className="text-2xl lg:text-3xl font-serif font-bold text-ink">
                   {usp.value}
                 </p>
 
-                {/* Label */}
                 <div className="space-y-1">
                   <p className="text-[10px] font-sans font-medium uppercase tracking-[0.15em] text-ink">
                     {usp.title}
@@ -65,7 +62,6 @@ export default function USPBar() {
                   </p>
                 </div>
 
-                {/* Subtle divider between items */}
                 {idx < usps.length - 1 && (
                   <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-border/60" />
                 )}

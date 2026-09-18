@@ -18,7 +18,17 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-ink overflow-hidden">
+    <section className="relative bg-ink overflow-hidden" style={{ aspectRatio: '1600 / 685', minHeight: '100vh' }}>
+      {/* Black/gold flowing background - original dimensions */}
+      <img
+        src="/hero-bg.jpg"
+        alt=""
+        className="absolute inset-0 w-full h-full"
+        style={{ objectFit: 'contain', objectPosition: 'center' }}
+        decoding="async"
+      />
+      {/* Subtle dark overlay for text readability */}
+      <div className="absolute inset-0 bg-ink/30 pointer-events-none" />
       {/* Animated grain overlay */}
       <div className="absolute inset-0 leather-grain opacity-30 pointer-events-none" />
 
@@ -35,8 +45,8 @@ export default function Hero() {
       <div className="absolute top-1/4 left-0 right-0 h-px bg-ivory/[0.03]" />
       <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-center relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-3 items-center pt-0 pb-8 sm:pb-12 lg:pb-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-start relative z-10 pt-[12vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-3 items-start pt-0 pb-8 sm:pb-12 lg:pb-16">
 
           {/* Left - Creative Typography */}
           <div className="lg:col-span-6 space-y-3 lg:space-y-4">
@@ -58,7 +68,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-[clamp(3rem,9vw,8rem)] leading-[0.88] tracking-[-0.03em] font-serif font-bold text-ivory">
+              <h1 className="text-[clamp(2.5rem,7vw,6rem)] leading-[0.88] tracking-[-0.03em] font-serif font-bold text-ivory">
                 MADE<br />
                 TO<br />
                 <span className="italic font-normal text-gold">
@@ -137,20 +147,20 @@ export default function Hero() {
           </div>
 
           {/* Right - Two Floating Backpacks Composition */}
-          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[800px] sm:min-h-[1000px] lg:min-h-[1200px] overflow-visible">
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] overflow-visible">
             
             {/* Floating shadow for teal backpack */}
-            <div className="absolute top-[70%] left-[10%] w-[700px] h-[120px] bg-black/40 rounded-[100%] blur-[70px] pointer-events-none" />
+            <div className="absolute top-[65%] left-[10%] w-[500px] h-[80px] bg-black/40 rounded-[100%] blur-[60px] pointer-events-none" />
             
             {/* Floating shadow for brown backpack */}
-            <div className="absolute top-[80%] left-[35%] w-[650px] h-[110px] bg-black/35 rounded-[100%] blur-[65px] pointer-events-none" />
+            <div className="absolute top-[75%] left-[35%] w-[450px] h-[70px] bg-black/35 rounded-[100%] blur-[55px] pointer-events-none" />
 
             {/* Teal/Cream Backpack - Primary, larger, positioned lower near MADE TO LAST */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[15%] left-[-25%] sm:top-[18%] sm:left-[-20%] w-[150%] sm:w-[145%] lg:w-[140%] z-20"
+              className="absolute top-[5%] left-[-25%] sm:top-[8%] sm:left-[-20%] w-[150%] sm:w-[145%] lg:w-[140%] z-20"
               style={{
                 animation: 'float-teal 6s ease-in-out infinite',
               }}
@@ -172,7 +182,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute top-[35%] left-[18%] sm:top-[38%] sm:left-[22%] w-[185%] sm:w-[175%] lg:w-[168%] z-10"
+              className="absolute top-[25%] left-[18%] sm:top-[28%] sm:left-[22%] w-[185%] sm:w-[175%] lg:w-[168%] z-10"
               style={{
                 animation: 'float-brown 7s ease-in-out infinite',
                 animationDelay: '-2s',
@@ -191,7 +201,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Subtle ambient glow behind products */}
-            <div className="absolute top-[10%] left-[0%] w-[100%] h-[90%] bg-gold/[0.06] rounded-full blur-[180px] pointer-events-none" />
+            <div className="absolute top-[0%] left-[0%] w-[100%] h-[80%] bg-gold/[0.06] rounded-full blur-[140px] pointer-events-none" />
           </div>
         </div>
       </div>
