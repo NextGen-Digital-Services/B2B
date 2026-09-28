@@ -79,7 +79,7 @@ export default function ProductCard({ product }) {
           </span>
           <button
             onClick={handleAdd}
-            className="flex items-center justify-center w-8 h-8 border border-border hover:border-leather/40 hover:bg-leather/5 transition-all duration-300"
+            className="flex items-center justify-center w-11 h-11 sm:w-9 sm:h-9 border border-border hover:border-leather/40 hover:bg-leather/5 transition-all duration-300"
             title="Add to RFQ"
           >
             <Plus className="w-3.5 h-3.5 text-muted" strokeWidth={1.5} />

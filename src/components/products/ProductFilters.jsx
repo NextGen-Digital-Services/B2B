@@ -14,10 +14,10 @@ export default function ProductFilters({
   return (
     <div className="mb-10 space-y-6">
       {/* Category Tabs */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 -mx-1 px-1">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer ${
+          className={`px-4 py-3 sm:py-2 text-[10px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer min-h-[40px] ${
             selectedCategory === 'all'
               ? 'bg-ink border-ink text-ivory'
               : 'bg-transparent border-border text-muted hover:border-ink hover:text-ink'
@@ -29,7 +29,7 @@ export default function ProductFilters({
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-4 py-2 text-[10px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer ${
+            className={`px-4 py-3 sm:py-2 text-[10px] uppercase tracking-[0.15em] font-medium border transition-all duration-300 cursor-pointer min-h-[40px] ${
               selectedCategory === cat.id
                 ? 'bg-ink border-ink text-ivory'
                 : 'bg-transparent border-border text-muted hover:border-ink hover:text-ink'
@@ -48,17 +48,17 @@ export default function ProductFilters({
             placeholder="Search materials, categories..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-card border border-border py-2.5 pl-10 pr-4 text-xs font-sans focus:outline-none focus:border-leather placeholder-muted text-ink transition-colors duration-300"
+            className="w-full bg-card border border-border py-3.5 sm:py-2.5 pl-10 pr-4 text-base sm:text-xs font-sans focus:outline-none focus:border-leather placeholder-muted text-ink transition-colors duration-300"
           />
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-muted" strokeWidth={1.5} />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" strokeWidth={1.5} />
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center justify-start sm:justify-end gap-3">
           <span className="text-[10px] text-muted font-mono uppercase tracking-wider">Sort:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="bg-card border border-border py-1.5 px-3 text-[10px] font-sans focus:outline-none focus:border-leather text-ink cursor-pointer uppercase tracking-wider"
+            className="bg-card border border-border py-3 sm:py-1.5 px-3 text-[11px] sm:text-[10px] font-sans focus:outline-none focus:border-leather text-ink cursor-pointer uppercase tracking-wider min-h-[44px] sm:min-h-0"
           >
             <option value="default">Relevance</option>
             <option value="name-asc">Name A-Z</option>
