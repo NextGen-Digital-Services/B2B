@@ -689,14 +689,120 @@ export const products = [
     price_tiers: [],
     specifications: { dimensions: '—', weight: '—', hardware: '—', lining: '—' },
     customization_options: {
-      colors: ['View 01', 'View 02', 'View 03'],
+      colors: ['View 01', 'View 02', 'View 03', 'View 04', 'View 05', 'View 06'],
       logo_branding: true,
       custom_packaging: true
     },
     images: [
       '/products/backpack-16/image-1.jpg',
       '/products/backpack-16/image-2.jpg',
-      '/products/backpack-16/image-3.jpg'
+      '/products/backpack-16/image-3.jpg',
+      '/products/backpack-16/image-4.jpg',
+      '/products/backpack-16/image-5.jpg',
+      '/products/backpack-16/image-6.jpg'
+    ],
+    lead_time_days: 30,
+    is_featured: false,
+    created_at: '2026-09-28T08:00:00Z'
+  },
+  {
+    id: 'backpack-17',
+    category_id: 'backpacks',
+    serial: 'ZC-027',
+    name: 'Backpack 17',
+    slug: 'backpack-17',
+    description: 'Imported backpack. Product details to be added.',
+    material: 'Imported Collection',
+    moq: 50,
+    price_tiers: [],
+    specifications: { dimensions: '—', weight: '—', hardware: '—', lining: '—' },
+    customization_options: {
+      colors: ['View 01', 'View 02', 'View 03', 'View 04'],
+      logo_branding: true,
+      custom_packaging: true
+    },
+    images: [
+      '/products/backpack-17/image-1.jpg',
+      '/products/backpack-17/image-2.jpg',
+      '/products/backpack-17/image-3.jpg',
+      '/products/backpack-17/image-4.jpg'
+    ],
+    lead_time_days: 30,
+    is_featured: false,
+    created_at: '2026-09-28T08:00:00Z'
+  },
+  {
+    id: 'backpack-18',
+    category_id: 'backpacks',
+    serial: 'ZC-028',
+    name: 'Backpack 18',
+    slug: 'backpack-18',
+    description: 'Imported backpack. Product details to be added.',
+    material: 'Imported Collection',
+    moq: 50,
+    price_tiers: [],
+    specifications: { dimensions: '—', weight: '—', hardware: '—', lining: '—' },
+    customization_options: {
+      colors: ['View 01', 'View 02', 'View 03', 'View 04'],
+      logo_branding: true,
+      custom_packaging: true
+    },
+    images: [
+      '/products/backpack-18/image-1.jpg',
+      '/products/backpack-18/image-2.jpg',
+      '/products/backpack-18/image-3.jpg',
+      '/products/backpack-18/image-4.jpg'
+    ],
+    lead_time_days: 30,
+    is_featured: false,
+    created_at: '2026-09-28T08:00:00Z'
+  },
+  {
+    id: 'backpack-19',
+    category_id: 'backpacks',
+    serial: 'ZC-029',
+    name: 'Backpack 19',
+    slug: 'backpack-19',
+    description: 'Imported backpack. Product details to be added.',
+    material: 'Imported Collection',
+    moq: 50,
+    price_tiers: [],
+    specifications: { dimensions: '—', weight: '—', hardware: '—', lining: '—' },
+    customization_options: {
+      colors: ['View 01', 'View 02', 'View 03'],
+      logo_branding: true,
+      custom_packaging: true
+    },
+    images: [
+      '/products/backpack-19/image-1.jpg',
+      '/products/backpack-19/image-2.jpg',
+      '/products/backpack-19/image-3.jpg'
+    ],
+    lead_time_days: 30,
+    is_featured: false,
+    created_at: '2026-09-28T08:00:00Z'
+  },
+  {
+    id: 'backpack-20',
+    category_id: 'backpacks',
+    serial: 'ZC-030',
+    name: 'Backpack 20',
+    slug: 'backpack-20',
+    description: 'Imported backpack. Product details to be added.',
+    material: 'Imported Collection',
+    moq: 50,
+    price_tiers: [],
+    specifications: { dimensions: '—', weight: '—', hardware: '—', lining: '—' },
+    customization_options: {
+      colors: ['View 01', 'View 02', 'View 03', 'View 04'],
+      logo_branding: true,
+      custom_packaging: true
+    },
+    images: [
+      '/products/backpack-20/image-1.jpg',
+      '/products/backpack-20/image-2.jpg',
+      '/products/backpack-20/image-3.jpg',
+      '/products/backpack-20/image-4.jpg'
     ],
     lead_time_days: 30,
     is_featured: false,
