@@ -29,7 +29,7 @@ export default function ProductCard({ product }) {
       {/* Specimen Header */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-border-light">
         <span className="text-[9px] text-muted font-mono tracking-wider uppercase">
-          Specimen / {product.id.slice(0, 4).toUpperCase()}
+          Specimen / {product.serial || product.id.slice(0, 4).toUpperCase()}
         </span>
         <span className="text-[9px] text-muted font-mono tracking-wider">
           {product.moq}+ MOQ
