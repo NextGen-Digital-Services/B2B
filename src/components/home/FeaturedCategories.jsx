@@ -19,6 +19,7 @@ const item = {
 
 export default function FeaturedCategories() {
   const categories = useCategories();
+  if (!categories.length) return null;
   return (
     <section className="bg-ivory py-20 lg:py-32 border-b border-border">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">

@@ -18,7 +18,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative bg-ink overflow-hidden" style={{ aspectRatio: '1600 / 685', minHeight: '100vh' }}>
+    <section className="relative bg-ink overflow-hidden w-full" style={{ aspectRatio: '1600 / 685', minHeight: '100vh' }}>
       {/* Black/gold flowing background - original dimensions */}
       <img
         src="/hero-bg.jpg"
