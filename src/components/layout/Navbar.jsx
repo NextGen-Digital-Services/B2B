@@ -17,7 +17,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Collection', path: '/products' },
     { name: 'Custom', path: '/custom-manufacturing' },
-    { name: 'Export', path: '/export-wholesale' },
+    { name: 'Import', path: '/import-sourcing' },
     { name: 'Certifications', path: '/certifications' },
     { name: 'Workshop', path: '/gallery' },
     { name: 'About', path: '/about' },

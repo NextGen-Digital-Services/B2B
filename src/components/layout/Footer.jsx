@@ -56,7 +56,7 @@ export default function Footer() {
               {[
                 { name: 'Collection', path: '/products' },
                 { name: 'Custom Manufacturing', path: '/custom-manufacturing' },
-                { name: 'Export & Shipping', path: '/export-wholesale' },
+                { name: 'Import & Sourcing', path: '/import-sourcing' },
                 { name: 'Workshop', path: '/gallery' },
                 { name: 'About', path: '/about' },
               ].map((link) => (

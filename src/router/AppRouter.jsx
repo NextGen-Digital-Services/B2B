@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
@@ -12,7 +12,7 @@ import About from '../pages/About';
 import Products from '../pages/Products';
 import ProductDetail from '../pages/ProductDetail';
 import CustomManufacturing from '../pages/CustomManufacturing';
-import ExportWholesale from '../pages/ExportWholesale';
+import ImportSourcing from '../pages/ImportSourcing';
 import Certifications from '../pages/Certifications';
 import Gallery from '../pages/Gallery';
 import Contact from '../pages/Contact';
@@ -71,7 +71,8 @@ export default function AppRouter() {
             <Route path="/products" element={<Products />} />
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/custom-manufacturing" element={<CustomManufacturing />} />
-            <Route path="/export-wholesale" element={<ExportWholesale />} />
+            <Route path="/import-sourcing" element={<ImportSourcing />} />
+            <Route path="/export-wholesale" element={<Navigate to="/import-sourcing" replace />} />
             <Route path="/certifications" element={<Certifications />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
