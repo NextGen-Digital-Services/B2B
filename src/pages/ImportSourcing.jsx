@@ -7,26 +7,28 @@ import Button from '../components/shared/Button';
 
 const EASE_OUT = [0.23, 1, 0.32, 1];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
-};
+// HIDDEN — used only by the imported-range section above
+// const container = {
+//   hidden: {},
+//   show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+// };
+//
+// const item = {
+//   hidden: { opacity: 0, y: 24 },
+//   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+// };
 
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
-};
-
-const importedRange = [
-  { name: 'Backpacks', img: '/product-images/product-1.webp' },
-  { name: 'Travel Bags', img: '/product-images/product-2.webp' },
-  { name: 'Laptop Bags', img: '/product-images/product-3.webp' },
-  { name: 'Duffel Bags', img: '/product-images/product-10.webp' },
-  { name: 'Office Bags', img: '/product-images/product-6.webp' },
-  { name: 'Totes & Handbags', img: '/product-images/product-5.webp' },
-  { name: 'Accessories', img: '/product-images/product-7.webp' },
-  { name: 'Other Imported Products', img: '/product-images/product-9.webp' },
-];
+// HIDDEN — imported product range removed from this page (uncomment to re-enable)
+// const importedRange = [
+//   { name: 'Backpacks', img: '/product-images/product-1.webp' },
+//   { name: 'Travel Bags', img: '/product-images/product-2.webp' },
+//   { name: 'Laptop Bags', img: '/product-images/product-3.webp' },
+//   { name: 'Duffel Bags', img: '/product-images/product-10.webp' },
+//   { name: 'Office Bags', img: '/product-images/product-6.webp' },
+//   { name: 'Totes & Handbags', img: '/product-images/product-5.webp' },
+//   { name: 'Accessories', img: '/product-images/product-7.webp' },
+//   { name: 'Other Imported Products', img: '/product-images/product-9.webp' },
+// ];
 
 const sourcingSteps = [
   { num: '01', icon: Search, title: 'MARKET DEMAND', desc: 'We look at what customers and the market are looking for and identify products with genuine demand.' },
@@ -77,7 +79,7 @@ export default function ImportSourcing() {
         </div>
       </section>
 
-      {/* 02 / Our Imported Range */}
+      {/* HIDDEN — imported product range disabled (uncomment this whole block to re-enable)
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
           eyebrow="02 / OUR IMPORTED RANGE"
@@ -143,12 +145,13 @@ export default function ImportSourcing() {
           </p>
         </div>
       </section>
+      */}
 
-      {/* 03 / How We Source */}
+      {/* 02 / How We Source */}
       <section className="bg-card border-y border-border py-20 lg:py-32">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <SectionHeading
-            eyebrow="03 / HOW WE SOURCE"
+            eyebrow="02 / HOW WE SOURCE"
             title="Right Product. Right Supplier. Right Quality."
             description="A straightforward sourcing process that keeps quality, availability and commercial value aligned."
             align="left"
@@ -178,10 +181,10 @@ export default function ImportSourcing() {
         </div>
       </section>
 
-      {/* 04 / Why We Import */}
+      {/* 03 / Why We Import */}
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="04 / WHY WE IMPORT"
+          eyebrow="03 / WHY WE IMPORT"
           title="More Products. More Possibilities."
           description="Our own manufacturing allows us to develop products around specific requirements. International sourcing allows us to offer additional styles, categories and market opportunities."
           align="left"

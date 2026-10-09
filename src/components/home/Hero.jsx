@@ -84,7 +84,7 @@ export default function Hero() {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -20, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="block text-xs sm:text-sm font-sans text-gold/40 tracking-[0.3em]"
+                className="block text-sm sm:text-base font-sans font-semibold text-ivory tracking-[0.3em]"
               >
                 {specWords[wordIndex]}
               </motion.span>
