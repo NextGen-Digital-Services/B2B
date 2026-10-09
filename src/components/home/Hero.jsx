@@ -24,7 +24,7 @@ export default function Hero() {
         src="/hero-bg.jpg"
         alt=""
         className="absolute inset-0 w-full h-full"
-        style={{ objectFit: 'contain', objectPosition: 'center' }}
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
         decoding="async"
       />
       {/* Subtle dark overlay for text readability */}
@@ -38,12 +38,6 @@ export default function Hero() {
           BAGPACKS
         </span>
       </div>
-
-      {/* Thin editorial lines */}
-      <div className="absolute top-0 left-4 lg:left-10 bottom-0 w-px bg-ivory/5" />
-      <div className="absolute top-0 right-4 lg:right-10 bottom-0 w-px bg-ivory/5" />
-      <div className="absolute top-1/4 left-0 right-0 h-px bg-ivory/[0.03]" />
-      <div className="absolute top-3/4 left-0 right-0 h-px bg-ivory/[0.03]" />
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 w-full min-h-screen flex items-start relative z-10 pt-[12vh]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-3 items-start pt-0 pb-8 sm:pb-12 lg:pb-16">

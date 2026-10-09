@@ -57,7 +57,6 @@ export default function Footer() {
                 { name: 'Collection', path: '/products' },
                 { name: 'Custom Manufacturing', path: '/custom-manufacturing' },
                 { name: 'Import & Sourcing', path: '/import-sourcing' },
-                { name: 'Workshop', path: '/gallery' },
                 { name: 'About', path: '/about' },
               ].map((link) => (
                 <li key={link.path}>
@@ -108,8 +107,8 @@ export default function Footer() {
         <div className="text-center mt-6 pt-4 border-t border-ivory/5">
           <p className="text-[9px] text-ivory/20 font-mono tracking-wider">
             Designed and Developed by{' '}
-            <a href="mailto:zycoonbags@gmail.com" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-gold/70 transition-colors underline underline-offset-2 decoration-ivory/10 hover:decoration-gold/30">
-              Zycoon
+            <a href="https://westmere.io" target="_blank" rel="noopener noreferrer" className="text-ivory/40 hover:text-gold/70 transition-colors underline underline-offset-2 decoration-ivory/10 hover:decoration-gold/30">
+              Westmere
             </a>
           </p>
         </div>

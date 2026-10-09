@@ -96,7 +96,7 @@ export function GalleryAdmin() {
       onDelete={remove}
       onToggle={toggle}
       onUpload={(file) => uploadProductImage(file, 'gallery')}
-      emptyText="No gallery entries yet. Add workshop or product photos to the /gallery page."
+      emptyText="No gallery entries yet. Add workshop or product photos."
       countLabel={`${items.length} photos`}
       fields={[
         { key: 'image', label: 'Photo or Color', type: 'image' },

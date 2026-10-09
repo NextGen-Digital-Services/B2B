@@ -9,20 +9,20 @@ export default function ProductGallery({ product, selectedColor, setSelectedColo
 
   return (
     <div className="space-y-6">
-      <div className="relative h-96 w-full border border-border flex flex-col justify-between p-8 text-ivory overflow-hidden">
+      <div className="relative w-full border border-border overflow-hidden text-ivory">
         {primaryIsPhoto ? (
-          <img src={primary} alt={selectedColor} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" />
+          <img src={primary} alt={selectedColor} className="block w-full h-auto transition-opacity duration-500" />
         ) : (
           <div
-            className="absolute inset-0 leather-grain transition-colors duration-500"
+            className="h-96 w-full leather-grain transition-colors duration-500"
             style={{ backgroundColor: primary }}
           />
         )}
-        <div className="relative z-10 flex justify-between items-start">
+        <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-start p-6 sm:p-8">
           <span className="stamp text-ivory/50 border-ivory/20">Specimen Canvas</span>
           <span className="text-[9px] text-ivory/40 font-mono">{product.specifications.dimensions}</span>
         </div>
-        <div className="relative z-10 space-y-1">
+        <div className="absolute bottom-0 left-0 right-0 z-10 space-y-1 p-6 sm:p-8">
           <p className="text-[10px] uppercase tracking-[0.2em] text-ivory/50 font-mono">Selected</p>
           <p className="text-2xl font-serif text-ivory">{selectedColor}</p>
         </div>

@@ -18,8 +18,8 @@ export default function Navbar() {
     { name: 'Collection', path: '/products' },
     { name: 'Custom', path: '/custom-manufacturing' },
     { name: 'Import', path: '/import-sourcing' },
-    { name: 'Certifications', path: '/certifications' },
-    { name: 'Workshop', path: '/gallery' },
+    // HIDDEN — Certifications disabled (uncomment to re-enable)
+    // { name: 'Certifications', path: '/certifications' },
     { name: 'About', path: '/about' },
     { name: 'B2B Contact', path: '/contact' },
   ];

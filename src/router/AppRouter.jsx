@@ -13,8 +13,9 @@ import Products from '../pages/Products';
 import ProductDetail from '../pages/ProductDetail';
 import CustomManufacturing from '../pages/CustomManufacturing';
 import ImportSourcing from '../pages/ImportSourcing';
-import Certifications from '../pages/Certifications';
-import Gallery from '../pages/Gallery';
+// HIDDEN — Certifications page disabled (uncomment to re-enable)
+// import Certifications from '../pages/Certifications';
+// Workshop/Gallery page removed — do not restore
 import Contact from '../pages/Contact';
 import RFQCart from '../pages/RFQCart';
 import NotFound from '../pages/NotFound';
@@ -73,8 +74,9 @@ export default function AppRouter() {
             <Route path="/custom-manufacturing" element={<CustomManufacturing />} />
             <Route path="/import-sourcing" element={<ImportSourcing />} />
             <Route path="/export-wholesale" element={<Navigate to="/import-sourcing" replace />} />
+            {/* HIDDEN — Certifications page disabled (uncomment to re-enable)
             <Route path="/certifications" element={<Certifications />} />
-            <Route path="/gallery" element={<Gallery />} />
+            */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/rfq-cart" element={<RFQCart />} />
             <Route path="*" element={<NotFound />} />
