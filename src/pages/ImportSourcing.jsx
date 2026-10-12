@@ -1,34 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, Factory, ShieldCheck, Truck, ArrowRight } from 'lucide-react';
+import { Search, Factory, ShieldCheck, Truck, ArrowRight, Package } from 'lucide-react';
 import SectionHeading from '../components/shared/SectionHeading';
 import Button from '../components/shared/Button';
+import { useProducts, useCategories } from '../context/ZycoonContext';
 
 const EASE_OUT = [0.23, 1, 0.32, 1];
 
-// HIDDEN — used only by the imported-range section above
-// const container = {
-//   hidden: {},
-//   show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
-// };
-//
-// const item = {
-//   hidden: { opacity: 0, y: 24 },
-//   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
-// };
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+};
 
-// HIDDEN — imported product range removed from this page (uncomment to re-enable)
-// const importedRange = [
-//   { name: 'Backpacks', img: '/product-images/product-1.webp' },
-//   { name: 'Travel Bags', img: '/product-images/product-2.webp' },
-//   { name: 'Laptop Bags', img: '/product-images/product-3.webp' },
-//   { name: 'Duffel Bags', img: '/product-images/product-10.webp' },
-//   { name: 'Office Bags', img: '/product-images/product-6.webp' },
-//   { name: 'Totes & Handbags', img: '/product-images/product-5.webp' },
-//   { name: 'Accessories', img: '/product-images/product-7.webp' },
-//   { name: 'Other Imported Products', img: '/product-images/product-9.webp' },
-// ];
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+};
+
+const isImageUrl = (v) => typeof v === 'string' && (v.startsWith('http') || v.startsWith('/') || v.startsWith('data:'));
+const coverImage = (p) => (Array.isArray(p.images) ? p.images.find(isImageUrl) : '') || '';
 
 const sourcingSteps = [
   { num: '01', icon: Search, title: 'MARKET DEMAND', desc: 'We look at what customers and the market are looking for and identify products with genuine demand.' },
@@ -45,6 +36,19 @@ const importBenefits = [
 ];
 
 export default function ImportSourcing() {
+  const products = useProducts();
+  const categories = useCategories();
+
+  // Products assigned (via admin panel) to a category named "Imported"
+  const importedCategoryIds = new Set(
+    categories
+      .filter((c) => /import/i.test(`${c.name || ''} ${c.slug || ''} ${c.id || ''}`))
+      .map((c) => c.id)
+  );
+  const importedProducts = products.filter(
+    (p) => p.active !== false && (importedCategoryIds.has(p.category_id) || /import/i.test(p.category_id || ''))
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -79,7 +83,7 @@ export default function ImportSourcing() {
         </div>
       </section>
 
-      {/* HIDDEN — imported product range disabled (uncomment this whole block to re-enable)
+      {/* 02 / Our Imported Range — sourced from admin panel */}
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
           eyebrow="02 / OUR IMPORTED RANGE"
@@ -88,70 +92,104 @@ export default function ImportSourcing() {
           align="left"
         />
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5"
-        >
-          {importedRange.map((product, idx) => (
-            <motion.div key={product.name} variants={item} whileHover={{ translateY: -4 }} transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}>
-              <Link
-                to="/products"
-                className="group relative flex flex-col h-full border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden"
-              >
-                <div className="flex items-center justify-between px-4 py-2.5 border-b border-border-light">
-                  <span className="text-[9px] text-muted font-mono tracking-wider uppercase">
-                    Import / {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <span className="text-[9px] text-muted font-mono tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    ENQUIRE
-                  </span>
-                </div>
+        {importedProducts.length > 0 ? (
+          <>
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5"
+            >
+              {importedProducts.map((product, idx) => {
+                const cover = coverImage(product);
+                return (
+                  <motion.div key={product.id} variants={item} whileHover={{ translateY: -4 }} transition={{ type: 'spring', duration: 0.5, bounce: 0.15 }}>
+                    <Link
+                      to={`/products/${product.slug}`}
+                      className="group relative flex flex-col h-full border border-border bg-card hover:border-leather/30 transition-all duration-500 overflow-hidden"
+                    >
+                      <div className="flex items-center justify-between px-4 py-2.5 border-b border-border-light">
+                        <span className="text-[9px] text-muted font-mono tracking-wider uppercase">
+                          Import / {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-[9px] text-muted font-mono tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          ENQUIRE
+                        </span>
+                      </div>
 
-                <div className="relative w-full aspect-[4/5] overflow-hidden bg-ivory">
-                  <img
-                    src={product.img}
-                    alt={product.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
+                      <div className="relative w-full aspect-[4/5] overflow-hidden bg-ivory">
+                        {cover ? (
+                          <img
+                            src={cover}
+                            alt={product.name}
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 leather-grain opacity-20 flex items-center justify-center">
+                            <Package className="w-6 h-6 text-muted" strokeWidth={1.5} />
+                          </div>
+                        )}
+                      </div>
 
-                <div className="p-4 flex items-center justify-between gap-2">
-                  <h3 className="text-sm font-serif text-ink leading-tight group-hover:text-leather transition-colors duration-300">
-                    {product.name}
-                  </h3>
-                  <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-muted group-hover:text-leather transition-all duration-300 group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </div>
+                      <div className="p-4 flex items-center justify-between gap-2">
+                        <h3 className="text-sm font-serif text-ink leading-tight group-hover:text-leather transition-colors duration-300">
+                          {product.name}
+                        </h3>
+                        <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-muted group-hover:text-leather transition-all duration-300 group-hover:translate-x-0.5" strokeWidth={1.5} />
+                      </div>
 
-                <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-transparent group-hover:border-leather/20 transition-colors duration-500" />
-                <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-transparent group-hover:border-leather/20 transition-colors duration-500" />
-              </Link>
+                      <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-transparent group-hover:border-leather/20 transition-colors duration-500" />
+                      <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-transparent group-hover:border-leather/20 transition-colors duration-500" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </motion.div>
-          ))}
-        </motion.div>
 
-        <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-          <Link to="/products" className="inline-block">
-            <Button variant="outline" className="text-xs group">
-              VIEW ALL IMPORTED PRODUCTS
-              <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
-            </Button>
-          </Link>
-          <p className="text-[11px] text-muted font-light">
-            This range is updated continuously as new China-imported products become available.
-          </p>
-        </div>
+            <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
+              <Link to="/products" className="inline-block">
+                <Button variant="outline" className="text-xs group">
+                  VIEW ALL IMPORTED PRODUCTS
+                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                </Button>
+              </Link>
+              <p className="text-[11px] text-muted font-light">
+                This range is updated continuously as new China-imported products become available.
+              </p>
+            </div>
+          </>
+        ) : (
+          <div className="border border-dashed border-border bg-card px-6 py-14 sm:py-20 text-center">
+            <span className="stamp text-muted border-border mb-6 inline-block">Awaiting Inventory</span>
+            <h3 className="text-xl lg:text-2xl font-serif text-ink">No imported products yet.</h3>
+            <p className="text-xs text-muted font-light max-w-md mx-auto mt-3 leading-relaxed">
+              Products added from the admin panel under a category named <span className="font-semibold text-ink">Imported</span> will appear here automatically.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link to="/admin">
+                <Button variant="primary" className="text-xs group">
+                  OPEN ADMIN PANEL
+                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" className="text-xs group">
+                  ENQUIRE ABOUT SOURCING
+                  <ArrowRight className="w-4 h-4 ml-2.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        )}
       </section>
-      */}
 
-      {/* 02 / How We Source */}
+      {/* 03 / How We Source */}
       <section className="bg-card border-y border-border py-20 lg:py-32">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <SectionHeading
-            eyebrow="02 / HOW WE SOURCE"
+            eyebrow="03 / HOW WE SOURCE"
             title="Right Product. Right Supplier. Right Quality."
             description="A straightforward sourcing process that keeps quality, availability and commercial value aligned."
             align="left"
@@ -181,10 +219,10 @@ export default function ImportSourcing() {
         </div>
       </section>
 
-      {/* 03 / Why We Import */}
+      {/* 04 / Why We Import */}
       <section className="py-20 lg:py-32 max-w-[1400px] mx-auto px-6 lg:px-10">
         <SectionHeading
-          eyebrow="03 / WHY WE IMPORT"
+          eyebrow="04 / WHY WE IMPORT"
           title="More Products. More Possibilities."
           description="Our own manufacturing allows us to develop products around specific requirements. International sourcing allows us to offer additional styles, categories and market opportunities."
           align="left"

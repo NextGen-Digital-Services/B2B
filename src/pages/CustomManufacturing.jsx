@@ -1,26 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { PenTool, Award, Palette, Wrench, Package, Box } from 'lucide-react';
 import Button from '../components/shared/Button';
 import SectionHeading from '../components/shared/SectionHeading';
-
-const customizationOptions = [
-  { icon: PenTool, title: 'Logo Printing & Embossing', desc: 'Screen print, embossed or debossed logo' },
-  { icon: Award, title: 'Metal Badge Customization', desc: 'Engraved or custom metal logo plates' },
-  { icon: Palette, title: 'Color Customization', desc: 'Choose from a wide range of colors' },
-  { icon: Wrench, title: 'Hardware Options', desc: 'Custom zippers, pulls, buckles and fittings' },
-  { icon: Box, title: 'Interior & Lining', desc: 'Custom lining, labels and inner branding' },
-  { icon: Package, title: 'Packaging', desc: 'Custom hangtags, polybags, and master cartons' },
-];
-
-const moqSpecs = [
-  { label: 'Catalog / Customized Logo / Color', value: '100 units / color' },
-  { label: 'Custom Design (Per CAD)', value: '100 units / design' },
-  { label: 'Imported Hardware (Zippers / Buckles)', value: '500 units / mold' },
-  { label: 'Custom Lining / Jacquard', value: '1,000 meters / design' },
-  { label: 'Custom Packaging (Hangtag / Box)', value: '500 units / design' },
-];
 
 const workflowSteps = [
   { num: '01', title: 'CHOOSE YOUR DESIGN', desc: 'Browse our existing backpack and bag designs and select the model that fits your requirement.' },
@@ -104,81 +86,6 @@ export default function CustomManufacturing() {
               </div>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* Logo & Customization Options + MOQ */}
-      <section className="bg-card border-t border-border py-20 lg:py-32">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <SectionHeading
-            eyebrow="Branding"
-            title="Logo & Customization Options"
-            description="Make it your own. Customize the logo, colors, materials and details to match your brand identity."
-            align="left"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mt-12">
-
-            {/* Left - Customization Options */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {customizationOptions.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
-                    className="border border-border bg-ivory p-5 space-y-3 hover:border-leather/30 transition-all duration-300"
-                  >
-                    <item.icon className="w-5 h-5 text-leather" strokeWidth={1.5} />
-                    <div>
-                      <h4 className="text-xs font-sans font-semibold uppercase tracking-wider text-ink">{item.title}</h4>
-                      <p className="text-[10px] text-muted mt-1 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Middle - Product Visual */}
-            <div className="lg:col-span-3">
-              <div className="border border-border bg-ivory aspect-[4/5] overflow-hidden">
-                <img
-                  src="/products/backpack-features-blue.jpg"
-                  alt="ZYCOON backpack customization details"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-
-            {/* Right - MOQ Specification Panel */}
-            <div className="lg:col-span-4 space-y-6">
-              <div className="border border-border p-6 space-y-5">
-                <h3 className="text-lg font-serif text-ink">Custom Manufacturing MOQ</h3>
-                <div className="space-y-3 text-xs font-mono">
-                  {moqSpecs.map((item, i) => (
-                    <div key={i} className="flex justify-between border-b border-border-light pb-2">
-                      <span className="font-sans font-medium text-muted">{item.label}</span>
-                      <span className="text-ink font-bold">{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Link to="/contact">
-                <Button variant="primary" className="w-full text-xs flex items-center justify-center group">
-                  START A CUSTOM PROJECT
-                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Button>
-              </Link>
-              <p className="text-[10px] text-muted text-center font-light">
-                Our team will assist you with specifications, pricing and production timelines.
-              </p>
-            </div>
-
-          </div>
         </div>
       </section>
     </motion.div>

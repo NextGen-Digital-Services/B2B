@@ -99,12 +99,17 @@
   color: var(--color-muted);
 }
 
-::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: var(--color-ivory); }
-::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-leather); }
+::-webkit-scrollbar-thumb { background: var(--color-leather); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-espresso); }
 
-html { scroll-behavior: smooth; }
+/* Firefox / cross-browser */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-leather) var(--color-ivory);
+}
 
 html.lenis,
 html.lenis body { height: auto; }
