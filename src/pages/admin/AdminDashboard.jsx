@@ -5,6 +5,7 @@ import { getAllProducts, isSupabaseReady, deleteProduct, setProductActive, upser
 import { B2B_CONFIG } from '../../utils/helpers';
 import AdminProductsTable from '../../components/admin/AdminProductsTable';
 import ProductForm from '../../components/admin/ProductForm';
+import BulkImportPanel from '../../components/admin/BulkImportPanel';
 import { ReviewsAdmin, TestimonialsAdmin, GalleryAdmin, CategoriesAdmin } from '../../components/admin/ContentScreens';
 import { useContentRefresh } from '../../context/ZycoonContext';
 
@@ -14,6 +15,7 @@ const NAV = [
     tabs: [
       { id: 'products', label: 'Products' },
       { id: 'add', label: 'Add Product' },
+      { id: 'bulk', label: 'Bulk Add' },
     ],
   },
   {
@@ -35,6 +37,7 @@ const NAV = [
 const TITLES = {
   products: 'Product Inventory',
   add: 'Add New Product',
+  bulk: 'Bulk Add Imported Products',
   reviews: 'Product Reviews',
   testimonials: 'Testimonials',
   gallery: 'Gallery',
@@ -219,6 +222,8 @@ export default function AdminDashboard({ onLogout }) {
               onToggleActive={(id, active) => toggleActive(id, active)}
             />
           )}
+
+          {tab === 'bulk' && <BulkImportPanel onSaved={() => { loadProducts(); refresh(); }} />}
 
           {tab === 'reviews' && <ReviewsAdmin />}
           {tab === 'testimonials' && <TestimonialsAdmin />}

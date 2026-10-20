@@ -2,7 +2,6 @@ import React from 'react';
 import Hero from '../components/home/Hero';
 import USPBar from '../components/home/USPBar';
 import ReelsStrip from '../components/products/ReelsStrip';
-import LeatherNotebookArchive from '../components/home/LeatherNotebookArchive';
 import MaterialArchive from '../components/home/MaterialArchive';
 import MarketMovement from '../components/home/MarketMovement';
 import MaterialToProduct from '../components/home/MaterialToProduct';
@@ -23,7 +22,6 @@ export default function Home() {
         </div>
       </section>
 
-      <LeatherNotebookArchive />
       <MaterialArchive />
       <MarketMovement />
       <MaterialToProduct />

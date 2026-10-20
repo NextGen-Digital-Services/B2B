@@ -16,6 +16,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Collection', path: '/products' },
+    { name: 'Lookbook', path: '/lookbook' },
     { name: 'Custom', path: '/custom-manufacturing' },
     { name: 'Import', path: '/import-sourcing' },
     // HIDDEN — Certifications disabled (uncomment to re-enable)

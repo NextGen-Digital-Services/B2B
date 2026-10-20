@@ -3,7 +3,7 @@ import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
-import WhatsAppFloatButton from '../components/shared/WhatsAppFloatButton';
+import SocialFloatButtons from '../components/shared/SocialFloatButtons';
 import useLenis from '../hooks/useLenis';
 
 // Pages
@@ -13,6 +13,7 @@ import Products from '../pages/Products';
 import ProductDetail from '../pages/ProductDetail';
 import CustomManufacturing from '../pages/CustomManufacturing';
 import ImportSourcing from '../pages/ImportSourcing';
+import Lookbook from '../pages/Lookbook';
 // HIDDEN — Certifications page disabled (uncomment to re-enable)
 // import Certifications from '../pages/Certifications';
 // Workshop/Gallery page removed — do not restore
@@ -73,6 +74,7 @@ export default function AppRouter() {
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/custom-manufacturing" element={<CustomManufacturing />} />
             <Route path="/import-sourcing" element={<ImportSourcing />} />
+            <Route path="/lookbook" element={<Lookbook />} />
             <Route path="/export-wholesale" element={<Navigate to="/import-sourcing" replace />} />
             {/* HIDDEN — Certifications page disabled (uncomment to re-enable)
             <Route path="/certifications" element={<Certifications />} />
@@ -88,7 +90,7 @@ export default function AppRouter() {
       <Footer />
 
       {/* Direct Contact Floating Assist */}
-      <WhatsAppFloatButton />
+      <SocialFloatButtons />
 
     </div>
   );

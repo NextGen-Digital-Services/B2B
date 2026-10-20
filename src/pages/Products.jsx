@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { useProducts } from '../context/ZycoonContext';
 import ProductFilters from '../components/products/ProductFilters';
 import ProductGrid from '../components/products/ProductGrid';
-import ReelsStrip from '../components/products/ReelsStrip';
 import SectionHeading from '../components/shared/SectionHeading';
 
 export default function Products() {
@@ -60,8 +59,6 @@ export default function Products() {
           description="Explore our signature collection of bags and backpacks, thoughtfully designed and manufactured by Zycoon for wholesale, corporate, and everyday markets. Discover our complete range and find the right styles for bulk orders, private label, and custom branding"
           align="left"
         />
-
-        <ReelsStrip />
 
         <ProductFilters
           searchQuery={searchQuery}

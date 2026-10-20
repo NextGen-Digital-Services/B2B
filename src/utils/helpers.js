@@ -11,6 +11,7 @@ export const B2B_CONFIG = {
   whatsappNumber: '+91 91365 42289',
   whatsappRaw: '919136542289', // Raw numbers only for api.whatsapp.com
   businessEmail: 'zycoonbags@gmail.com',
+  instagramUrl: '', // TODO: fill Instagram profile URL later — float button uses this
   businessHours: 'Mon — Sat: 10:00 AM — 8:00 PM',
   certifications: 'ISO 9001:2015, REACH Compliance, LWG Gold Rated, Sedex Certified'
 };
