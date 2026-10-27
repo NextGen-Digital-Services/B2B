@@ -192,35 +192,30 @@ async function compressImage(file, maxWidth = 800, quality = 0.7) {
   });
 }
 
+const VIDEO_EXT = /\.(mp4|webm|mov|m4v|ogg)$/i;
+const isVideoFile = (file) => file.type.startsWith('video/') || VIDEO_EXT.test(file.name);
+
 export async function uploadProductImage(file, slug = 'image') {
-  console.log('Upload started:', file.name, 'Supabase:', !!supabase);
-  
   if (!supabase) {
-    // demo mode: compress and store as base64 data url
-    console.log('Demo mode - compressing image');
+    if (isVideoFile(file)) {
+      throw new Error('Video upload requires Supabase. Add VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY to .env, then run supabase/schema.sql in the SQL editor.');
+    }
     return compressImage(file, 600, 0.6);
   }
-  
-  const ext = (file.name.split('.').pop() || 'png').toLowerCase();
-  const cleanSlug = slug.replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'image';
+
+  const ext = (file.name.split('.').pop() || (isVideoFile(file) ? 'mp4' : 'png')).toLowerCase();
+  const cleanSlug = slug.replace(/[^a-z0-9-]/gi, '').slice(0, 40) || 'media';
   const path = `${Date.now()}-${cleanSlug}.${ext}`;
-  
-  console.log('Uploading to path:', path);
-  
-  const { data, error } = await supabase.storage
-    .from('product-images')
+
+  const bucket = isVideoFile(file) ? 'reel-videos' : 'product-images';
+
+  const { error } = await supabase.storage
+    .from(bucket)
     .upload(path, file, { upsert: true, cacheControl: '3600' });
-  
-  if (error) {
-    console.error('Upload error:', error);
-    throw new Error(`Upload failed: ${error.message}`);
-  }
-  
-  console.log('Upload success:', data);
-  
-  const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(path);
-  console.log('Public URL:', urlData.publicUrl);
-  
+
+  if (error) throw new Error(`Upload failed: ${error.message}`);
+
+  const { data: urlData } = supabase.storage.from(bucket).getPublicUrl(path);
   return urlData.publicUrl;
 }
 

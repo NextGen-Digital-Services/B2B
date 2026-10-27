@@ -63,6 +63,27 @@ drop policy if exists "Admin delete product images" on storage.objects;
 create policy "Admin delete product images"
   on storage.objects for delete using (bucket_id = 'product-images');
 
+-- 3b. Storage bucket for reel videos
+insert into storage.buckets (id, name, public)
+values ('reel-videos', 'reel-videos', true)
+on conflict (id) do nothing;
+
+drop policy if exists "Public read reel videos" on storage.objects;
+create policy "Public read reel videos"
+  on storage.objects for select using (bucket_id = 'reel-videos');
+
+drop policy if exists "Admin upload reel videos" on storage.objects;
+create policy "Admin upload reel videos"
+  on storage.objects for insert with check (bucket_id = 'reel-videos');
+
+drop policy if exists "Admin update reel videos" on storage.objects;
+create policy "Admin update reel videos"
+  on storage.objects for update using (bucket_id = 'reel-videos');
+
+drop policy if exists "Admin delete reel videos" on storage.objects;
+create policy "Admin delete reel videos"
+  on storage.objects for delete using (bucket_id = 'reel-videos');
+
 -- ============================================================
 --  4. Categories, Reviews, Testimonials, Gallery
 -- ============================================================
