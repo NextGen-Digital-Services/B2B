@@ -4,6 +4,7 @@ import { products as staticProducts } from '../data/products';
 import { categories as staticCategories } from '../data/categories';
 import { testimonials as staticTestimonials } from '../data/testimonials';
 import { galleryItems } from '../data/gallery';
+import { reviews as seedReviews } from '../data/reviews';
 
 const KEYS = {
   products: 'zycoon_local_products',
@@ -18,7 +19,7 @@ const seed = {
   categories: staticCategories,
   testimonials: staticTestimonials,
   gallery: galleryItems,
-  reviews: [],
+  reviews: seedReviews,
 };
 
 function readLocal(key) {

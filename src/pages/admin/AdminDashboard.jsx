@@ -6,7 +6,7 @@ import { B2B_CONFIG } from '../../utils/helpers';
 import AdminProductsTable from '../../components/admin/AdminProductsTable';
 import ProductForm from '../../components/admin/ProductForm';
 import BulkImportPanel from '../../components/admin/BulkImportPanel';
-import { ReviewsAdmin, TestimonialsAdmin, GalleryAdmin, CategoriesAdmin } from '../../components/admin/ContentScreens';
+import { ReviewsAdmin, TestimonialsAdmin, GalleryAdmin, ReelsAdmin, CategoriesAdmin } from '../../components/admin/ContentScreens';
 import { useContentRefresh } from '../../context/ZycoonContext';
 
 const NAV = [
@@ -24,6 +24,7 @@ const NAV = [
       { id: 'reviews', label: 'Reviews' },
       { id: 'testimonials', label: 'Testimonials' },
       { id: 'gallery', label: 'Gallery' },
+      { id: 'reels', label: 'Reels' },
     ],
   },
   {
@@ -41,6 +42,7 @@ const TITLES = {
   reviews: 'Product Reviews',
   testimonials: 'Testimonials',
   gallery: 'Gallery',
+  reels: 'Reels',
   categories: 'Categories',
 };
 
@@ -104,7 +106,7 @@ export default function AdminDashboard({ onLogout }) {
     await Promise.all([loadProducts(), refresh()]);
   };
 
-  const isContentTab = ['reviews', 'testimonials', 'gallery', 'categories'].includes(tab);
+  const isContentTab = ['reviews', 'testimonials', 'gallery', 'reels', 'categories'].includes(tab);
 
   return (
     <div className="min-h-screen flex bg-ivory text-ink">
@@ -228,6 +230,7 @@ export default function AdminDashboard({ onLogout }) {
           {tab === 'reviews' && <ReviewsAdmin />}
           {tab === 'testimonials' && <TestimonialsAdmin />}
           {tab === 'gallery' && <GalleryAdmin />}
+          {tab === 'reels' && <ReelsAdmin />}
           {tab === 'categories' && <CategoriesAdmin />}
         </div>
       </div>

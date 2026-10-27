@@ -94,6 +94,23 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Factory Map */}
+        <div className="mb-12">
+          <h4 className="text-[10px] font-sans font-medium uppercase tracking-[0.2em] text-ivory/40 mb-4">Factory Location</h4>
+          <div className="border border-ivory/10 overflow-hidden">
+            <iframe
+              title="Zycoon Factory Location"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(B2B_CONFIG.factoryLocation)}&output=embed`}
+              width="100%"
+              height="260"
+              style={{ border: 0, filter: 'grayscale(0.6) invert(0.9) contrast(0.85)' }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
+        </div>
+
         {/* Bottom */}
         <div className="border-t border-ivory/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-ivory/30">
           <div>&copy; {currentYear} {B2B_CONFIG.brandName}. All Rights Reserved.</div>

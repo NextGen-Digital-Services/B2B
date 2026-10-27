@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import ReelsStrip from '../components/products/ReelsStrip';
 import SectionHeading from '../components/shared/SectionHeading';
 
 export default function Lookbook() {
@@ -19,8 +18,6 @@ export default function Lookbook() {
           description="Vertical reels and visual stories from our factory floor, materials and finished bags. Fresh shots are added here as they are published."
           align="left"
         />
-
-        <ReelsStrip />
       </div>
     </motion.div>
   );

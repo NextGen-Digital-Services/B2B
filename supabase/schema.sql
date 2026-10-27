@@ -109,16 +109,26 @@ create table if not exists public.gallery (
   created_at  timestamptz default now()
 );
 
+create table if not exists public.reels (
+  id         text primary key,
+  video_url  text not null,
+  caption    text default '',
+  sort_order integer default 0,
+  active     boolean default true,
+  created_at timestamptz default now()
+);
+
 -- row level security (public reads; panel password guards writes)
 alter table public.categories      enable row level security;
 alter table public.product_reviews enable row level security;
 alter table public.testimonials    enable row level security;
 alter table public.gallery         enable row level security;
+alter table public.reels           enable row level security;
 
 do $$
 declare t text;
 begin
-  foreach t in array array['categories','product_reviews','testimonials','gallery'] loop
+  foreach t in array array['categories','product_reviews','testimonials','gallery','reels'] loop
     execute format('drop policy if exists "Public read %I" on public.%I', t, t);
     execute format('create policy "Public read %I" on public.%I for select using (true)', t, t);
     execute format('drop policy if exists "Admin write %I" on public.%I', t, t);

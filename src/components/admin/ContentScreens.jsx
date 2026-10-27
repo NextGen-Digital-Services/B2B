@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Reorder } from 'framer-motion';
+import { Film, GripVertical, Save } from 'lucide-react';
 import CrudSection from './CrudSection';
-import { getAllContent, upsertContent, deleteContent, toggleContent, newCategory, newTestimonial, newReview, newGalleryItem } from '../../lib/contentAdmin';
-import { uploadProductImage } from '../../lib/productAdmin';
+import MediaUploader from './MediaUploader';
+import { getAllContent, upsertContent, deleteContent, toggleContent, reorderContent, newCategory, newTestimonial, newReview, newGalleryItem, newReel } from '../../lib/contentAdmin';
+import { uploadProductImage, slugify } from '../../lib/productAdmin';
 import { useProducts, useContentRefresh } from '../../context/ZycoonContext';
 
 function useContentSection(key, emptyText) {
@@ -15,7 +18,39 @@ function useContentSection(key, emptyText) {
   const remove = async (id) => { await deleteContent(key, id); await Promise.all([load(), refreshSite()]); };
   const toggle = async (id) => { await toggleContent(key, id, items); await Promise.all([load(), refreshSite()]); };
 
-  return { items, save, remove, toggle, emptyText };
+  return { items, load, save, remove, toggle, emptyText };
+}
+
+function ReorderGrid({ items, onReorder, renderCell }) {
+  return (
+    <Reorder.Group axis="y" values={items} onReorder={onReorder} className="space-y-2">
+      {items.map((item, idx) => (
+        <Reorder.Item key={item.id} value={item} className="flex items-center gap-3 border border-border bg-card px-4 py-3 cursor-grab active:cursor-grabbing select-none">
+          <GripVertical className="w-4 h-4 text-muted flex-shrink-0" strokeWidth={1.5} />
+          <span className="text-[9px] font-mono text-muted w-6 flex-shrink-0">{String(idx + 1).padStart(2, '0')}</span>
+          {renderCell(item)}
+        </Reorder.Item>
+      ))}
+    </Reorder.Group>
+  );
+}
+
+function OrderModeButtons({ onCancel, onSave, saving, dirty }) {
+  return (
+    <div className="flex items-center justify-end gap-3">
+      <button onClick={onCancel} className="px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] text-muted hover:text-ink transition-colors">
+        Cancel
+      </button>
+      <button
+        onClick={onSave}
+        disabled={saving || !dirty}
+        className="flex items-center space-x-2 bg-ink text-ivory px-5 py-2.5 text-[10px] uppercase tracking-[0.2em] font-medium hover:bg-espresso transition-colors duration-300 disabled:opacity-50"
+      >
+        <Save className="w-3.5 h-3.5" strokeWidth={1.5} />
+        <span>{saving ? 'Saving…' : 'Save Order'}</span>
+      </button>
+    </div>
+  );
 }
 
 /* ── Product Reviews ────────────────────────────────────────── */
@@ -80,31 +115,188 @@ export function TestimonialsAdmin() {
 
 /* ── Gallery ────────────────────────────────────────────────── */
 export function GalleryAdmin() {
-  const { items, save, remove, toggle } = useContentSection('gallery', 'No gallery entries yet.');
+  const { items, load, save, remove, toggle } = useContentSection('gallery', 'No gallery entries yet.');
+  const refreshSite = useContentRefresh();
+  const [orderMode, setOrderMode] = useState(false);
+  const [draftOrder, setDraftOrder] = useState([]);
+  const [savingOrder, setSavingOrder] = useState(false);
+
+  const startOrder = () => { setDraftOrder([...items]); setOrderMode(true); };
+  const cancelOrder = () => { setOrderMode(false); setDraftOrder([]); };
+  const saveOrder = async () => {
+    setSavingOrder(true);
+    try {
+      await reorderContent('gallery', draftOrder.map((g) => g.id));
+      await Promise.all([load(), refreshSite()]);
+      setOrderMode(false);
+      setDraftOrder([]);
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
+  const handleBulkUpload = async (urls) => {
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      await save({ ...newGalleryItem(), image: url, title: slugify(url.split('/').pop().replace(/\.[^.]+$/, '')).replace(/-/g, ' ') || `Photo ${i + 1}` });
+    }
+  };
+
+  const dirty = orderMode && draftOrder.map((g) => g.id).join(',') !== items.map((g) => g.id).join(',');
 
   return (
-    <CrudSection
-      eyebrow="Content · Workshop Gallery"
-      title="Gallery Images"
-      items={items}
-      newItem={newGalleryItem}
-      idOf={(g) => g.id}
-      previewKey="image"
-      rowTitle={(g) => g.title}
-      rowSub={(g) => g.description || (g.category_id ? g.category_id : '')}
-      onSave={save}
-      onDelete={remove}
-      onToggle={toggle}
-      onUpload={(file) => uploadProductImage(file, 'gallery')}
-      emptyText="No gallery entries yet. Add workshop or product photos."
-      countLabel={`${items.length} photos`}
-      fields={[
-        { key: 'image', label: 'Photo or Color', type: 'image' },
-        { key: 'title', label: 'Title', type: 'text', required: true, placeholder: 'e.g. Precision Hydraulic Die Cutting' },
-        { key: 'description', label: 'Description', type: 'textarea', rows: 3 },
-        { key: 'sort_order', label: 'Order', type: 'number' },
-      ]}
-    />
+    <div className="space-y-6">
+      <div className="border border-border bg-card p-6">
+        <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-muted mb-1">Bulk Upload</p>
+        <h4 className="text-sm font-serif text-ink mb-4">Add Multiple Photos</h4>
+        <MediaUploader accept="image/*" label="photos" slugPrefix="gallery" multi onUploaded={handleBulkUpload} />
+      </div>
+
+      {!orderMode && items.length > 1 && (
+        <div className="flex justify-end">
+          <button onClick={startOrder} className="text-[10px] uppercase tracking-wider text-muted hover:text-leather transition-colors">
+            Reorder Photos
+          </button>
+        </div>
+      )}
+
+      {orderMode && (
+        <div className="space-y-4">
+          <p className="text-[9px] font-mono uppercase tracking-wider text-muted">Drag to reorder · then Save Order</p>
+          <ReorderGrid
+            items={draftOrder}
+            onReorder={setDraftOrder}
+            renderCell={(g) => (
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                {g.image ? (
+                  <img src={g.image} alt="" className="w-10 h-10 object-cover border border-border flex-shrink-0" />
+                ) : (
+                  <div className="w-10 h-10 border border-dashed border-border bg-ivory flex-shrink-0" />
+                )}
+                <p className="text-xs text-ink truncate">{g.title}</p>
+              </div>
+            )}
+          />
+          <OrderModeButtons onCancel={cancelOrder} onSave={saveOrder} saving={savingOrder} dirty={dirty} />
+        </div>
+      )}
+
+      {!orderMode && (
+        <CrudSection
+          eyebrow="Content · Workshop Gallery"
+          title="Gallery Images"
+          items={items}
+          newItem={newGalleryItem}
+          idOf={(g) => g.id}
+          previewKey="image"
+          rowTitle={(g) => g.title}
+          rowSub={(g) => g.description || (g.category_id ? g.category_id : '')}
+          onSave={save}
+          onDelete={remove}
+          onToggle={toggle}
+          onUpload={(file) => uploadProductImage(file, 'gallery')}
+          emptyText="No gallery entries yet. Add workshop or product photos."
+          countLabel={`${items.length} photos`}
+          fields={[
+            { key: 'image', label: 'Photo or Color', type: 'image' },
+            { key: 'title', label: 'Title', type: 'text', required: true, placeholder: 'e.g. Precision Hydraulic Die Cutting' },
+            { key: 'description', label: 'Description', type: 'textarea', rows: 3 },
+            { key: 'sort_order', label: 'Order', type: 'number' },
+          ]}
+        />
+      )}
+    </div>
+  );
+}
+
+/* ── Reels ─────────────────────────────────────────────────── */
+export function ReelsAdmin() {
+  const { items, load, save, remove, toggle } = useContentSection('reels', 'No reels yet.');
+  const refreshSite = useContentRefresh();
+  const [orderMode, setOrderMode] = useState(false);
+  const [draftOrder, setDraftOrder] = useState([]);
+  const [savingOrder, setSavingOrder] = useState(false);
+
+  const startOrder = () => { setDraftOrder([...items]); setOrderMode(true); };
+  const cancelOrder = () => { setOrderMode(false); setDraftOrder([]); };
+  const saveOrder = async () => {
+    setSavingOrder(true);
+    try {
+      await reorderContent('reels', draftOrder.map((r) => r.id));
+      await Promise.all([load(), refreshSite()]);
+      setOrderMode(false);
+      setDraftOrder([]);
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
+  const handleBulkUpload = async (urls) => {
+    for (let i = 0; i < urls.length; i++) {
+      await save({ ...newReel(), video_url: urls[i], caption: `Sample Reel ${String(i + 1).padStart(2, '0')}` });
+    }
+  };
+
+  const dirty = orderMode && draftOrder.map((r) => r.id).join(',') !== items.map((r) => r.id).join(',');
+
+  return (
+    <div className="space-y-6">
+      <div className="border border-border bg-card p-6">
+        <p className="text-[9px] font-mono uppercase tracking-[0.3em] text-muted mb-1">Bulk Upload</p>
+        <h4 className="text-sm font-serif text-ink mb-4">Add Multiple Reel Videos</h4>
+        <MediaUploader accept="video/*" label="videos" slugPrefix="reel" multi onUploaded={handleBulkUpload} />
+      </div>
+
+      {!orderMode && items.length > 1 && (
+        <div className="flex justify-end">
+          <button onClick={startOrder} className="text-[10px] uppercase tracking-wider text-muted hover:text-leather transition-colors">
+            Reorder Reels
+          </button>
+        </div>
+      )}
+
+      {orderMode && (
+        <div className="space-y-4">
+          <p className="text-[9px] font-mono uppercase tracking-wider text-muted">Drag to reorder · then Save Order</p>
+          <ReorderGrid
+            items={draftOrder}
+            onReorder={setDraftOrder}
+            renderCell={(r) => (
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="w-10 h-14 border border-border bg-ivory flex items-center justify-center flex-shrink-0">
+                  <Film className="w-4 h-4 text-muted" strokeWidth={1.5} />
+                </div>
+                <p className="text-xs text-ink truncate">{r.caption || 'Untitled reel'}</p>
+              </div>
+            )}
+          />
+          <OrderModeButtons onCancel={cancelOrder} onSave={saveOrder} saving={savingOrder} dirty={dirty} />
+        </div>
+      )}
+
+      {!orderMode && (
+        <CrudSection
+          eyebrow="Content · Reels"
+          title="Reel Videos"
+          items={items}
+          newItem={newReel}
+          idOf={(r) => r.id}
+          previewKey="video_url"
+          rowTitle={(r) => r.caption || 'Untitled reel'}
+          rowSub={(r) => r.video_url}
+          onSave={save}
+          onDelete={remove}
+          onToggle={toggle}
+          emptyText="No reels yet. Upload videos above or add one manually."
+          countLabel={`${items.length} reels`}
+          fields={[
+            { key: 'video_url', label: 'Video URL', type: 'text', required: true, placeholder: 'https://…mp4' },
+            { key: 'caption', label: 'Caption', type: 'text', placeholder: 'e.g. Workshop Craft Detail' },
+            { key: 'sort_order', label: 'Order', type: 'number' },
+          ]}
+        />
+      )}
+    </div>
   );
 }
 

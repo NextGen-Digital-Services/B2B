@@ -17,13 +17,13 @@ async function loadStatic(key) {
   if (key === 'categories') return mod.categories;
   if (key === 'testimonials') return mod.testimonials;
   if (key === 'gallery') return mod.galleryItems;
+  if (key === 'reels') return mod.reels;
   return [];
 }
 
 async function crud(key, { get = true, row = null, id = null } = {}) {
-  const tableMap = { products: 'products', categories: 'categories', testimonials: 'testimonials', gallery: 'gallery', reviews: 'product_reviews' };
+  const tableMap = { products: 'products', categories: 'categories', testimonials: 'testimonials', gallery: 'gallery', reviews: 'product_reviews', reels: 'reels' };
   const table = tableMap[key];
-  const local = localKey(key);
 
   if (supabase) {
     if (get) {
@@ -43,7 +43,7 @@ async function crud(key, { get = true, row = null, id = null } = {}) {
     }
   }
 
-  let rows = readLocal(local);
+  let rows = readLocal(key);
   if (!rows.length && key !== 'reviews') rows = await loadStatic(key);
 
   if (get) return rows;
@@ -51,11 +51,11 @@ async function crud(key, { get = true, row = null, id = null } = {}) {
     const idx = rows.findIndex((r) => r.id === row.id);
     row.created_at = idx >= 0 ? rows[idx].created_at : new Date().toISOString();
     if (idx >= 0) rows[idx] = row; else rows.push(row);
-    writeLocal(local, rows);
+    writeLocal(key, rows);
     return;
   }
   if (id) {
-    writeLocal(local, rows.filter((r) => r.id !== id));
+    writeLocal(key, rows.filter((r) => r.id !== id));
   }
 }
 
@@ -71,6 +71,24 @@ export async function toggleContent(key, id, list) {
   return crud(key, {
     row: { ...(target || { id }), active: !current, id },
   });
+}
+
+export async function reorderContent(key, orderedIds) {
+  if (supabase) {
+    const updates = orderedIds.map((id, i) => ({ id, sort_order: i + 1 }));
+    const { error } = await supabase.from(tableFor(key)).upsert(updates, { onConflict: 'id' });
+    if (error) throw error;
+    return;
+  }
+  let rows = readLocal(key);
+  if (!rows.length) rows = await loadStatic(key);
+  const byId = new Map(rows.map((r) => [r.id, r]));
+  const next = orderedIds.map((id, i) => ({ ...(byId.get(id) || { id }), sort_order: i + 1 })).filter((r) => byId.has(r.id));
+  writeLocal(key, next);
+}
+
+function tableFor(key) {
+  return { products: 'products', categories: 'categories', testimonials: 'testimonials', gallery: 'gallery', reviews: 'product_reviews', reels: 'reels' }[key] || key;
 }
 
 // ── shape helpers ─────────────────────────────────────────────
@@ -89,6 +107,10 @@ export function newReview(productId = '', productName = '') {
 
 export function newGalleryItem() {
   return { id: nid('g'), title: '', description: '', image: '', category_id: '', sort_order: 0, active: true };
+}
+
+export function newReel() {
+  return { id: nid('rl'), video_url: '', caption: '', sort_order: 0, active: true };
 }
 
 export { slugify };

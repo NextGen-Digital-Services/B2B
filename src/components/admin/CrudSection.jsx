@@ -3,10 +3,12 @@ import { Pencil, Trash2, Plus, Save, Upload, X, Star } from 'lucide-react';
 import { slugify } from '../../lib/productAdmin';
 
 const inputBase = "w-full bg-ivory border border-border py-2.5 px-4 text-xs font-sans text-ink focus:outline-none focus:border-leather transition-colors duration-300 placeholder-muted";
-const isUrl = (v) => typeof v === 'string' && (v.startsWith('http') || v.startsWith('/') || v.startsWith('data:'));
+const isUrl = (v) => typeof v === 'string' && (v.startsWith('http') || v.startsWith('/') || v.startsWith('data:') || v.startsWith('blob:'));
+const isVideoUrl = (v) => typeof v === 'string' && /\.(mp4|webm|ogg|mov|m4v)(\?|$)/i.test(v) || (typeof v === 'string' && v.includes('video'));
 
 function Preview({ value }) {
   if (!value) return <div className="w-12 h-12 border border-dashed border-border bg-ivory" />;
+  if (isVideoUrl(value)) return <video src={value} muted playsInline className="w-12 h-14 object-cover border border-border" />;
   if (isUrl(value)) return <img src={value} alt="" className="w-12 h-12 object-cover border border-border" />;
   return <div className="w-12 h-12 border border-border leather-grain" style={{ backgroundColor: value }} />;
 }
